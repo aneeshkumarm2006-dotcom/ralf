@@ -2,7 +2,7 @@
 const fireLoaded = () => document.body.classList.add('is-loaded');
 if (document.getElementById('loader')) {
   // hold the loader briefly so the logo reads, then wipe + reveal hero
-  const MIN = document.body.classList.contains('home') ? 1600 : 700;
+  const MIN = document.body.classList.contains('home') ? 1600 : 1100;
   let done = false;
   const trigger = () => { if (!done) { done = true; setTimeout(fireLoaded, MIN); } };
   if (document.readyState === 'complete') trigger();
