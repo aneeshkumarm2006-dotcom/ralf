@@ -172,7 +172,7 @@ body.is-loaded .hero-tag{opacity:.92;transform:none;transition-delay:1.45s}
 .house-title{font-family:var(--serif);font-weight:300;font-size:clamp(3.4rem,8.2vw,6.6rem);line-height:1;margin-bottom:1.8rem;letter-spacing:-.01em}
 .house-desc{color:var(--ink-soft);font-size:1.1rem;line-height:1.9}
 .house-center .btn-line{margin-top:1.8rem}
-.hp{position:absolute;overflow:hidden;border-radius:3px;box-shadow:0 26px 66px rgba(20,13,8,.22);will-change:transform,opacity}
+.hp{position:absolute;overflow:hidden;border-radius:3px;will-change:transform,opacity}
 .hp img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1s var(--ease)}
 .hp:hover img{transform:scale(1.05)}
 /* resting (assembled) positions — "House of" editorial layout:
