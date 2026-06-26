@@ -88,11 +88,11 @@ whenLoaded(() => document.querySelectorAll('.reveal').forEach((el) => io.observe
 // ===== Wellness cluster: single image that opens up into the spread =====
 const well = document.querySelector('.well');
 if (well) {
-  // two-phase: photos drop in and pile into a centre stack, then the
-  // stack splits apart into the final fanned spread
+  // two-phase: photos unfurl open one-by-one onto a centred pile, then the
+  // pile disperses out into the final fanned spread
   const runWell = () => {
-    well.classList.add('well-stack');                              // pile up
-    setTimeout(() => well.classList.add('well-open'), 1150);       // then split
+    well.classList.add('well-stack');                              // unfurl in centre
+    setTimeout(() => well.classList.add('well-open'), 1700);       // then disperse
   };
   // hold until the intro loader has wiped away
   const reveal = () => {
