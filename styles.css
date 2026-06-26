@@ -165,7 +165,7 @@ body.is-loaded .hero-tag{opacity:.92;transform:none;transition-delay:1.45s}
 /* ============ HOUSE OF RALF (parallax float) ============ */
 .house{position:relative;background:var(--cream)}
 .house-track{position:relative}
-.house-stage{position:relative;height:188vh;max-width:1600px;margin:0 auto;overflow:hidden}
+.house-stage{position:relative;height:170vh;max-width:1600px;margin:0 auto;overflow:hidden}
 .house-center{position:absolute;left:50%;top:43%;transform:translate(-50%,-50%);max-width:34rem;text-align:center;z-index:6;padding:0 1rem}
 .house-center::before{content:'';position:absolute;left:50%;top:50%;width:165%;height:155%;transform:translate(-50%,-50%);background:radial-gradient(ellipse at center,rgba(241,234,214,.95)0%,rgba(241,234,214,.64)52%,rgba(241,234,214,0)76%);z-index:-1}
 .house-eyebrow{text-transform:uppercase;letter-spacing:.4em;font-size:.82rem;color:var(--ink);margin-bottom:.5rem}
@@ -184,7 +184,7 @@ body.is-loaded .hero-tag{opacity:.92;transform:none;transition-delay:1.45s}
 .hp-3{width:23%;right:4%;top:13%;aspect-ratio:1/1}     /* top-right · square    */
 .hp-4{width:17.5%;left:2%;top:46%;aspect-ratio:1/1}    /* mid-left  · square    */
 .hp-7{width:19%;right:2%;top:49%;aspect-ratio:3/4}     /* mid-right · portrait  */
-.hp-5{width:48%;left:26%;bottom:11%;aspect-ratio:2/1}  /* bottom-centre · wide  */
+.hp-5{width:48%;left:26%;bottom:8%;aspect-ratio:2/1}  /* bottom-centre · wide  */
 @media(prefers-reduced-motion:reduce){
   .house-track{height:auto}
   .house-stage{position:static;height:auto;min-height:clamp(620px,90vh,900px)}
@@ -193,6 +193,7 @@ body.is-loaded .hero-tag{opacity:.92;transform:none;transition-delay:1.45s}
 }
 
 /* ============ FEATURE ============ */
+.feature{padding-top:clamp(2rem,5vw,4rem)}
 .feature-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,6vw,6rem);align-items:center}
 .feature-media{aspect-ratio:4/5;overflow:hidden}
 .feature-media img{transition:transform 1.4s var(--ease)}
