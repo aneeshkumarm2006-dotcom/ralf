@@ -159,25 +159,25 @@ body.is-loaded .hero-tag{opacity:.92;transform:none;transition-delay:1.45s}
 /* ============ HOUSE OF RALF (parallax float) ============ */
 .house{position:relative;background:var(--cream)}
 .house-track{position:relative}
-.house-stage{position:relative;height:100vh;max-width:1320px;margin:0 auto;overflow:hidden}
-.house-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);max-width:30rem;text-align:center;z-index:6;padding:0 1rem}
+.house-stage{position:relative;height:155vh;max-width:1600px;margin:0 auto;overflow:hidden}
+.house-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);max-width:34rem;text-align:center;z-index:6;padding:0 1rem}
 .house-center::before{content:'';position:absolute;left:50%;top:50%;width:165%;height:155%;transform:translate(-50%,-50%);background:radial-gradient(ellipse at center,rgba(241,234,214,.95)0%,rgba(241,234,214,.64)52%,rgba(241,234,214,0)76%);z-index:-1}
 .house-eyebrow{text-transform:uppercase;letter-spacing:.4em;font-size:.82rem;color:var(--ink);margin-bottom:.5rem}
-.house-title{font-family:var(--serif);font-weight:300;font-size:clamp(3rem,7.5vw,5.8rem);line-height:1;margin-bottom:1.6rem;letter-spacing:-.01em}
-.house-desc{color:var(--ink-soft);font-size:1.02rem;line-height:1.85}
+.house-title{font-family:var(--serif);font-weight:300;font-size:clamp(3.4rem,8.2vw,6.6rem);line-height:1;margin-bottom:1.8rem;letter-spacing:-.01em}
+.house-desc{color:var(--ink-soft);font-size:1.1rem;line-height:1.9}
 .house-center .btn-line{margin-top:1.8rem}
 .hp{position:absolute;overflow:hidden;border-radius:3px;box-shadow:0 26px 66px rgba(20,13,8,.22);will-change:transform,opacity}
 .hp img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1s var(--ease)}
 .hp:hover img{transform:scale(1.05)}
 /* resting (assembled) positions — evenly spaced: 4 across the top, 3 across the bottom,
    with symmetric horizontal centres so the stage reads balanced edge-to-edge */
-.hp-6{width:14%;left:6%;top:14%;aspect-ratio:3/4}
-.hp-1{width:22%;left:26%;top:10%;aspect-ratio:3/2}
-.hp-3{width:16%;left:55%;top:12%;aspect-ratio:4/5}
-.hp-2{width:22%;right:2%;top:15%;aspect-ratio:16/10}
-.hp-4{width:22%;left:7%;bottom:12%;aspect-ratio:16/10}
-.hp-5{width:18%;left:41%;bottom:8%;aspect-ratio:16/10}
-.hp-7{width:14%;right:11%;bottom:14%;aspect-ratio:3/4}
+.hp-6{width:19%;left:1%;top:11%;aspect-ratio:3/4}
+.hp-1{width:28%;left:22%;top:4%;aspect-ratio:3/2}
+.hp-3{width:20%;left:51%;top:9%;aspect-ratio:4/5}
+.hp-2{width:26%;right:1%;top:5%;aspect-ratio:16/10}
+.hp-4{width:27%;left:1%;bottom:11%;aspect-ratio:16/10}
+.hp-5{width:24%;left:38%;bottom:4%;aspect-ratio:16/10}
+.hp-7{width:19%;right:2%;bottom:13%;aspect-ratio:3/4}
 @media(prefers-reduced-motion:reduce){
   .house-track{height:auto}
   .house-stage{position:static;height:auto;min-height:clamp(620px,90vh,900px)}
