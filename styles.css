@@ -169,12 +169,11 @@ body.is-loaded .hero-tag{opacity:.92;transform:none;transition-delay:1.45s}
 .hp{position:absolute;overflow:hidden;border-radius:3px;box-shadow:0 26px 66px rgba(20,13,8,.22);will-change:transform,opacity}
 .hp img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1s var(--ease)}
 .hp:hover img{transform:scale(1.05)}
-/* resting (assembled) positions — evenly spaced: 4 across the top, 3 across the bottom,
+/* resting (assembled) positions — evenly spaced: 3 across the top, 3 across the bottom,
    with symmetric horizontal centres so the stage reads balanced edge-to-edge */
 .hp-6{width:19%;left:1%;top:11%;aspect-ratio:3/4}
-.hp-1{width:28%;left:22%;top:4%;aspect-ratio:3/2}
-.hp-3{width:20%;left:51%;top:9%;aspect-ratio:4/5}
-.hp-2{width:26%;right:1%;top:5%;aspect-ratio:16/10}
+.hp-1{width:28%;left:35%;top:4%;aspect-ratio:3/2}
+.hp-3{width:20%;right:2%;top:9%;aspect-ratio:4/5}
 .hp-4{width:27%;left:1%;bottom:11%;aspect-ratio:16/10}
 .hp-5{width:24%;left:38%;bottom:4%;aspect-ratio:16/10}
 .hp-7{width:19%;right:2%;bottom:13%;aspect-ratio:3/4}
