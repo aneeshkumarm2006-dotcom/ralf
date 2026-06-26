@@ -156,9 +156,10 @@ body.is-loaded .hero-bg{transform:scale(1)}
 .hero-emblem{height:clamp(2.6rem,6vw,4.2rem);filter:brightness(0) invert(1);margin-bottom:.7rem;opacity:0;transform:translateY(18px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
 body.is-loaded .hero-emblem{opacity:1;transform:none;transition-delay:.75s}
 .hero-logo{font-family:var(--script);font-weight:400;font-size:clamp(3.6rem,12vw,8.5rem);line-height:1}
-.hero-logo .ln{display:block;overflow:hidden;padding-bottom:.7em}
+.hero-logo .ln{display:block;overflow:hidden;padding-bottom:1.2em}
 .hero-logo .ln>span{display:block;transform:translateY(190%);transition:transform 1.2s var(--ease)}
 body.is-loaded .hero-logo .ln>span{transform:none;transition-delay:1s}
+body.is-loaded .hero-logo .ln{overflow:visible}
 .hero-tag{margin-top:.6rem;text-transform:uppercase;letter-spacing:.36em;font-size:clamp(.66rem,1.4vw,.82rem);opacity:0;transform:translateY(18px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
 body.is-loaded .hero-tag{opacity:.92;transform:none;transition-delay:1.45s}
 
