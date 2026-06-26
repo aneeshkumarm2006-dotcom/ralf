@@ -181,7 +181,7 @@ body.is-loaded .hero-tag{opacity:.92;transform:none;transition-delay:1.45s}
    anchors the bottom centre */
 .hp-6{width:21%;left:6%;top:13%;aspect-ratio:4/5}      /* top-left  · portrait  */
 .hp-2{width:24%;left:38%;top:1%;aspect-ratio:6/5}      /* top-centre · landscape */
-.hp-3{width:23%;right:4%;top:4%;aspect-ratio:1/1}      /* top-right · square    */
+.hp-3{width:23%;right:4%;top:13%;aspect-ratio:1/1}     /* top-right · square    */
 .hp-4{width:17.5%;left:2%;top:46%;aspect-ratio:1/1}    /* mid-left  · square    */
 .hp-7{width:19%;right:2%;top:49%;aspect-ratio:3/4}     /* mid-right · portrait  */
 .hp-5{width:48%;left:26%;bottom:11%;aspect-ratio:2/1}  /* bottom-centre · wide  */
