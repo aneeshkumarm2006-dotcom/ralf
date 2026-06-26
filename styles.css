@@ -140,15 +140,18 @@ body.is-loaded .hero-tag{opacity:.92;transform:none;transition-delay:1.45s}
 .house-title{font-family:var(--serif);font-weight:300;font-size:clamp(3rem,7.5vw,5.8rem);line-height:1;margin-bottom:1.6rem;letter-spacing:-.01em}
 .house-desc{color:var(--ink-soft);font-size:1.02rem;line-height:1.85}
 .house-center .btn-line{margin-top:1.8rem}
-.hp{position:absolute;overflow:hidden;border-radius:2px;box-shadow:0 24px 60px rgba(20,13,8,.18);animation:floaty 9s ease-in-out infinite}
+.hp{position:absolute;overflow:hidden;border-radius:2px;box-shadow:0 24px 60px rgba(20,13,8,.18);opacity:0;transition:opacity 1.1s var(--ease);will-change:transform}
+.hp.hp-in{opacity:1}
 .hp img{transition:transform 1.6s var(--ease)}
 .hp:hover img{transform:scale(1.06)}
-.hp-1{width:16%;left:6%;top:20%;aspect-ratio:3/4;animation-delay:0s}
-.hp-2{width:21%;left:38%;top:2%;aspect-ratio:5/4;animation-delay:.9s}
-.hp-3{width:17%;right:6%;top:6%;aspect-ratio:1/1;animation-delay:1.3s}
-.hp-4{width:17%;left:1%;bottom:3%;aspect-ratio:4/3;animation-delay:.5s}
-.hp-5{width:15%;right:3%;bottom:0;aspect-ratio:3/4;animation-delay:2s}
-.hp-6{display:none}
+/* Maybourne-style: 3 across the top, varied sizes + one larger landscape anchor, clear centre, photos at top & bottom bands */
+.hp-1{width:18%;left:18%;top:3%;aspect-ratio:3/2}
+.hp-2{width:22%;right:1%;top:9%;aspect-ratio:16/9}
+.hp-3{width:15%;right:24%;top:4%;aspect-ratio:7/5}
+.hp-4{width:19%;left:3%;bottom:6%;aspect-ratio:16/9}
+.hp-5{width:18%;right:4%;bottom:7%;aspect-ratio:3/2}
+.hp-6{width:13%;left:2%;top:10%;aspect-ratio:3/4}
+.hp-7{width:13%;left:43%;bottom:3%;aspect-ratio:3/4}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
 
 /* ============ FEATURE ============ */

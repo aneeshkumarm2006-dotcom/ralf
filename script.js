@@ -60,6 +60,39 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.18 });
 document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
+// ===== House of Ralf collage: scroll-linked parallax (Maybourne-style drift) =====
+const houseStage = document.querySelector('.house-stage');
+if (houseStage) {
+  const photos = [...houseStage.querySelectorAll('.hp')];
+  // fade in as each photo enters
+  const fadeIO = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add('hp-in'); fadeIO.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  photos.forEach((p) => fadeIO.observe(p));
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isDesktop = () => window.matchMedia('(min-width: 761px)').matches;
+  let ticking = false;
+  const apply = () => {
+    ticking = false;
+    if (reduce || !isDesktop()) { photos.forEach((p) => { p.style.transform = ''; }); return; }
+    const vh = window.innerHeight;
+    const rect = houseStage.getBoundingClientRect();
+    // -1..1: how far the section's centre is from the viewport centre
+    const progress = ((vh / 2) - (rect.top + rect.height / 2)) / vh;
+    photos.forEach((p) => {
+      const speed = parseFloat(p.dataset.speed || '0');
+      p.style.transform = `translateY(${(progress * speed).toFixed(1)}px)`;
+    });
+  };
+  const requestApply = () => { if (!ticking) { ticking = true; requestAnimationFrame(apply); } };
+  window.addEventListener('scroll', requestApply, { passive: true });
+  window.addEventListener('resize', requestApply);
+  apply();
+}
+
 // ===== Mobile nav =====
 const toggle = document.getElementById('navToggle');
 const nav = document.getElementById('primaryNav');
