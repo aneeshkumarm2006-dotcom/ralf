@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Ralf | Variant 1 — Polished scatter + parallax</title>
+  <meta name="description" content="The Ralf, an intimate, design-led guesthouse in the heart of Montréal's Old Port. Ten rooms and a penthouse, warm personal service, and a certain French ease. Bienvenue, Darling." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="../ralf-emblem.png" />
+  <link rel="apple-touch-icon" href="../ralf-emblem.png" />
+  <link rel="stylesheet" href="../styles.css" />
+
+  <!-- ===== VARIANT 1 · Polished scatter + scroll-parallax + idle float ===== -->
+  <style>
+    /* tighten the stage so the top & bottom bands sit closer (less dead centre) */
+    .house-stage{min-height:clamp(600px,84vh,880px)}
+    .house-center{top:53%}
+
+    /* three clean transform layers, no conflicts:
+       .hp        -> reveal (opacity) + parallax (inline transform, set by JS)
+       .hp-inner  -> idle float (animation)  |  parent .hp is overflow:visible so it never clips
+       img        -> hover zoom (scale)                                                        */
+    .house-stage .hp{overflow:visible;box-shadow:none;border-radius:0;background:none}
+    .house-stage .hp .hp-inner{position:absolute;inset:0;overflow:hidden;border-radius:3px;
+      box-shadow:0 26px 66px rgba(20,13,8,.22);animation:hpfloat 7s ease-in-out infinite}
+    .house-stage .hp .hp-inner img{width:100%;height:100%;object-fit:cover;display:block;
+      transition:transform 1s var(--ease)}
+    .house-stage .hp:hover .hp-inner img{transform:scale(1.06)}
+
+    @keyframes hpfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
+    /* desync the bob per tile */
+    .house-stage .hp-1 .hp-inner{animation-duration:8.6s;animation-delay:-1.2s}
+    .house-stage .hp-2 .hp-inner{animation-duration:7.4s;animation-delay:-3.0s}
+    .house-stage .hp-3 .hp-inner{animation-duration:9.2s;animation-delay:-2.1s}
+    .house-stage .hp-4 .hp-inner{animation-duration:8.0s;animation-delay:-4.4s}
+    .house-stage .hp-5 .hp-inner{animation-duration:7.0s;animation-delay:-0.6s}
+    .house-stage .hp-6 .hp-inner{animation-duration:9.6s;animation-delay:-5.2s}
+    .house-stage .hp-7 .hp-inner{animation-duration:8.2s;animation-delay:-1.8s}
+
+    /* rebalanced, slightly larger composition — fills the cream, keeps the centre clear */
+    .house-stage .hp-6{width:14%;left:2%;top:6%;aspect-ratio:3/4}
+    .house-stage .hp-1{width:23%;left:16%;top:8%;aspect-ratio:3/2}
+    .house-stage .hp-3{width:16.5%;right:21%;top:5%;aspect-ratio:4/5}
+    .house-stage .hp-2{width:23%;right:1%;top:9%;aspect-ratio:16/10}
+    .house-stage .hp-4{width:21%;left:3%;bottom:6%;aspect-ratio:16/10}
+    .house-stage .hp-5{width:17%;left:41%;bottom:3%;aspect-ratio:16/10}
+    .house-stage .hp-7{width:14%;right:2%;bottom:5%;aspect-ratio:3/4}
+
+    @media (max-width:760px){
+      .house-stage .hp .hp-inner{position:absolute;inset:0;animation:none}
+    }
+    @media (prefers-reduced-motion:reduce){
+      .house-stage .hp .hp-inner{animation:none}
+    }
+  </style>
+</head>
+<body class="home">
+  <!-- ============ LOADER ============ -->
+  <div class="c-loader" id="loader">
+    <div class="c-loader_bg"><span class="bar" style="--i:0"><span class="bar-logo"><img class="ralf-dog big" src="../ralf-emblem.png" alt="The Ralf" /><span class="c-loader_name">The Ralf</span></span></span><span class="bar" style="--i:1"><span class="bar-logo"><img class="ralf-dog big" src="../ralf-emblem.png" alt="The Ralf" /><span class="c-loader_name">The Ralf</span></span></span><span class="bar" style="--i:2"><span class="bar-logo"><img class="ralf-dog big" src="../ralf-emblem.png" alt="The Ralf" /><span class="c-loader_name">The Ralf</span></span></span><span class="bar" style="--i:3"><span class="bar-logo"><img class="ralf-dog big" src="../ralf-emblem.png" alt="The Ralf" /><span class="c-loader_name">The Ralf</span></span></span><span class="bar" style="--i:4"><span class="bar-logo"><img class="ralf-dog big" src="../ralf-emblem.png" alt="The Ralf" /><span class="c-loader_name">The Ralf</span></span></span><span class="bar" style="--i:5"><span class="bar-logo"><img class="ralf-dog big" src="../ralf-emblem.png" alt="The Ralf" /><span class="c-loader_name">The Ralf</span></span></span></div>
+  </div>
+
+  <!-- ============ HEADER (Rosewood-style) ============ -->
+  <header class="site-header" id="header">
+    <div class="header-brand-row">
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a href="../index.html" class="brand" aria-label="The Ralf home"><img class="ralf-dog" src="../ralf-emblem.png" alt="The Ralf" /><span class="brand-name">The Ralf</span></a>
+    </div>
+    <div class="header-nav-row">
+      <nav class="nav-main">
+        <a href="../about.html">About</a>
+        <a href="../story.html">The House</a>
+        <a href="../rooms.html">Rooms</a>
+        <a href="../wellness.html">Wellness</a>
+        <a href="../presents.html">Just Ask Ralf</a>
+      </nav>
+      <div class="nav-utility">
+        <a href="#" class="lang-toggle" aria-label="Français">FR</a>
+        <a href="../rooms.html#book" class="btn-book">Book</a>
+      </div>
+    </div>
+    <nav class="primary-nav" id="primaryNav">
+      <a href="../about.html">About</a>
+      <a href="../story.html">The House</a>
+      <a href="../rooms.html">Rooms</a>
+      <a href="../wellness.html">Wellness</a>
+      <a href="../presents.html">Just Ask Ralf</a>
+      <a href="#shop" class="nav-ext">The Shop &#8599;</a>
+      <a href="../rooms.html#book" class="btn-book">Book</a>
+    </nav>
+  </header>
+
+  <!-- ============ HERO BANNER ============ -->
+  <section class="hero" id="top">
+    <div class="hero-bg" style="background-image:url('../ralf-house.png')"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-banner">
+      <img class="ralf-dog hero-emblem" src="../ralf-emblem.png" alt="The Ralf" />
+      <h1 class="hero-logo"><span class="ln"><span>The Ralf</span></span></h1>
+      <p class="hero-tag">Guest House &middot; Old Montréal</p>
+    </div>
+  </section>
+
+  <!-- ============ HOUSE OF RALF · VARIANT 1 (polished scatter) ============ -->
+  <section class="house" id="house">
+    <div class="house-stage">
+      <figure class="hp hp-1"><div class="hp-inner"><img src="../ralf-bedroom-day.jpg" alt="A guest room at The Ralf overlooking Old Montréal" /></div></figure>
+      <figure class="hp hp-2"><div class="hp-inner"><img src="../ralf-living.jpg" alt="The living and dining space of a Ralf suite" /></div></figure>
+      <figure class="hp hp-3"><div class="hp-inner"><img src="../ralf-bath.jpg" alt="A Ralf guestroom bathroom" /></div></figure>
+      <figure class="hp hp-4"><div class="hp-inner"><img src="../ralf-hall.jpg" alt="The panelled corridor at The Ralf" /></div></figure>
+      <figure class="hp hp-5"><div class="hp-inner"><img src="../ralf-bedroom-dusk.jpg" alt="A guest room at dusk, City Hall view" /></div></figure>
+      <figure class="hp hp-6"><div class="hp-inner"><img src="../ralf-arrival.jpg" alt="Arrival at The Ralf" /></div></figure>
+      <figure class="hp hp-7"><div class="hp-inner"><img src="../ralf-room-view.jpg" alt="A guest room with a view" /></div></figure>
+
+      <div class="house-center">
+        <div class="house-inner reveal">
+          <p class="house-eyebrow">House of</p>
+          <h2 class="house-title">Ralf</h2>
+          <p class="house-desc">Located in the heart of Montreal's Old Port, just moments from City Hall, we offer an elevated hospitality experience where contemporary luxury meets the city's historic charm. Every stay is designed to provide remarkable experiences and memorable moments inspired by Montreal's rich design heritage, vibrant culture, and timeless character.</p>
+          <a href="../story.html" class="btn-line">Meet Ralf</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURE: ROOMS ============ -->
+  <section class="feature section" id="rooms">
+    <div class="feature-grid">
+      <div class="feature-media reveal">
+        <img src="../ralf-bedroom-day.jpg" alt="A spacious, design-led guest room at The Ralf" />
+      </div>
+      <div class="feature-text reveal">
+        <p class="section-eyebrow">Rooms</p>
+        <h2 class="feature-title">Ten rooms. One penthouse.</h2>
+        <p class="feature-body">We opt for fewer keys, so every room is spacious and comfortable, each with a kitchenette and living space, proper bedding, and considered light. Home comforts, with a luxe feel.</p>
+        <a href="../rooms.html" class="btn-line">Explore the Rooms</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BAR & TABLE ============ -->
+  <section class="dining section" id="dining">
+    <div class="dining-intro reveal">
+      <p class="section-eyebrow">The Bar &amp; Table</p>
+      <h2 class="display-line">Spaces made for lingering</h2>
+      <p class="dining-lede">Inviting communal spaces encourage guests to linger, relax, and unwind together, a bar that draws the right crowd without trying too hard, and a long table that fills up by morning.</p>
+    </div>
+
+    <div class="dining-cards">
+      <article class="dining-card reveal">
+        <div class="dining-media">
+          <img src="../ralf-bar.jpg" alt="The Bar at The Ralf" />
+        </div>
+        <div class="dining-info">
+          <h3>The Bar</h3>
+          <p>A negroni without consulting the menu, a martini before dinner, the kind of room where you settle in and stay a little longer.</p>
+          <a href="#dining" class="btn-line">Pull up a stool &#8599;</a>
+        </div>
+      </article>
+
+      <article class="dining-card reveal">
+        <div class="dining-media">
+          <img src="../ralf-table.jpg" alt="The communal Table at The Ralf" />
+        </div>
+        <div class="dining-info">
+          <h3>The Table</h3>
+          <p>Coffee, an orange, the morning paper. A communal kitchen and table for slow breakfasts and unhurried evenings, together.</p>
+          <a href="#dining" class="btn-line">Take a seat &#8599;</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ JUST ASK RALF ============ -->
+  <section class="presents section" id="presents">
+    <div class="reveal">
+      <p class="section-eyebrow">Just Ask Ralf</p>
+      <h2 class="display-line">Hidden cafés, the right table, where to go, and where not to. Ralf knows best.</h2>
+      <a href="../presents.html" class="btn-line">Ask Ralf</a>
+    </div>
+  </section>
+
+  <!-- ============ HOUSE LIST / BOOK ============ -->
+  <section class="cta section" id="book">
+    <div class="reveal">
+      <p class="section-eyebrow">Opening Soon</p>
+      <h2 class="cta-title">Be first through the door.</h2>
+      <p class="cta-body">Join our mailing list for opening updates, early access bookings, and special events.</p>
+      <form class="cta-form" id="newsletterForm">
+        <input type="email" name="email" placeholder="Email address" required />
+        <button type="submit">Subscribe</button>
+      </form>
+      <p class="cta-note" id="formNote" hidden>Thank you, welcome to the house.</p>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer" id="press">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img class="ralf-dog big" src="../ralf-emblem.png" alt="The Ralf" />
+        <p class="footer-address">164 Notre-Dame Est<br />Old Montréal, QC H2Y 1C2</p>
+        <a href="tel:15147000164" class="footer-phone">514&middot;700&middot;0164</a>
+      </div>
+
+      <nav class="footer-col">
+        <h4>The House</h4>
+        <a href="../story.html">Our Story</a>
+        <a href="../rooms.html">Rooms</a>
+        <a href="#dining">The Bar &amp; Table</a>
+      </nav>
+
+      <nav class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:reservations@theralf.ca">Reservations</a>
+        <a href="mailto:ask@theralf.ca">Just Ask Ralf</a>
+        <a href="mailto:events@theralf.ca">Gatherings</a>
+        <a href="mailto:press@theralf.ca">Blog</a>
+      </nav>
+
+      <nav class="footer-col">
+        <h4>Connect</h4>
+        <a href="#shop">The Shop</a>
+        <a href="../presents.html">House List</a>
+        <a href="#shop">Instagram</a>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 The Ralf. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#accessibility">Accessibility</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ OPENING ANNOUNCEMENT ============ -->
+  <div class="announce" id="announce" role="dialog" aria-label="Opening announcement">
+    <div class="announce-card">
+      <button class="announce-close" id="announceClose" aria-label="Close">&times;</button>
+      <span class="announce-logo">The Ralf</span>
+      <p class="announce-eyebrow">Old Montréal</p>
+      <h3 class="announce-title">Opening our doors this August</h3>
+      <p class="announce-text">A new guesthouse in the heart of the Old Port. Be among the first to arrive.</p>
+      <a href="#book" class="announce-btn">Join the House List</a>
+    </div>
+  </div>
+
+  <script src="../script.js"></script>
+
+  <!-- ===== VARIANT 1 · subtle scroll-parallax on the floating photos ===== -->
+  <script>
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || window.matchMedia('(max-width:760px)').matches) return;
+
+      var tiles = Array.prototype.slice.call(document.querySelectorAll('.house-stage .hp'));
+      if (!tiles.length) return;
+
+      // per-tile depth factor — alternating sign + magnitude gives layered depth
+      var depths = [0.05, -0.045, 0.06, -0.07, 0.04, -0.05, 0.065];
+      var ticking = false;
+
+      function update() {
+        ticking = false;
+        var vh = window.innerHeight;
+        for (var i = 0; i < tiles.length; i++) {
+          var r = tiles[i].getBoundingClientRect();
+          var rel = (r.top + r.height / 2 - vh / 2) / vh;   // ~ -0.5 .. 0.5
+          var py = rel * vh * depths[i % depths.length];
+          tiles[i].style.transform = 'translate3d(0,' + py.toFixed(1) + 'px,0)';
+        }
+      }
+      function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+      update();
+    })();
+  </script>
+</body>
+</html>
