@@ -1,6 +1,20 @@
 // ===== Loader intro =====
-const fireLoaded = () => document.body.classList.add('is-loaded');
+const fireLoaded = () => {
+  document.body.classList.add('is-loaded');
+  // release the scroll lock once the wipe is underway
+  document.documentElement.classList.remove('is-loading');
+  window.removeEventListener('wheel', blockScroll);
+  window.removeEventListener('touchmove', blockScroll);
+};
+// while the loader covers the page, swallow scroll input so the page
+// underneath doesn't quietly scroll down behind the intro
+const blockScroll = (e) => e.preventDefault();
 if (document.getElementById('loader')) {
+  // lock the page at the top until the intro finishes
+  document.documentElement.classList.add('is-loading');
+  window.scrollTo(0, 0);
+  window.addEventListener('wheel', blockScroll, { passive: false });
+  window.addEventListener('touchmove', blockScroll, { passive: false });
   // hold the loader briefly so the logo reads, then wipe + reveal hero
   const MIN = document.body.classList.contains('home') ? 1600 : 1100;
   let done = false;
@@ -12,6 +26,17 @@ if (document.getElementById('loader')) {
 } else {
   fireLoaded();
 }
+
+// run a callback only once the intro loader has lifted — otherwise entrance
+// animations for anything already in view play (and finish) behind the loader
+const whenLoaded = (cb) => {
+  if (document.body.classList.contains('is-loaded')) cb();
+  else {
+    const t = setInterval(() => {
+      if (document.body.classList.contains('is-loaded')) { clearInterval(t); cb(); }
+    }, 100);
+  }
+};
 
 // ===== Header scroll state =====
 const header = document.getElementById('header');
@@ -58,39 +83,39 @@ const io = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.18 });
-document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+whenLoaded(() => document.querySelectorAll('.reveal').forEach((el) => io.observe(el)));
 
-// ===== House of Ralf collage: scroll-linked parallax (Maybourne-style drift) =====
+// ===== Wellness cluster: single image that opens up into the spread =====
+const well = document.querySelector('.well');
+if (well) {
+  // two-phase: photos drop in and pile into a centre stack, then the
+  // stack splits apart into the final fanned spread
+  const runWell = () => {
+    well.classList.add('well-stack');                              // pile up
+    setTimeout(() => well.classList.add('well-open'), 1150);       // then split
+  };
+  // hold until the intro loader has wiped away
+  const reveal = () => {
+    if (document.body.classList.contains('is-loaded')) runWell();
+    else setTimeout(reveal, 120);
+  };
+  const wellIO = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) { reveal(); wellIO.unobserve(e.target); }
+    });
+  }, { threshold: 0.2 });
+  wellIO.observe(well);
+}
+
+// ===== House of Ralf collage: slide-up + fade on entry (Maybourne-style) =====
 const houseStage = document.querySelector('.house-stage');
 if (houseStage) {
-  const photos = [...houseStage.querySelectorAll('.hp')];
-  // fade in as each photo enters
-  const fadeIO = new IntersectionObserver((entries) => {
+  const hpIO = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
-      if (e.isIntersecting) { e.target.classList.add('hp-in'); fadeIO.unobserve(e.target); }
+      if (e.isIntersecting) { e.target.classList.add('hp-in'); hpIO.unobserve(e.target); }
     });
   }, { threshold: 0.12 });
-  photos.forEach((p) => fadeIO.observe(p));
-
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isDesktop = () => window.matchMedia('(min-width: 761px)').matches;
-  let ticking = false;
-  const apply = () => {
-    ticking = false;
-    if (reduce || !isDesktop()) { photos.forEach((p) => { p.style.transform = ''; }); return; }
-    const vh = window.innerHeight;
-    const rect = houseStage.getBoundingClientRect();
-    // -1..1: how far the section's centre is from the viewport centre
-    const progress = ((vh / 2) - (rect.top + rect.height / 2)) / vh;
-    photos.forEach((p) => {
-      const speed = parseFloat(p.dataset.speed || '0');
-      p.style.transform = `translateY(${(progress * speed).toFixed(1)}px)`;
-    });
-  };
-  const requestApply = () => { if (!ticking) { ticking = true; requestAnimationFrame(apply); } };
-  window.addEventListener('scroll', requestApply, { passive: true });
-  window.addEventListener('resize', requestApply);
-  apply();
+  whenLoaded(() => houseStage.querySelectorAll('.hp').forEach((p) => hpIO.observe(p)));
 }
 
 // ===== Mobile nav =====
@@ -117,7 +142,7 @@ if (form && note) {
 // ===== Opening announcement pop-up (once per session) =====
 const announce = document.getElementById('announce');
 if (announce && sessionStorage.getItem('ralf-announce') !== '1') {
-  setTimeout(() => announce.classList.add('show'), 2200);
+  setTimeout(() => announce.classList.add('show'), 4800);
   const dismiss = () => {
     announce.classList.remove('show');
     sessionStorage.setItem('ralf-announce', '1');
