@@ -366,7 +366,7 @@ body.is-loaded .page-hero-img{transform:scale(1)}
 
 /* state 2 — DISPERSE: the open pile scatters out to its final positions */
 .well-open .wp{transform:none;--d:0s}
-.well-open .wp{animation:floaty 10s ease-in-out infinite;animation-delay:calc(1.7s + var(--af,0s))}
+.well-open .wp{animation:none}
 .well-open .wp-2{--af:1.1s}
 .well-open .wp-3{--af:.5s}
 .well-open .wp-4{--af:1.7s}

@@ -19,10 +19,11 @@ if (document.getElementById('loader')) {
   const MIN = document.body.classList.contains('home') ? 1600 : 1100;
   let done = false;
   const trigger = () => { if (!done) { done = true; setTimeout(fireLoaded, MIN); } };
-  if (document.readyState === 'complete') trigger();
-  else window.addEventListener('load', trigger);
-  // safety net in case 'load' never fires (slow images)
-  setTimeout(trigger, 2800);
+  // lift on DOM-ready, NOT window 'load' — otherwise heavy images hold the intro hostage
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', trigger);
+  else trigger();
+  // safety net in case DOMContentLoaded already passed unusually
+  setTimeout(trigger, 2000);
 } else {
   fireLoaded();
 }
