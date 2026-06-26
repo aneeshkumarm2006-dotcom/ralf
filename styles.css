@@ -405,7 +405,7 @@ body.is-loaded .page-hero-img{transform:scale(1)}
 .split-tag{font-family:var(--serif);font-style:italic;font-size:1.25rem;color:var(--ink);margin-top:1rem}
 
 /* ============ EDITORIAL STORY (few words, many photos) ============ */
-.ed{padding:clamp(2.5rem,6vw,5rem) clamp(1.5rem,6vw,8rem)}
+.ed{padding:clamp(5rem,10vw,9rem) clamp(1.5rem,6vw,8rem)}
 .ed-duo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,5vw,4rem);max-width:1080px;margin:0 auto}
 .ed-duo-col{display:flex;flex-direction:column;gap:clamp(1.5rem,4vw,3rem)}
 .ed-duo figure:nth-child(2){margin-top:clamp(2rem,8vw,6.5rem)}
