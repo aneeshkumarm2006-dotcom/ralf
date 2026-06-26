@@ -169,14 +169,15 @@ body.is-loaded .hero-tag{opacity:.92;transform:none;transition-delay:1.45s}
 .hp{position:absolute;overflow:hidden;border-radius:3px;box-shadow:0 26px 66px rgba(20,13,8,.22);will-change:transform,opacity}
 .hp img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1s var(--ease)}
 .hp:hover img{transform:scale(1.05)}
-/* resting (assembled) positions — clustered toward the centre so the stage doesn't read empty */
-.hp-6{width:14%;left:7%;top:15%;aspect-ratio:3/4}
-.hp-1{width:23%;left:21%;top:12%;aspect-ratio:3/2}
-.hp-3{width:16%;right:23%;top:13%;aspect-ratio:4/5}
-.hp-2{width:23%;right:6%;top:16%;aspect-ratio:16/10}
-.hp-4{width:22%;left:9%;bottom:13%;aspect-ratio:16/10}
-.hp-5{width:18%;left:41%;bottom:9%;aspect-ratio:16/10}
-.hp-7{width:14%;right:7%;bottom:14%;aspect-ratio:3/4}
+/* resting (assembled) positions — evenly spaced: 4 across the top, 3 across the bottom,
+   with symmetric horizontal centres so the stage reads balanced edge-to-edge */
+.hp-6{width:14%;left:6%;top:14%;aspect-ratio:3/4}
+.hp-1{width:22%;left:26%;top:10%;aspect-ratio:3/2}
+.hp-3{width:16%;left:55%;top:12%;aspect-ratio:4/5}
+.hp-2{width:22%;right:2%;top:15%;aspect-ratio:16/10}
+.hp-4{width:22%;left:7%;bottom:12%;aspect-ratio:16/10}
+.hp-5{width:18%;left:41%;bottom:8%;aspect-ratio:16/10}
+.hp-7{width:14%;right:11%;bottom:14%;aspect-ratio:3/4}
 @media(prefers-reduced-motion:reduce){
   .house-track{height:auto}
   .house-stage{position:static;height:auto;min-height:clamp(620px,90vh,900px)}

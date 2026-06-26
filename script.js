@@ -122,8 +122,8 @@ if (well) {
 
   // per-tile drift rate (fraction of AMP). mixed signs let some photos rise
   // while others sink as you scroll, for a layered, floating depth
-  const factors = [-0.28, 0.42, -0.52, 0.30, 0.55, -0.36, 0.46];
-  const AMP = 150;
+  const factors = [-0.45, 0.62, -0.78, 0.50, 0.82, -0.55, 0.70];
+  const AMP = 210;
 
   const clamp = (v, a, b) => (v < a ? a : (v > b ? b : v));
 
@@ -140,7 +140,7 @@ if (well) {
       tiles[i].style.transform = 'translate3d(0,' + y.toFixed(1) + 'px,0)';
     }
     if (center) {
-      center.style.transform = 'translate(-50%,-50%) translateY(' + (drift * -12).toFixed(1) + 'px)';
+      center.style.transform = 'translate(-50%,-50%) translateY(' + (drift * -18).toFixed(1) + 'px)';
     }
   };
   const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(render); } };
