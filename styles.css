@@ -156,28 +156,33 @@ body.is-loaded .hero-logo .ln>span{transform:none;transition-delay:1s}
 .hero-tag{margin-top:.6rem;text-transform:uppercase;letter-spacing:.36em;font-size:clamp(.66rem,1.4vw,.82rem);opacity:0;transform:translateY(18px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
 body.is-loaded .hero-tag{opacity:.92;transform:none;transition-delay:1.45s}
 
-/* ============ HOUSE OF RALF (floating photos) ============ */
-.house{position:relative;overflow:hidden;background:var(--cream);padding:clamp(3.5rem,8vw,7rem) clamp(1.5rem,6vw,5rem)}
-.house-stage{position:relative;max-width:1320px;margin:0 auto;min-height:clamp(640px,94vh,980px)}
-.house-center{position:absolute;left:50%;top:58%;transform:translate(-50%,-50%);max-width:30rem;text-align:center;z-index:6;padding:0 1rem}
+/* ============ HOUSE OF RALF (parallax float) ============ */
+.house{position:relative;background:var(--cream)}
+.house-track{position:relative}
+.house-stage{position:relative;height:100vh;max-width:1320px;margin:0 auto;overflow:hidden}
+.house-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);max-width:30rem;text-align:center;z-index:6;padding:0 1rem}
 .house-center::before{content:'';position:absolute;left:50%;top:50%;width:165%;height:155%;transform:translate(-50%,-50%);background:radial-gradient(ellipse at center,rgba(241,234,214,.95)0%,rgba(241,234,214,.64)52%,rgba(241,234,214,0)76%);z-index:-1}
 .house-eyebrow{text-transform:uppercase;letter-spacing:.4em;font-size:.82rem;color:var(--ink);margin-bottom:.5rem}
 .house-title{font-family:var(--serif);font-weight:300;font-size:clamp(3rem,7.5vw,5.8rem);line-height:1;margin-bottom:1.6rem;letter-spacing:-.01em}
 .house-desc{color:var(--ink-soft);font-size:1.02rem;line-height:1.85}
 .house-center .btn-line{margin-top:1.8rem}
-.hp{position:absolute;overflow:hidden;border-radius:2px;box-shadow:0 24px 60px rgba(20,13,8,.18);opacity:0;transform:translateY(14px);transition:opacity .7s var(--ease),transform .7s var(--ease);will-change:transform,opacity}
-.hp.hp-in{opacity:1;transform:translateY(0)}
-.hp img{transition:transform 1s var(--ease)}
+.hp{position:absolute;overflow:hidden;border-radius:3px;box-shadow:0 26px 66px rgba(20,13,8,.22);will-change:transform,opacity}
+.hp img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1s var(--ease)}
 .hp:hover img{transform:scale(1.05)}
-/* Maybourne-style: aligned top band (4) + bottom band (3), one larger landscape anchor, centre clear */
-.hp-6{width:13%;left:3%;top:7%;aspect-ratio:3/4;transition-delay:0s}
-.hp-1{width:18%;left:18%;top:6%;aspect-ratio:3/2;transition-delay:.06s}
-.hp-3{width:15%;right:24%;top:6%;aspect-ratio:7/5;transition-delay:.12s}
-.hp-2{width:21%;right:1%;top:7%;aspect-ratio:16/9;transition-delay:.18s}
-.hp-4{width:18%;left:4%;bottom:6%;aspect-ratio:16/9;transition-delay:.24s}
-.hp-5{width:15%;left:42.5%;bottom:3%;aspect-ratio:16/9;transition-delay:.3s}
-.hp-7{width:13%;right:3%;bottom:5%;aspect-ratio:3/4;transition-delay:.36s}
-@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+/* resting (assembled) positions — clustered toward the centre so the stage doesn't read empty */
+.hp-6{width:14%;left:7%;top:15%;aspect-ratio:3/4}
+.hp-1{width:23%;left:21%;top:12%;aspect-ratio:3/2}
+.hp-3{width:16%;right:23%;top:13%;aspect-ratio:4/5}
+.hp-2{width:23%;right:6%;top:16%;aspect-ratio:16/10}
+.hp-4{width:22%;left:9%;bottom:13%;aspect-ratio:16/10}
+.hp-5{width:18%;left:41%;bottom:9%;aspect-ratio:16/10}
+.hp-7{width:14%;right:7%;bottom:14%;aspect-ratio:3/4}
+@media(prefers-reduced-motion:reduce){
+  .house-track{height:auto}
+  .house-stage{position:static;height:auto;min-height:clamp(620px,90vh,900px)}
+  .hp{opacity:1!important;transform:none!important}
+  .house-center{opacity:1!important}
+}
 
 /* ============ FEATURE ============ */
 .feature-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,6vw,6rem);align-items:center}
@@ -462,9 +467,11 @@ body.is-loaded .page-hero-img{transform:scale(1)}
   .split{grid-template-columns:1fr}
   .split.reverse .split-media{order:0}
   .press-item{flex-direction:column;gap:.5rem}
-  .house-stage{position:static;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-  .house-center{position:static;transform:none;grid-column:1/-1;max-width:none;margin:0 auto 1rem;padding:0;order:-1}
-  .hp{position:static;width:auto!important;aspect-ratio:4/3!important;box-shadow:0 14px 34px rgba(20,13,8,.16);animation:none}
+  .house-track{height:auto}
+  .house-stage{position:static;height:auto;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:1rem;padding:clamp(2.5rem,7vw,4rem) 1.2rem;overflow:visible}
+  .house-center{position:static;transform:none!important;grid-column:1/-1;max-width:none;margin:0 auto .6rem;padding:0;order:-1;opacity:1!important}
+  .house-center::before{display:none}
+  .hp{position:static!important;width:auto!important;aspect-ratio:4/3!important;transform:none!important;opacity:1!important;box-shadow:0 14px 34px rgba(20,13,8,.16)}
   .room{grid-template-columns:1fr;gap:1.6rem;margin-bottom:3.5rem}
   .room.reverse .room-media{order:0}
   .room-media{aspect-ratio:4/3}

@@ -108,16 +108,48 @@ if (well) {
   wellIO.observe(well);
 }
 
-// ===== House of Ralf collage: slide-up + fade on entry (Maybourne-style) =====
-const houseStage = document.querySelector('.house-stage');
-if (houseStage) {
-  const hpIO = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (e.isIntersecting) { e.target.classList.add('hp-in'); hpIO.unobserve(e.target); }
-    });
-  }, { threshold: 0.12 });
-  whenLoaded(() => houseStage.querySelectorAll('.hp').forEach((p) => hpIO.observe(p)));
-}
+// ===== House of Ralf: gentle parallax float (photos drift with the scroll) =====
+(function () {
+  const stage = document.querySelector('.house-stage');
+  const center = document.querySelector('.house-center');
+  if (!stage) return;
+  const tiles = Array.prototype.slice.call(stage.querySelectorAll('.hp'));
+  if (!tiles.length) return;
+
+  // mobile lays the photos out in a static grid; reduced-motion users opt out
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || window.matchMedia('(max-width:760px)').matches) return;
+
+  // per-tile drift rate (fraction of AMP). mixed signs let some photos rise
+  // while others sink as you scroll, for a layered, floating depth
+  const factors = [-0.28, 0.42, -0.52, 0.30, 0.55, -0.36, 0.46];
+  const AMP = 150;
+
+  const clamp = (v, a, b) => (v < a ? a : (v > b ? b : v));
+
+  let ticking = false;
+  const render = () => {
+    ticking = false;
+    const r = stage.getBoundingClientRect();
+    const vh = window.innerHeight;
+    // 0 as the stage enters from the bottom -> 1 as it leaves past the top
+    const p = clamp((vh - r.top) / (vh + r.height), 0, 1);
+    const drift = (p - 0.5) * 2;                  // -1 .. 1, neutral when centred
+    for (let i = 0; i < tiles.length; i++) {
+      const y = drift * factors[i % factors.length] * AMP;
+      tiles[i].style.transform = 'translate3d(0,' + y.toFixed(1) + 'px,0)';
+    }
+    if (center) {
+      center.style.transform = 'translate(-50%,-50%) translateY(' + (drift * -12).toFixed(1) + 'px)';
+    }
+  };
+  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(render); } };
+
+  render();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  window.addEventListener('load', render);
+})();
 
 // ===== Mobile nav =====
 const toggle = document.getElementById('navToggle');
