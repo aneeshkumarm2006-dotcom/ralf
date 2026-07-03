@@ -184,7 +184,7 @@ a{color:inherit;text-decoration:none}
 body.is-loaded .hero-bg{transform:scale(1)}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,13,8,.42)0%,rgba(20,13,8,.3)45%,rgba(20,13,8,.55)100%)}
 .hero-banner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;padding:0 1.5rem}
-.hero-lines{font-family:var(--sans);font-weight:300;font-size:clamp(1.05rem,2.1vw,1.6rem);line-height:1.9;letter-spacing:.06em;text-shadow:0 1px 18px rgba(20,13,8,.35)}
+.hero-lines{font-family:var(--editorial);font-weight:200;font-size:clamp(1.05rem,2.1vw,1.6rem);line-height:1.9;letter-spacing:.06em;text-shadow:0 1px 18px rgba(20,13,8,.35)}
 .hero-lines .ln{display:block;overflow:hidden}
 .hero-lines .ln>span{display:block;transform:translateY(130%);transition:transform 1.1s var(--ease)}
 body.is-loaded .hero-lines .ln>span{transform:none;transition-delay:.9s}
