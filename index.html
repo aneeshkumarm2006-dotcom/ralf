@@ -33,16 +33,21 @@
       </nav>
       <div class="nav-utility">
         <a href="#" class="lang-toggle" aria-label="Français">FR</a>
-        <a href="https://app.mews.com/distributor/6bb1de57-7e2d-4c1b-a060-b45000c2c7ea" target="_blank" rel="noopener" class="btn-book">Book</a>
+        <a href="https://app.mews.com/distributor/6bb1de57-7e2d-4c1b-a060-b45000c2c7ea" target="_blank" rel="noopener" class="btn-book">Plan Your Stay</a>
       </div>
     </div>
     <nav class="primary-nav" id="primaryNav">
+      <div class="pnav-top">
+        <span class="pnav-logo">The Ralf</span>
+        <button class="pnav-close" id="navClose" aria-label="Close menu">Close <span aria-hidden="true">&#215;</span></button>
+      </div>
       <a href="about.html">About</a>
       <a href="story.html">The House</a>
       <a href="rooms.html">Rooms</a>
       <a href="presents.html">Just Ask Ralf</a>
       <a href="#shop" class="nav-ext">The Shop &#8599;</a>
-      <a href="https://app.mews.com/distributor/6bb1de57-7e2d-4c1b-a060-b45000c2c7ea" target="_blank" rel="noopener" class="btn-book">Book</a>
+      <a href="https://app.mews.com/distributor/6bb1de57-7e2d-4c1b-a060-b45000c2c7ea" target="_blank" rel="noopener" class="btn-book">Book Your Stay</a>
+      <div class="pnav-lang"><a href="#">EN</a><span aria-hidden="true">|</span><a href="#">FR</a></div>
     </nav>
   </header>
 
@@ -55,6 +60,7 @@
       <h1 class="hero-logo"><span class="ln"><span>The Ralf</span></span></h1>
       <p class="hero-tag">Guest House &middot; Old Montréal</p>
     </div>
+    <a href="#house" class="hero-scroll">Discover more<span class="hero-scroll-arrow">&darr;</span></a>
   </section>
 
   <!-- ============ HOUSE OF RALF (parallax float) ============ -->
@@ -71,7 +77,8 @@
         <div class="house-center">
           <p class="house-eyebrow">House of</p>
           <h2 class="house-title">Ralf</h2>
-          <p class="house-desc">Located in the heart of Montreal's Old Port, just moments from City Hall, we offer an elevated hospitality experience where contemporary luxury meets the city's historic charm. Every stay is designed to provide remarkable experiences and memorable moments inspired by Montreal's rich design heritage, vibrant culture, and timeless character.</p>
+          <p class="house-desc house-desc-intro">Not quite a hotel.<br />Not quite home.<br />Something in between.</p>
+          <p class="house-desc">A house of ten suites located in the heart of Montréal's Old Port, designed for people who appreciate beautiful places and thoughtful hospitality.</p>
           <a href="story.html" class="btn-line">Meet Ralf</a>
         </div>
       </div>
@@ -96,12 +103,23 @@
   <!-- ============ BAR & TABLE ============ -->
   <section class="dining section" id="dining">
     <div class="dining-intro reveal">
-      <p class="section-eyebrow">The Bar &amp; Table</p>
-      <h2 class="display-line">Spaces made for lingering</h2>
-      <p class="dining-lede">Inviting communal spaces encourage guests to linger, relax, and unwind together, a bar that draws the right crowd without trying too hard, and a long table that fills up by morning.</p>
+      <p class="section-eyebrow">The Common Spaces</p>
+      <h2 class="display-line">Gather, unwind, return.</h2>
+      <p class="dining-lede">Whether it's your first coffee of the day or your last cocktail of the evening, these are the spaces that bring the house together.</p>
     </div>
 
     <div class="dining-cards">
+      <article class="dining-card reveal">
+        <div class="dining-media">
+          <img src="ralf-bar.jpg" alt="The Café at The Ralf" />
+        </div>
+        <div class="dining-info">
+          <h3>The Café</h3>
+          <p>A neighborhood café by day. A quiet start to the day, just downstairs.</p>
+          <a href="#dining" class="btn-line">Take a seat &#8599;</a>
+        </div>
+      </article>
+
       <article class="dining-card reveal">
         <div class="dining-media">
           <img src="ralf-table.jpg" alt="The Bar at The Ralf" />
@@ -112,17 +130,6 @@
           <a href="#dining" class="btn-line">Pull up a stool &#8599;</a>
         </div>
       </article>
-
-      <article class="dining-card reveal">
-        <div class="dining-media">
-          <img src="ralf-bar.jpg" alt="The communal Table at The Ralf" />
-        </div>
-        <div class="dining-info">
-          <h3>The Table</h3>
-          <p>Coffee, an orange, the morning paper. A communal kitchen and table for slow breakfasts and unhurried evenings, together.</p>
-          <a href="#dining" class="btn-line">Take a seat &#8599;</a>
-        </div>
-      </article>
     </div>
   </section>
 
@@ -130,8 +137,8 @@
   <section class="presents section" id="presents">
     <div class="reveal">
       <p class="section-eyebrow">Just Ask Ralf</p>
-      <h2 class="display-line">Hidden cafés, the right table, where to go, and where not to. Ralf knows best.</h2>
-      <a href="presents.html" class="btn-line">Ask Ralf</a>
+      <h2 class="display-line">The places worth finding. The tables worth booking. The Montréal you'll want to come back for. Ralf knows best.</h2>
+      <a href="presents.html" class="btn-line">Ralf's Picks</a>
     </div>
   </section>
 

@@ -155,10 +155,23 @@ if (well) {
 const toggle = document.getElementById('navToggle');
 const nav = document.getElementById('primaryNav');
 if (toggle && nav) {
-  toggle.addEventListener('click', () => nav.classList.toggle('open'));
-  nav.addEventListener('click', (e) => {
-    if (e.target.tagName === 'A') nav.classList.remove('open');
+  toggle.addEventListener('click', () => {
+    nav.classList.toggle('open');
+    document.body.classList.toggle('nav-open', nav.classList.contains('open'));
   });
+  nav.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A') {
+      nav.classList.remove('open');
+      document.body.classList.remove('nav-open');
+    }
+  });
+  const navClose = document.getElementById('navClose');
+  if (navClose) {
+    navClose.addEventListener('click', () => {
+      nav.classList.remove('open');
+      document.body.classList.remove('nav-open');
+    });
+  }
 }
 
 // ===== Newsletter form =====

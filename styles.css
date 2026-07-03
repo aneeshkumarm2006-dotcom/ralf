@@ -132,7 +132,7 @@ a{color:inherit;text-decoration:none}
 }
 .btn-book:hover{background:var(--espresso)}
 
-.nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;position:absolute;left:clamp(1.1rem,5vw,2rem);top:50%;transform:translateY(-50%)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;position:absolute;left:clamp(1.1rem,5vw,2rem);top:50%;transform:translateY(-50%);z-index:120}
 .nav-toggle span{width:24px;height:1.5px;background:var(--ink);transition:background .4s var(--ease)}
 
 /* mobile overlay nav (hidden on desktop) */
@@ -170,8 +170,9 @@ body.is-loaded .hero-tag{opacity:.92;transform:none;transition-delay:1.45s}
 .house-center{position:absolute;left:50%;top:43%;transform:translate(-50%,-50%);max-width:34rem;text-align:center;z-index:6;padding:0 1rem}
 .house-center::before{content:'';position:absolute;left:50%;top:50%;width:165%;height:155%;transform:translate(-50%,-50%);background:radial-gradient(ellipse at center,rgba(241,234,214,.95)0%,rgba(241,234,214,.64)52%,rgba(241,234,214,0)76%);z-index:-1}
 .house-eyebrow{text-transform:uppercase;letter-spacing:.4em;font-size:.82rem;color:var(--ink);margin-bottom:.5rem}
-.house-title{font-family:var(--serif);font-weight:300;font-size:clamp(3.4rem,8.2vw,6.6rem);line-height:1;margin-bottom:1.8rem;letter-spacing:-.01em}
+.house-title{font-family:var(--script);font-weight:400;font-size:clamp(3.4rem,8.2vw,6.6rem);line-height:1.15;margin-bottom:1.8rem;letter-spacing:0}
 .house-desc{color:var(--ink-soft);font-size:1.1rem;line-height:1.9}
+.house-desc-intro{margin-bottom:1.15rem}
 .house-center .btn-line{margin-top:1.8rem}
 .hp{position:absolute;overflow:hidden;border-radius:3px;will-change:transform,opacity}
 .hp img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1s var(--ease)}
@@ -468,11 +469,27 @@ body.is-loaded .page-hero-img{transform:scale(1)}
   .dining-cards{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr 1fr}
   .primary-nav.open{
-    display:flex;flex-direction:column;position:fixed;inset:0;background:var(--cream);
-    z-index:99;align-items:center;justify-content:center;gap:1.6rem;
+    display:flex;flex-direction:column;position:fixed;inset:0;
+    background:linear-gradient(rgba(30,22,13,.72),rgba(30,22,13,.72)),var(--espresso) url('ralf-menu.png') center/cover no-repeat;
+    z-index:150;align-items:center;justify-content:center;gap:1.6rem;
   }
-  .primary-nav.open a{color:var(--ink);font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase}
-  .primary-nav.open .btn-book{margin-top:.6rem;color:var(--cream)}
+  .primary-nav.open a{color:var(--cream);font-size:1.05rem;letter-spacing:.22em;text-transform:uppercase}
+  .primary-nav.open .btn-book{
+    margin-top:.9rem;background:rgba(154,133,82,.9);color:var(--cream);
+    font-size:.68rem;padding:.85rem 1.9rem;
+  }
+  .primary-nav.open .btn-book:hover{background:var(--moss)}
+  .pnav-top{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.4rem}
+  .pnav-logo{font-family:var(--script);font-size:2rem;line-height:1;color:var(--cream)}
+  .pnav-close{
+    background:none;border:none;cursor:pointer;color:var(--cream);
+    font-family:var(--sans);font-size:.64rem;letter-spacing:.28em;text-transform:uppercase;
+    display:flex;align-items:center;gap:.45rem;
+  }
+  .pnav-close span{font-size:1.05rem;line-height:1}
+  .pnav-lang{position:absolute;bottom:1.8rem;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:.8rem;color:var(--cream)}
+  .primary-nav.open .pnav-lang a{font-size:.68rem;letter-spacing:.28em;opacity:.9}
+  .pnav-lang span{opacity:.45;font-size:.68rem}
 }
 @media(max-width:760px){
   .split{grid-template-columns:1fr}
@@ -513,6 +530,43 @@ body.is-loaded .page-hero-img{transform:scale(1)}
   .well-stage{grid-template-columns:1fr}
   .hero-tag{letter-spacing:.22em}
 }
+/* ============ HOME: hero to the top, transparent header ============ */
+/* The header floats over the hero; the beige background only appears on scroll. */
+body.home .site-header{
+  position:fixed;left:0;right:0;top:0;
+  background:transparent;border-bottom-color:transparent;
+  transition:background .5s var(--ease),border-color .5s var(--ease),box-shadow .4s var(--ease);
+}
+body.home .site-header.scrolled{background:var(--cream);border-bottom-color:var(--line)}
+body.home .site-header:not(.scrolled) .header-nav-row{border-top-color:transparent}
+/* the hero carries the logo — don't double it in the header until it scrolls away */
+body.home .brand{transition:opacity .5s var(--ease)}
+body.home .site-header:not(.scrolled) .brand{opacity:0;pointer-events:none}
+body.home.nav-open .site-header:not(.scrolled) .brand{opacity:1;pointer-events:auto}
+body.home .site-header:not(.scrolled) .brand,
+body.home .site-header:not(.scrolled) .nav-main a,
+body.home .site-header:not(.scrolled) .lang-toggle{color:#fff}
+body.home .site-header:not(.scrolled) .brand .ralf-dog{filter:brightness(0) invert(1)}
+body.home .site-header:not(.scrolled) .nav-toggle span{background:#fff}
+body.home .site-header:not(.scrolled) .nav-utility .btn-book{
+  background:transparent;color:#fff;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.65);
+}
+body.home .site-header:not(.scrolled) .nav-utility .btn-book:hover{background:rgba(255,255,255,.14)}
+/* mobile overlay is dark and sits above the header — no ink flip needed while open */
+
+/* "Discover more" scroll cue at the foot of the hero */
+.hero-scroll{
+  position:absolute;left:50%;bottom:2.1rem;transform:translateX(-50%);z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:.55rem;
+  color:#fff;text-transform:uppercase;letter-spacing:.3em;font-size:.62rem;
+  opacity:0;transition:opacity 1s var(--ease);
+}
+body.is-loaded .hero-scroll{opacity:.8;transition-delay:1.9s}
+.hero-scroll:hover{opacity:1}
+.hero-scroll-arrow{font-size:.9rem;animation:heroNudge 2.6s var(--ease) infinite}
+@keyframes heroNudge{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition-duration:.01ms!important}
   html{scroll-behavior:auto}
