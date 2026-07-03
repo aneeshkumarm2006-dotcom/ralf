@@ -135,8 +135,39 @@ a{color:inherit;text-decoration:none}
 .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;position:absolute;left:clamp(1.1rem,5vw,2rem);top:50%;transform:translateY(-50%);z-index:120}
 .nav-toggle span{width:24px;height:1.5px;background:var(--ink);transition:background .4s var(--ease)}
 
-/* mobile overlay nav (hidden on desktop) */
+/* Landing masthead: circled MENU left, stacked logo centre, Book right */
+.nav-toggle.menu-btn{flex-direction:row;align-items:center;gap:.7rem;color:var(--ink);transition:color .5s var(--ease)}
+.menu-btn .menu-btn-circle{width:36px;height:36px;background:none;border:1px solid currentColor;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3.5px;flex:none;transition:none}
+.menu-btn .menu-btn-circle span{width:13px;height:1px;background:currentColor}
+.menu-btn .menu-btn-label{width:auto;height:auto;background:none;font-family:var(--sans);font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:currentColor}
+.brand-stacked{flex-direction:column;gap:.5rem}
+.brand-stacked .ralf-dog{height:1.5rem}
+.brand-stacked .brand-name{font-size:1.95rem;line-height:.75;padding-top:0}
+
+/* overlay nav (opened via MENU on any viewport) */
 .primary-nav{display:none}
+.primary-nav.open{
+  display:flex;flex-direction:column;position:fixed;inset:0;
+  background:linear-gradient(rgba(30,22,13,.72),rgba(30,22,13,.72)),var(--espresso) url('ralf-menu.png') center/cover no-repeat;
+  z-index:150;align-items:center;justify-content:center;gap:1.6rem;
+}
+.primary-nav.open a{color:var(--cream);font-size:1.05rem;letter-spacing:.22em;text-transform:uppercase}
+.primary-nav.open .btn-book{
+  margin-top:.9rem;background:rgba(154,133,82,.9);color:var(--cream);
+  font-size:.68rem;padding:.85rem 1.9rem;
+}
+.primary-nav.open .btn-book:hover{background:var(--moss)}
+.pnav-top{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.4rem}
+.pnav-logo{font-family:var(--script);font-size:2rem;line-height:1;color:var(--cream)}
+.pnav-close{
+  background:none;border:none;cursor:pointer;color:var(--cream);
+  font-family:var(--sans);font-size:.64rem;letter-spacing:.28em;text-transform:uppercase;
+  display:flex;align-items:center;gap:.45rem;
+}
+.pnav-close span{font-size:1.05rem;line-height:1}
+.pnav-lang{position:absolute;bottom:1.8rem;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:.8rem;color:var(--cream)}
+.primary-nav.open .pnav-lang a{font-size:.68rem;letter-spacing:.28em;opacity:.9}
+.pnav-lang span{opacity:.45;font-size:.68rem}
 
 /* ============ HERO BANNER (cropped, not full screen) ============ */
 .hero{
@@ -153,14 +184,12 @@ a{color:inherit;text-decoration:none}
 body.is-loaded .hero-bg{transform:scale(1)}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,13,8,.42)0%,rgba(20,13,8,.3)45%,rgba(20,13,8,.55)100%)}
 .hero-banner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;padding:0 1.5rem}
-.hero-emblem{height:clamp(2.6rem,6vw,4.2rem);filter:brightness(0) invert(1);margin-bottom:.7rem;opacity:0;transform:translateY(18px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
-body.is-loaded .hero-emblem{opacity:1;transform:none;transition-delay:.75s}
-.hero-logo{font-family:var(--script);font-weight:400;font-size:clamp(3.6rem,12vw,8.5rem);line-height:1}
-.hero-logo .ln{display:block;overflow:hidden;padding-bottom:1.2em}
-.hero-logo .ln>span{display:block;transform:translateY(190%);transition:transform 1.2s var(--ease)}
-body.is-loaded .hero-logo .ln>span{transform:none;transition-delay:1s}
-body.is-loaded .hero-logo .ln{overflow:visible}
-.hero-tag{margin-top:.6rem;text-transform:uppercase;letter-spacing:.36em;font-size:clamp(.66rem,1.4vw,.82rem);opacity:0;transform:translateY(18px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.hero-lines{font-family:var(--serif);font-weight:300;font-size:clamp(1.4rem,3.1vw,2.4rem);line-height:1.55;letter-spacing:.015em;text-shadow:0 1px 18px rgba(20,13,8,.35)}
+.hero-lines .ln{display:block;overflow:hidden}
+.hero-lines .ln>span{display:block;transform:translateY(130%);transition:transform 1.1s var(--ease)}
+body.is-loaded .hero-lines .ln>span{transform:none;transition-delay:.9s}
+body.is-loaded .hero-lines .ln:nth-child(2)>span{transition-delay:1.1s}
+.hero-tag{position:absolute;left:0;right:0;bottom:clamp(5.5rem,15vh,8.5rem);z-index:2;text-align:center;text-transform:uppercase;letter-spacing:.36em;font-size:clamp(.66rem,1.4vw,.82rem);opacity:0;transform:translateY(18px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
 body.is-loaded .hero-tag{opacity:.92;transform:none;transition-delay:1.45s}
 
 /* ============ HOUSE OF RALF (parallax float) ============ */
@@ -468,28 +497,6 @@ body.is-loaded .page-hero-img{transform:scale(1)}
   .feature-media{aspect-ratio:4/3}
   .dining-cards{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr 1fr}
-  .primary-nav.open{
-    display:flex;flex-direction:column;position:fixed;inset:0;
-    background:linear-gradient(rgba(30,22,13,.72),rgba(30,22,13,.72)),var(--espresso) url('ralf-menu.png') center/cover no-repeat;
-    z-index:150;align-items:center;justify-content:center;gap:1.6rem;
-  }
-  .primary-nav.open a{color:var(--cream);font-size:1.05rem;letter-spacing:.22em;text-transform:uppercase}
-  .primary-nav.open .btn-book{
-    margin-top:.9rem;background:rgba(154,133,82,.9);color:var(--cream);
-    font-size:.68rem;padding:.85rem 1.9rem;
-  }
-  .primary-nav.open .btn-book:hover{background:var(--moss)}
-  .pnav-top{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.4rem}
-  .pnav-logo{font-family:var(--script);font-size:2rem;line-height:1;color:var(--cream)}
-  .pnav-close{
-    background:none;border:none;cursor:pointer;color:var(--cream);
-    font-family:var(--sans);font-size:.64rem;letter-spacing:.28em;text-transform:uppercase;
-    display:flex;align-items:center;gap:.45rem;
-  }
-  .pnav-close span{font-size:1.05rem;line-height:1}
-  .pnav-lang{position:absolute;bottom:1.8rem;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:.8rem;color:var(--cream)}
-  .primary-nav.open .pnav-lang a{font-size:.68rem;letter-spacing:.28em;opacity:.9}
-  .pnav-lang span{opacity:.45;font-size:.68rem}
 }
 @media(max-width:760px){
   .split{grid-template-columns:1fr}
@@ -539,20 +546,22 @@ body.home .site-header{
 }
 body.home .site-header.scrolled{background:var(--cream);border-bottom-color:var(--line)}
 body.home .site-header:not(.scrolled) .header-nav-row{border-top-color:transparent}
-/* the hero carries the logo — don't double it in the header until it scrolls away */
-body.home .brand{transition:opacity .5s var(--ease)}
-body.home .site-header:not(.scrolled) .brand{opacity:0;pointer-events:none}
-body.home.nav-open .site-header:not(.scrolled) .brand{opacity:1;pointer-events:auto}
+/* the logo lives in the masthead (dog above wordmark), MENU pinned left on every viewport */
+body.home .nav-toggle{display:flex}
 body.home .site-header:not(.scrolled) .brand,
 body.home .site-header:not(.scrolled) .nav-main a,
 body.home .site-header:not(.scrolled) .lang-toggle{color:#fff}
 body.home .site-header:not(.scrolled) .brand .ralf-dog{filter:brightness(0) invert(1)}
-body.home .site-header:not(.scrolled) .nav-toggle span{background:#fff}
+body.home .site-header:not(.scrolled) .nav-toggle{color:#fff}
 body.home .site-header:not(.scrolled) .nav-utility .btn-book{
   background:transparent;color:#fff;
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.65);
 }
 body.home .site-header:not(.scrolled) .nav-utility .btn-book:hover{background:rgba(255,255,255,.14)}
+/* narrow screens: Book lives in the overlay menu — keep the masthead to MENU + logo */
+@media(max-width:640px){
+  body.home .header-brand-row .nav-utility{display:none}
+}
 /* mobile overlay is dark and sits above the header — no ink flip needed while open */
 
 /* "Discover more" scroll cue at the foot of the hero */
