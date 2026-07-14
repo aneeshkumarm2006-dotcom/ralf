@@ -343,8 +343,8 @@ body.is-loaded .c-loader{transition:visibility 0s 1.5s;visibility:hidden}
 /* The menu you just clicked was this page's hero photo under a .72 scrim. So
    don't ship a copy of the photo across the navigation — the page already has
    it, in .hero-bg. The six bars carry only the scrim, the real hero shows
-   straight through them, and they peel away with the same staggered lift the
-   loader already uses. Pixel-identical to the frame we left on, by construction:
+   straight through them, and they peel away in one unbroken upward lift.
+   Pixel-identical to the frame we left on, by construction:
    same <img>, nothing to decode twice, nothing to align. */
 /* The six bars have to add up to ONE uniform scrim. Tinting each bar with
    rgba(...,.72) does NOT: where two antialiased translucent edges meet they
@@ -352,7 +352,9 @@ body.is-loaded .c-loader{transition:visibility 0s 1.5s;visibility:hidden}
    (measured). So the bars are opaque, bleed 1px into each other (opaque over
    opaque in one colour is lossless), and the .72 is applied once, to the group. */
 html.is-curtain .c-loader_bg{opacity:.72}
-html.is-curtain .c-loader_bg .bar{background:rgb(30,22,13);box-shadow:1px 0 0 0 rgb(30,22,13)}
+/* the scrim must exit as ONE sheet: kill the per-bar stagger, or the seams
+   between mid-flight bars read as a split wipe instead of a single lift */
+html.is-curtain .c-loader_bg .bar{background:rgb(30,22,13);box-shadow:1px 0 0 0 rgb(30,22,13);transition-delay:0s!important}
 html.is-curtain .bar-logo{display:none}
 /* the hero's own gradient would stack on top of the scrim and read far darker
    than the menu did — hold it off, then fade it in as the strips lift */
