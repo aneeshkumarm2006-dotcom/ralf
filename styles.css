@@ -109,8 +109,8 @@ a{color:inherit;text-decoration:none}
   padding:1.15rem clamp(1.5rem,5vw,4rem) .85rem;
 }
 .brand{display:flex;align-items:center;gap:.85rem;color:var(--ink)}
-.brand .ralf-dog{height:2.9rem}
-.brand-name{height:2.6rem;width:auto;display:block;object-fit:contain}
+.brand .ralf-dog{height:2.4rem}
+.brand-name{height:2.8rem;width:auto;display:block;object-fit:contain}
 .nav-utility{
   position:absolute;right:clamp(1.5rem,5vw,4rem);top:50%;
   transform:translateY(-50%);display:flex;align-items:center;gap:1.3rem;
@@ -131,8 +131,8 @@ a{color:inherit;text-decoration:none}
 .menu-btn .menu-btn-circle span{width:15px;height:1px;background:currentColor}
 .menu-btn .menu-btn-label{width:auto;height:auto;background:none;font-family:var(--sans);font-size:.8rem;letter-spacing:.3em;text-transform:uppercase;color:currentColor}
 .brand-lockup{flex-direction:row;align-items:center;gap:.9rem}
-.brand-lockup .ralf-dog{height:2.7rem}
-.brand-lockup .brand-name{height:2.5rem}
+.brand-lockup .ralf-dog{height:2.4rem}
+.brand-lockup .brand-name{height:2.8rem}
 
 /* overlay nav (opened via MENU on any viewport) */
 /* always rendered so it can be transitioned — same shape as .announce further
