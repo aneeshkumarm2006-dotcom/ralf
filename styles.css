@@ -108,9 +108,9 @@ a{color:inherit;text-decoration:none}
   position:relative;display:flex;justify-content:center;align-items:center;
   padding:1.15rem clamp(1.5rem,5vw,4rem) .85rem;
 }
-.brand{display:flex;align-items:center;gap:.7rem;color:var(--ink)}
-.brand .ralf-dog{height:2.2rem}
-.brand-name{height:2rem;width:auto;display:block;object-fit:contain}
+.brand{display:flex;align-items:center;gap:.85rem;color:var(--ink)}
+.brand .ralf-dog{height:2.9rem}
+.brand-name{height:2.6rem;width:auto;display:block;object-fit:contain}
 .nav-utility{
   position:absolute;right:clamp(1.5rem,5vw,4rem);top:50%;
   transform:translateY(-50%);display:flex;align-items:center;gap:1.3rem;
@@ -130,9 +130,9 @@ a{color:inherit;text-decoration:none}
 .menu-btn .menu-btn-circle{width:42px;height:42px;background:none;border:1px solid currentColor;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;flex:none;transition:none}
 .menu-btn .menu-btn-circle span{width:15px;height:1px;background:currentColor}
 .menu-btn .menu-btn-label{width:auto;height:auto;background:none;font-family:var(--sans);font-size:.8rem;letter-spacing:.3em;text-transform:uppercase;color:currentColor}
-.brand-lockup{flex-direction:row;align-items:center;gap:.75rem}
-.brand-lockup .ralf-dog{height:2rem}
-.brand-lockup .brand-name{height:1.9rem}
+.brand-lockup{flex-direction:row;align-items:center;gap:.9rem}
+.brand-lockup .ralf-dog{height:2.7rem}
+.brand-lockup .brand-name{height:2.5rem}
 
 /* overlay nav (opened via MENU on any viewport) */
 /* always rendered so it can be transitioned — same shape as .announce further
@@ -581,11 +581,11 @@ html.is-curtain body.is-loaded .site-header{opacity:1;transition-delay:.85s}
   .well-stage{grid-template-columns:1fr 1fr}
   /* tighter brand row on small screens */
   .header-brand-row{padding:.95rem 1.1rem .85rem}
-  .brand-name{height:1.6rem}
-  .brand .ralf-dog{height:1.7rem}
-  .brand-lockup{gap:.5rem}
-  .brand-lockup .brand-name{height:1.45rem}
-  .brand-lockup .ralf-dog{height:1.6rem}
+  .brand-name{height:1.95rem}
+  .brand .ralf-dog{height:2.15rem}
+  .brand-lockup{gap:.6rem}
+  .brand-lockup .brand-name{height:1.85rem}
+  .brand-lockup .ralf-dog{height:2rem}
   .pnav-wolf{height:1.6rem}
   .pnav-text{height:1.2rem}
   .section{padding:clamp(3.25rem,13vw,5.5rem) 1.3rem}
