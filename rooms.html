@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" href="ralf-logo-wolf-black.png" />
   <link rel="apple-touch-icon" href="ralf-logo-wolf-black.png" />
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=4" />
   <!-- Arrived by clicking a word in the menu? Then the loader is a scrim over this page's own hero, not a cream slab. Must run before first paint. -->
   <script>try{if(sessionStorage.getItem('ralf:curtain')){sessionStorage.removeItem('ralf:curtain');document.documentElement.className+=' is-curtain'}}catch(e){}</script>
 </head>
@@ -57,38 +57,75 @@
     <a href="#rooms" class="hero-scroll">Discover more<span class="hero-scroll-arrow">&darr;</span></a>
   </section>
 
-  <section class="section" id="rooms" style="background:var(--cream-2)">
-    <div class="rooms-detail">
-      <!-- Room details below are placeholder content from Casa Monti Roma; final names, copy & rates to be supplied by the client. -->
-      <article class="room reveal">
-        <div class="room-media"><img src="artsuites.jpg" alt="The Art Suite" /></div>
-        <div class="room-text">
-          <p class="room-eyebrow">Suite</p>
-          <h2 class="room-name">Art Suite</h2>
+  <!-- ============ ROOMS INDEX ============
+       The rail on the left is the guide: as you scroll, script.js marks the room
+       you're currently on and slides its arrow in. Each room is an arched plate
+       with its name curved over the crown. Modelled on lafantaisie.com/rooms. -->
+  <section class="section rooms-index" id="rooms" style="background:var(--cream-2)">
+    <nav class="rooms-rail" aria-label="Rooms">
+      <ul class="rooms-rail-list">
+        <li>
+          <a class="rail-link is-current" href="#art-suite">
+            <svg class="rail-arrow" viewBox="0 0 46 10" aria-hidden="true"><path d="M0 5h42M37.5 1.5 42 5l-4.5 3.5" /></svg>
+            <span>Art Suite</span>
+          </a>
+        </li>
+        <li>
+          <a class="rail-link" href="#cosy-room">
+            <svg class="rail-arrow" viewBox="0 0 46 10" aria-hidden="true"><path d="M0 5h42M37.5 1.5 42 5l-4.5 3.5" /></svg>
+            <span>Cosy Room</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="rooms-panels">
+      <!-- Room copy & specs below are placeholder content from Casa Monti Roma; final names, copy & rates to be supplied by the client. -->
+      <article class="room-panel reveal" id="art-suite">
+        <h2 class="sr-only">Art Suite</h2>
+        <div class="room-plate">
+          <div class="room-plate-inner">
+            <svg class="room-arc" viewBox="0 0 400 500" aria-hidden="true">
+              <path id="arc-art-suite" d="M-26 210A226 236 0 0 1 426 210" />
+              <text><textPath href="#arc-art-suite" startOffset="50%" text-anchor="middle">Art Suite</textPath></text>
+            </svg>
+            <div class="room-media"><img src="artsuites.jpg" alt="The Art Suite" /></div>
+          </div>
+        </div>
+        <div class="room-info">
           <p class="room-desc">From April to October an exclusive room reimagined by artist-in-residence Michael McGregor becomes a living artwork, where contemporary art meets Roman hospitality.</p>
+          <span class="room-rule" aria-hidden="true"></span>
           <dl class="room-specs">
+            <div class="room-spec"><dt>Occupancy</dt><dd>4 max &middot; 3 adults</dd></div>
             <div class="room-spec"><dt>Size</dt><dd>41 sqm</dd></div>
-            <div class="room-spec"><dt>Occupancy</dt><dd>4 max · 3 adults</dd></div>
+            <div class="room-spec"><dt>View</dt><dd>Panisperna &middot; Patio &middot; Cimarra</dd></div>
             <div class="room-spec"><dt>Bed</dt><dd>King / Twin</dd></div>
-            <div class="room-spec"><dt>View</dt><dd>Panisperna · Patio · Cimarra</dd></div>
           </dl>
-          <a href="https://app.mews.com/distributor/6bb1de57-7e2d-4c1b-a060-b45000c2c7ea" target="_blank" rel="noopener" class="btn-line">Reserve</a>
+          <a href="https://app.mews.com/distributor/6bb1de57-7e2d-4c1b-a060-b45000c2c7ea" target="_blank" rel="noopener" class="btn-frame">Find out more</a>
         </div>
       </article>
 
-      <article class="room reverse reveal">
-        <div class="room-media"><img src="cosyrooms.jpg" alt="The Cosy Room" /></div>
-        <div class="room-text">
-          <p class="room-eyebrow">Room</p>
-          <h2 class="room-name">Cosy Room</h2>
+      <article class="room-panel reveal" id="cosy-room">
+        <h2 class="sr-only">Cosy Room</h2>
+        <div class="room-plate">
+          <div class="room-plate-inner">
+            <svg class="room-arc" viewBox="0 0 400 500" aria-hidden="true">
+              <path id="arc-cosy-room" d="M-26 210A226 236 0 0 1 426 210" />
+              <text><textPath href="#arc-cosy-room" startOffset="50%" text-anchor="middle">Cosy Room</textPath></text>
+            </svg>
+            <div class="room-media"><img src="cosyrooms.jpg" alt="The Cosy Room" /></div>
+          </div>
+        </div>
+        <div class="room-info">
           <p class="room-desc">Dive into our Cosy Room's enchanting allure, drawing inspiration from the artistic atmosphere of Monti with a view on Via Panisperna or the patio.</p>
+          <span class="room-rule" aria-hidden="true"></span>
           <dl class="room-specs">
-            <div class="room-spec"><dt>Size</dt><dd>19–21 sqm</dd></div>
             <div class="room-spec"><dt>Occupancy</dt><dd>1 max</dd></div>
+            <div class="room-spec"><dt>Size</dt><dd>19&ndash;21 sqm</dd></div>
+            <div class="room-spec"><dt>View</dt><dd>Panisperna &middot; Patio</dd></div>
             <div class="room-spec"><dt>Bed</dt><dd>Queen</dd></div>
-            <div class="room-spec"><dt>View</dt><dd>Panisperna · Patio</dd></div>
           </dl>
-          <a href="https://app.mews.com/distributor/6bb1de57-7e2d-4c1b-a060-b45000c2c7ea" target="_blank" rel="noopener" class="btn-line">Reserve</a>
+          <a href="https://app.mews.com/distributor/6bb1de57-7e2d-4c1b-a060-b45000c2c7ea" target="_blank" rel="noopener" class="btn-frame">Find out more</a>
         </div>
       </article>
     </div>
@@ -120,6 +157,6 @@
     </div>
   </div>
 
-  <script src="script.js?v=4"></script>
+  <script src="script.js?v=5"></script>
 </body>
 </html>

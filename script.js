@@ -19,7 +19,7 @@ if (document.getElementById('loader')) {
   window.addEventListener('wheel', blockScroll, { passive: false });
   window.addEventListener('touchmove', blockScroll, { passive: false });
   // hold the loader briefly so the logo reads, then wipe + reveal hero
-  const MIN = document.body.classList.contains('home') ? 1600 : 1100;
+  const MIN = document.body.classList.contains('home') ? 1100 : 800;
   let done = false;
   const trigger = () => {
     if (done) return;
@@ -342,3 +342,25 @@ if (announce && store.get('ralf-announce') !== '1') {
   announce.querySelector('.announce-btn')?.addEventListener('click', dismiss);
   announce.addEventListener('click', (e) => { if (e.target === announce) dismiss(); });
 }
+
+// ===== Rooms rail: the nav follows the room you're looking at =====
+// A room becomes the current one once it crosses a band through the middle of
+// the viewport. Between rooms nothing is in the band and no entry fires, so the
+// last room simply stays lit — that's what makes the rail read as a guide
+// rather than a light flickering off in the gaps.
+(function () {
+  const rail = document.querySelector('.rooms-rail-list');
+  if (!rail) return;
+  const links = Array.prototype.slice.call(rail.querySelectorAll('.rail-link'));
+  const panels = links.map((a) => document.querySelector(a.getAttribute('href')));
+  if (!panels.length || panels.some((p) => !p)) return;
+
+  const setCurrent = (panel) => {
+    links.forEach((a, i) => a.classList.toggle('is-current', panels[i] === panel));
+  };
+
+  const railIO = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) setCurrent(e.target); });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  panels.forEach((p) => railIO.observe(p));
+})();

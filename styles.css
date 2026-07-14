@@ -75,7 +75,7 @@ a{color:inherit;text-decoration:none}
 
 /* ============ BRAND MARK (running hound) ============ */
 .ralf-dog{height:1.7rem;width:auto;display:block;object-fit:contain}
-.ralf-dog.big{height:2.8rem}
+.ralf-dog.big{height:4.4rem}
 
 /* ============ BUTTONS ============ */
 .btn-line{
@@ -90,6 +90,26 @@ a{color:inherit;text-decoration:none}
 }
 .btn-line:hover{letter-spacing:.3em;opacity:.7}
 .btn-line.light{color:#fff;border-color:rgba(255,255,255,.6)}
+/* framed variant — the "Find out more" call to book on a room */
+.btn-frame{
+  display:inline-block;
+  margin-top:2.5rem;
+  padding:1rem 2.2rem;
+  border:1px solid var(--moss);
+  color:var(--ink);
+  font-size:.72rem;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  transition:background .45s var(--ease),color .45s var(--ease);
+}
+.btn-frame:hover{background:var(--moss);color:var(--cream)}
+
+/* ============ A11Y ============ */
+/* for headings the design draws some other way (e.g. a room name set on an arc) */
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0;
+}
 
 /* ============ HEADER (floats over the hero on every page) ============ */
 /* Transparent masthead over the hero; the beige background only appears on scroll. */
@@ -233,6 +253,7 @@ body.is-loaded .hero-tag{opacity:.92;transform:none;transition-delay:1.45s}
 .house-stage{position:relative;height:170vh;max-width:1600px;margin:0 auto;overflow:hidden}
 .house-center{position:absolute;left:50%;top:43%;transform:translate(-50%,-50%);max-width:34rem;text-align:center;z-index:6;padding:0 1rem}
 .house-center::before{content:'';position:absolute;left:50%;top:50%;width:165%;height:155%;transform:translate(-50%,-50%);background:radial-gradient(ellipse at center,rgba(241,234,214,.95)0%,rgba(241,234,214,.64)52%,rgba(241,234,214,0)76%);z-index:-1}
+.house-logo{height:2.6rem;width:auto;object-fit:contain;margin:0 auto 1.2rem;display:block}
 .house-eyebrow{text-transform:uppercase;letter-spacing:.4em;font-size:.82rem;color:var(--ink);margin-bottom:.5rem}
 .house-title{font-family:var(--script);font-weight:400;font-size:clamp(3.4rem,8.2vw,6.6rem);line-height:1.15;margin-bottom:1.8rem;letter-spacing:0}
 .house-desc{color:var(--ink-soft);font-size:1.1rem;line-height:1.9}
@@ -329,18 +350,18 @@ html.is-loading body{overflow:hidden}
 .c-loader{position:fixed;inset:0;z-index:1000;pointer-events:none}
 /* cream "slider" of 6 vertical bars; each bar carries its own slice of the logo */
 .c-loader_bg{position:absolute;inset:0;display:flex}
-.c-loader_bg .bar{position:relative;flex:1 1 0;height:100%;overflow:hidden;background:var(--cream);transform:translateY(0);transition:transform .9s cubic-bezier(.23,1,.32,1)}
+.c-loader_bg .bar{position:relative;flex:1 1 0;height:100%;overflow:hidden;background:var(--cream);transform:translateY(0);transition:transform .65s cubic-bezier(.23,1,.32,1)}
 .bar-logo{
   position:absolute;top:0;height:100%;width:600%;left:calc(var(--i) * -100%);
-  display:flex;flex-direction:column;justify-content:center;align-items:center;gap:.6rem;
-  color:var(--ink);opacity:0;animation:logoIn .9s var(--ease) .2s forwards;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;gap:.8rem;
+  color:var(--ink);opacity:0;animation:logoIn .6s var(--ease) .12s forwards;
 }
-.c-loader_name{height:clamp(1.7rem,3.4vw,2.4rem);width:auto;object-fit:contain}
+.c-loader_name{height:clamp(2.4rem,4.6vw,3.4rem);width:auto;object-fit:contain}
 @keyframes logoIn{to{opacity:1}}
 
 /* exit — each bar lifts up (staggered), carrying its slice of the logo with it */
-body.is-loaded .c-loader_bg .bar{transform:translateY(-100%);transition-delay:calc(var(--i)*.08s)}
-body.is-loaded .c-loader{transition:visibility 0s 1.5s;visibility:hidden}
+body.is-loaded .c-loader_bg .bar{transform:translateY(-100%);transition-delay:calc(var(--i)*.05s)}
+body.is-loaded .c-loader{transition:visibility 0s 1s;visibility:hidden}
 
 /* ============ CURTAIN (arriving from the menu) ============ */
 /* The menu you just clicked was this page's hero photo under a .72 scrim. So
@@ -411,19 +432,73 @@ html.is-curtain body.is-loaded .site-header{opacity:1;transition-delay:.85s}
 .press-item .headline{font-family:var(--serif);font-size:1.35rem;line-height:1.3}
 .press-item .date{font-size:.82rem;color:var(--ink-soft);white-space:nowrap}
 
-/* ============ ROOMS & SUITES (detailed, Casa Monti style) ============ */
-.room{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,5.5rem);align-items:center;margin-bottom:clamp(4rem,9vw,8rem)}
-.room:last-child{margin-bottom:0}
-.room-media{aspect-ratio:4/5;overflow:hidden}
-.room-media img{transition:transform 1.6s var(--ease)}
-.room:hover .room-media img{transform:scale(1.05)}
-.room.reverse .room-media{order:2}
-.room-eyebrow{text-transform:uppercase;letter-spacing:.24em;font-size:.7rem;color:var(--moss);margin-bottom:.8rem}
-.room-name{font-family:var(--serif);font-weight:300;font-size:clamp(2rem,4.2vw,3.4rem);line-height:1.04;margin-bottom:1.2rem}
-.room-desc{color:var(--ink-soft);max-width:46ch;font-size:1.05rem}
-.room-specs{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem 2rem;margin:2rem 0 .4rem;border-top:1px solid var(--line);padding-top:1.8rem;max-width:30rem}
-.room-spec dt{text-transform:uppercase;letter-spacing:.18em;font-size:.64rem;color:var(--moss);margin-bottom:.35rem}
-.room-spec dd{font-family:var(--serif);font-size:1.2rem;line-height:1.25}
+/* ============ ROOMS & SUITES (sticky rail + arched plates) ============ */
+/* Two columns: a rail that stays with you, and the rooms themselves. The rail
+   column must be left to STRETCH to the full row height — that travel is what
+   its sticky child slides along. Any align-items here would collapse it and the
+   rail would scroll away with the first room. */
+.rooms-index{
+  display:grid;
+  grid-template-columns:minmax(11rem,15rem) minmax(0,1fr);
+  gap:clamp(2rem,6vw,7rem);
+}
+.rooms-rail-list{
+  position:sticky;top:calc(50vh - 4rem);
+  list-style:none;display:flex;flex-direction:column;gap:1.15rem;
+  padding-left:3.6rem;   /* the gutter the active arrow slides into */
+}
+.rail-link{
+  position:relative;display:inline-block;
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(1.05rem,1.5vw,1.3rem);
+  line-height:1.2;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink);opacity:.42;
+  transition:opacity .5s var(--ease);
+}
+.rail-link:hover{opacity:.72}
+.rail-link.is-current{opacity:1}
+/* the arrow only belongs to the room you're on: it fades in and settles */
+.rail-arrow{
+  position:absolute;left:-3.6rem;top:50%;
+  width:2.5rem;height:auto;
+  fill:none;stroke:currentColor;stroke-width:1;
+  opacity:0;transform:translate(-10px,-50%);
+  transition:opacity .5s var(--ease),transform .5s var(--ease);
+}
+.rail-link.is-current .rail-arrow{opacity:1;transform:translate(0,-50%)}
+
+.rooms-panels{display:flex;flex-direction:column;gap:clamp(5rem,11vw,10rem)}
+.room-panel{
+  display:grid;
+  grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);
+  gap:clamp(2rem,5vw,5.5rem);
+  align-items:center;
+  scroll-margin-top:clamp(7rem,14vh,10rem);   /* clear the fixed masthead on a rail click */
+}
+.room-plate{padding-top:clamp(2.4rem,4vw,3.4rem)}   /* headroom for the curved name */
+.room-plate-inner{position:relative}
+.room-media{aspect-ratio:4/5;overflow:hidden;border-radius:50% 50% 0 0/42% 42% 0 0}
+.room-media img{transition:transform 1.8s var(--ease)}
+.room-panel:hover .room-media img{transform:scale(1.05)}
+
+/* The name, set along the dome. The viewBox is the same 4:5 as the plate, so its
+   400x500 units map 1:1 onto it: the arch is the ellipse centred (200,210) with
+   rx 200 / ry 210 (= the 50%/42% radii above), and the text rides that same
+   ellipse swelled 26 units outward. overflow:visible lets it clear the crown. */
+.room-arc{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:2}
+.room-arc path{fill:none}
+.room-arc text{
+  font-family:var(--serif);font-weight:400;
+  font-size:18px;letter-spacing:3px;text-transform:uppercase;
+  text-anchor:middle;fill:var(--ink);
+}
+
+.room-info{display:flex;flex-direction:column;align-items:center;text-align:center}
+.room-desc{color:var(--ink-soft);font-size:1.02rem;line-height:1.85;max-width:34ch}
+.room-rule{width:100%;max-width:19rem;height:1px;background:var(--line);margin:2rem 0 1.7rem}
+.room-specs{display:grid;grid-template-columns:1fr 1fr;gap:2rem 2.5rem;width:100%;max-width:21rem}
+.room-spec dt{font-family:var(--serif);text-transform:uppercase;letter-spacing:.16em;font-size:.9rem;color:var(--moss);margin-bottom:.5rem}
+.room-spec dd{font-size:.85rem;color:var(--ink-soft);line-height:1.5}
 
 /* ============ WELLNESS (leitmotiv-style floating pop-up) ============ */
 .well{position:relative;overflow:hidden;background:var(--cream);padding:clamp(3rem,7vw,6rem) clamp(1.5rem,6vw,5rem) clamp(1.75rem,4vw,3.25rem)}
@@ -551,6 +626,9 @@ html.is-curtain body.is-loaded .site-header{opacity:1;transition-delay:.85s}
   .feature-media{aspect-ratio:4/3}
   .dining-cards{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr 1fr}
+  /* the room stacks, but the rail stays — it's still the guide down the page */
+  .room-panel{grid-template-columns:1fr;gap:2.4rem}
+  .room-plate{width:100%;max-width:24rem;margin-inline:auto}
 }
 @media(max-width:760px){
   .split{grid-template-columns:1fr}
@@ -561,9 +639,10 @@ html.is-curtain body.is-loaded .site-header{opacity:1;transition-delay:.85s}
   .house-center{position:static;transform:none!important;grid-column:1/-1;max-width:none;margin:0 auto .6rem;padding:0;order:-1;opacity:1!important}
   .house-center::before{display:none}
   .hp{position:static!important;width:auto!important;aspect-ratio:4/3!important;transform:none!important;opacity:1!important;box-shadow:0 14px 34px rgba(20,13,8,.16)}
-  .room{grid-template-columns:1fr;gap:1.6rem;margin-bottom:3.5rem}
-  .room.reverse .room-media{order:0}
-  .room-media{aspect-ratio:4/3}
+  /* no room left for the rail beside the plates — the page itself is the guide now */
+  .rooms-index{grid-template-columns:1fr}
+  .rooms-rail{display:none}
+  .rooms-panels{gap:clamp(3.5rem,10vw,5rem)}
   .well-stage{position:static;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:1rem}
   .well-center{position:static;display:block;padding:0;margin-bottom:1.6rem}
   .well-inner{max-width:none}
