@@ -136,17 +136,18 @@ a{color:inherit;text-decoration:none}
 
 /* overlay nav (opened via MENU on any viewport) */
 /* always rendered so it can be transitioned — same shape as .announce further
-   down. visibility (not just opacity) keeps the links out of the tab order
-   while it's closed. .open may only ever carry opacity/visibility/pointer-
-   events: anything else here would snap back mid-fade, in full view. */
+   down. visibility (not just visual movement) keeps the links out of the tab
+   order while it's closed. the panel rests above the viewport and drops in;
+   closing slides it back up. .open may only ever carry transform/visibility/
+   pointer-events: anything else here would snap back mid-slide, in full view. */
 .primary-nav{
   position:fixed;inset:0;z-index:150;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.6rem;
   background:var(--espresso);
-  opacity:0;visibility:hidden;pointer-events:none;
-  transition:opacity .6s var(--ease),visibility 0s .6s;
+  transform:translateY(-100%);visibility:hidden;pointer-events:none;
+  transition:transform .7s var(--ease),visibility 0s .7s;
 }
-.primary-nav.open{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .6s var(--ease)}
+.primary-nav.open{transform:translateY(0);visibility:visible;pointer-events:auto;transition:transform .7s var(--ease)}
 
 /* the photo behind the words. z-index:-1 is load-bearing — a positioned child
    paints above non-positioned in-flow content, so without it the photo would
