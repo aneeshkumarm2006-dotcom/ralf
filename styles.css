@@ -110,7 +110,7 @@ a{color:inherit;text-decoration:none}
 }
 .brand{display:flex;align-items:center;gap:.7rem;color:var(--ink)}
 .brand .ralf-dog{height:2.2rem}
-.brand-name{font-family:var(--script);font-size:2.95rem;line-height:1;letter-spacing:.01em;padding-top:.2em}
+.brand-name{height:2rem;width:auto;display:block;object-fit:contain}
 .nav-utility{
   position:absolute;right:clamp(1.5rem,5vw,4rem);top:50%;
   transform:translateY(-50%);display:flex;align-items:center;gap:1.3rem;
@@ -132,7 +132,7 @@ a{color:inherit;text-decoration:none}
 .menu-btn .menu-btn-label{width:auto;height:auto;background:none;font-family:var(--sans);font-size:.8rem;letter-spacing:.3em;text-transform:uppercase;color:currentColor}
 .brand-lockup{flex-direction:row;align-items:center;gap:.75rem}
 .brand-lockup .ralf-dog{height:2rem}
-.brand-lockup .brand-name{font-size:2.65rem;line-height:1;padding-top:.18em}
+.brand-lockup .brand-name{height:1.9rem}
 
 /* overlay nav (opened via MENU on any viewport) */
 /* always rendered so it can be transitioned — same shape as .announce further
@@ -167,7 +167,10 @@ a{color:inherit;text-decoration:none}
 }
 .primary-nav .btn-book:hover{background:var(--moss)}
 .pnav-top{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.4rem}
-.pnav-logo{font-family:var(--script);font-size:2rem;line-height:1;color:var(--cream)}
+.pnav-logo{display:flex;align-items:center;gap:.65rem}
+.pnav-logo img{width:auto;object-fit:contain}
+.pnav-wolf{height:1.9rem}
+.pnav-text{height:1.45rem}
 .pnav-close{
   background:none;border:none;cursor:pointer;color:var(--cream);
   font-family:var(--sans);font-size:.64rem;letter-spacing:.28em;text-transform:uppercase;
@@ -332,7 +335,7 @@ html.is-loading body{overflow:hidden}
   display:flex;flex-direction:column;justify-content:center;align-items:center;gap:.6rem;
   color:var(--ink);opacity:0;animation:logoIn .9s var(--ease) .2s forwards;
 }
-.c-loader_name{font-family:var(--script);font-size:clamp(2.4rem,5vw,3.6rem);line-height:1}
+.c-loader_name{height:clamp(1.7rem,3.4vw,2.4rem);width:auto;object-fit:contain}
 @keyframes logoIn{to{opacity:1}}
 
 /* exit — each bar lifts up (staggered), carrying its slice of the logo with it */
@@ -524,7 +527,7 @@ html.is-curtain body.is-loaded .site-header{opacity:1;transition-delay:.85s}
 .announce.show .announce-card{transform:none}
 .announce-close{position:absolute;top:.8rem;right:1.1rem;background:none;border:none;font-size:1.6rem;line-height:1;color:var(--ink-soft);cursor:pointer;transition:opacity .3s var(--ease)}
 .announce-close:hover{opacity:.6}
-.announce-logo{font-family:var(--script);font-size:2.6rem;line-height:1;display:block;margin-bottom:.6rem;color:var(--ink)}
+.announce-logo{height:clamp(1.6rem,4.5vw,2rem);width:auto;object-fit:contain;display:block;margin:0 auto .8rem}
 .announce-eyebrow{text-transform:uppercase;letter-spacing:.3em;font-size:.66rem;color:var(--moss);margin-bottom:.9rem}
 .announce-title{font-family:var(--serif);font-weight:300;font-size:clamp(1.6rem,3.5vw,2.3rem);line-height:1.12;margin-bottom:.8rem}
 .announce-text{color:var(--ink-soft);font-size:.98rem;line-height:1.6;margin-bottom:1.8rem}
@@ -578,11 +581,13 @@ html.is-curtain body.is-loaded .site-header{opacity:1;transition-delay:.85s}
   .well-stage{grid-template-columns:1fr 1fr}
   /* tighter brand row on small screens */
   .header-brand-row{padding:.95rem 1.1rem .85rem}
-  .brand-name{font-size:2.1rem}
+  .brand-name{height:1.6rem}
   .brand .ralf-dog{height:1.7rem}
   .brand-lockup{gap:.5rem}
-  .brand-lockup .brand-name{font-size:2rem}
+  .brand-lockup .brand-name{height:1.45rem}
   .brand-lockup .ralf-dog{height:1.6rem}
+  .pnav-wolf{height:1.6rem}
+  .pnav-text{height:1.2rem}
   .section{padding:clamp(3.25rem,13vw,5.5rem) 1.3rem}
   .footer-bottom{flex-direction:column;align-items:flex-start;gap:.8rem}
 }
@@ -594,7 +599,8 @@ html.is-curtain body.is-loaded .site-header{opacity:1;transition-delay:.85s}
 /* ============ MASTHEAD OVER THE HERO (all pages) ============ */
 /* While the header sits on the hero it inverts to white; on scroll it takes the beige bar. */
 .site-header:not(.scrolled) .brand{color:#fff}
-.site-header:not(.scrolled) .brand .ralf-dog{filter:brightness(0) invert(1)}
+.site-header:not(.scrolled) .brand .ralf-dog,
+.site-header:not(.scrolled) .brand .brand-name{filter:brightness(0) invert(1)}
 .site-header:not(.scrolled) .nav-toggle{color:#fff}
 .site-header:not(.scrolled) .nav-utility .btn-book{
   background:transparent;color:#fff;
