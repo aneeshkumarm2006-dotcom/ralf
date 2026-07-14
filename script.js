@@ -9,6 +9,9 @@ const fireLoaded = () => {
 // while the loader covers the page, swallow scroll input so the page
 // underneath doesn't quietly scroll down behind the intro
 const blockScroll = (e) => e.preventDefault();
+// set by the inline <head> snippet when we arrived by clicking a menu word:
+// the loader bars are then a scrim laid over this page's own hero, not a cream slab
+const isCurtain = document.documentElement.classList.contains('is-curtain');
 if (document.getElementById('loader')) {
   // lock the page at the top until the intro finishes
   document.documentElement.classList.add('is-loading');
@@ -18,7 +21,20 @@ if (document.getElementById('loader')) {
   // hold the loader briefly so the logo reads, then wipe + reveal hero
   const MIN = document.body.classList.contains('home') ? 1600 : 1100;
   let done = false;
-  const trigger = () => { if (!done) { done = true; setTimeout(fireLoaded, MIN); } };
+  const trigger = () => {
+    if (done) return;
+    done = true;
+    if (!isCurtain) { setTimeout(fireLoaded, MIN); return; }
+    // curtain: peel as soon as the hero has actually painted. a wall-clock guess
+    // would strip the scrim off an undecoded photo and wipe a brown slab instead.
+    // capped, so a slow decode can't leave anyone stranded behind the curtain.
+    const hero = document.querySelector('.hero-bg');
+    const painted = (hero && hero.decode) ? hero.decode().catch(() => {}) : Promise.resolve();
+    let fired = false;
+    const peel = () => { if (!fired) { fired = true; fireLoaded(); } };
+    painted.then(() => setTimeout(peel, 100));
+    setTimeout(peel, 700);
+  };
   // lift on DOM-ready, NOT window 'load' — otherwise heavy images hold the intro hostage
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', trigger);
   else trigger();
@@ -151,27 +167,156 @@ if (well) {
   window.addEventListener('load', render);
 })();
 
-// ===== Mobile nav =====
+// ===== Overlay menu =====
+// Hovering a word previews where it goes. Clicking one holds that photo dead
+// still, fades the words off it, and hands it to the arriving page — which is
+// already showing the same photo under the same scrim, and peels the scrim away.
+
+// where each word leads, and the hero it lands on. the only copy of this map.
+const HERO = {
+  'about.html': 'ralf-house.png',
+  'story.html': 'ralf-bedroom-dusk.jpg',
+  'rooms.html': 'V2_Guestroom_day.png',
+  'presents.html': 'presents.jpg',
+};
+const MENU_IMG = 'ralf-menu.png';   // idle, nothing hovered
+
+// sessionStorage throws outright in some privacy modes — never let it kill a link
+const store = {
+  set(k, v) { try { sessionStorage.setItem(k, v); return true; } catch (_) { return false; } },
+  get(k) { try { return sessionStorage.getItem(k); } catch (_) { return null; } },
+  del(k) { try { sessionStorage.removeItem(k); } catch (_) { /* nothing to do */ } },
+};
+
 const toggle = document.getElementById('navToggle');
 const nav = document.getElementById('primaryNav');
 if (toggle && nav) {
-  toggle.addEventListener('click', () => {
-    nav.classList.toggle('open');
-    document.body.classList.toggle('nav-open', nav.classList.contains('open'));
-  });
-  nav.addEventListener('click', (e) => {
-    if (e.target.tagName === 'A') {
-      nav.classList.remove('open');
-      document.body.classList.remove('nav-open');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const here = location.pathname.split('/').pop() || 'index.html';
+
+  // --- photo layers, built here so the eight copies of the nav markup stay untouched
+  const bg = document.createElement('div');
+  bg.className = 'pnav-bg';
+  const layers = {};
+  const addLayer = (key, src) => {
+    const img = new Image();
+    img.className = 'pnav-layer';
+    img.alt = '';
+    img.setAttribute('aria-hidden', 'true');
+    img.dataset.src = src;            // no src yet — nothing is fetched until the menu is wanted
+    bg.appendChild(img);
+    layers[key] = img;
+  };
+  addLayer('default', MENU_IMG);
+  Object.keys(HERO).forEach((href) => addLayer(href, HERO[href]));
+  nav.prepend(bg);
+  layers.default.classList.add('is-active');
+
+  let warmed = false;
+  const warm = () => {
+    if (warmed) return;
+    warmed = true;
+    Object.keys(layers).forEach((k) => { layers[k].src = layers[k].dataset.src; });
+  };
+
+  const show = (key) => {
+    const next = layers[key] || layers.default;
+    Object.keys(layers).forEach((k) => layers[k].classList.toggle('is-active', layers[k] === next));
+  };
+
+  // the words: every direct link except the Book button (EN/FR live inside .pnav-lang)
+  const words = [...nav.querySelectorAll(':scope > a')].filter((a) => !a.classList.contains('btn-book'));
+  words.forEach((a) => a.classList.add('pnav-word'));
+
+  // a link we can take over: one of ours, opening in this tab. leaves #shop,
+  // EN/FR and the Mews booking tab exactly as they were.
+  const isOurs = (a) => !a.target && !!HERO[a.getAttribute('href') || ''];
+
+  // --- hover: swap the photo, step the other words back, warm the next page
+  const prefetched = new Set();
+  const hoverOn = (a) => {
+    const href = a.getAttribute('href');
+    nav.classList.add('is-hovering');
+    words.forEach((w) => w.classList.toggle('is-hot', w === a));
+    show(isOurs(a) ? href : 'default');
+    if (isOurs(a) && !prefetched.has(href)) {
+      prefetched.add(href);
+      const link = document.createElement('link');
+      link.rel = 'prefetch';
+      link.href = href;
+      document.head.appendChild(link);
     }
+  };
+  const hoverOff = () => {
+    nav.classList.remove('is-hovering');
+    words.forEach((w) => w.classList.remove('is-hot'));
+    show('default');
+  };
+  words.forEach((a) => {
+    a.addEventListener('mouseenter', () => hoverOn(a));
+    a.addEventListener('mouseleave', hoverOff);
+    a.addEventListener('focus', () => hoverOn(a));      // tabbing previews too
   });
-  const navClose = document.getElementById('navClose');
-  if (navClose) {
-    navClose.addEventListener('click', () => {
-      nav.classList.remove('open');
-      document.body.classList.remove('nav-open');
-    });
-  }
+  nav.addEventListener('mouseleave', hoverOff);
+  nav.addEventListener('focusout', (e) => { if (!nav.contains(e.relatedTarget)) hoverOff(); });
+
+  // --- open / close
+  let leaving = null;
+  const openNav = () => {
+    warm();
+    nav.classList.add('open');
+    document.body.classList.add('nav-open');
+    toggle.setAttribute('aria-expanded', 'true');
+  };
+  const closeNav = () => {
+    if (leaving) { clearTimeout(leaving); leaving = null; store.del('ralf:curtain'); }
+    nav.classList.remove('open', 'is-leaving', 'is-hovering');
+    words.forEach((w) => w.classList.remove('is-hot'));
+    document.body.classList.remove('nav-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    show('default');
+  };
+  toggle.setAttribute('aria-expanded', 'false');
+  toggle.addEventListener('pointerenter', warm);   // a head start before the click
+  toggle.addEventListener('click', () => (nav.classList.contains('open') ? closeNav() : openNav()));
+  document.getElementById('navClose')?.addEventListener('click', closeNav);
+
+  // --- leaving: hold the photo, fade the words, hand off
+  nav.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href]');
+    if (!a) return;
+    // anything below navigates exactly as it does today — no interception at all
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if (!isOurs(a)) { closeNav(); return; }
+    const href = a.getAttribute('href');
+    if (href === here) { e.preventDefault(); closeNav(); return; }   // already on this page
+    if (reduceMotion.matches) return;                                // straight there, no stall
+    if (!store.set('ralf:curtain', '1')) return;                     // storage blocked: don't brick the link
+
+    e.preventDefault();
+    // .is-hot out-specifies the leaving fade, so drop the hover state first
+    nav.classList.remove('is-hovering');
+    words.forEach((w) => w.classList.remove('is-hot'));
+    // settle this word's photo to its exact resting frame. a touch tap never
+    // hovered, and a fast click may be mid-crossfade — either way the next page
+    // must open on the photo we're leaving on.
+    show(href);
+    nav.classList.add('is-leaving');
+    leaving = setTimeout(() => { location.href = href; }, 380);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && nav.classList.contains('open')) { closeNav(); toggle.focus(); }
+  });
+
+  // --- back button. bfcache restores the DOM verbatim, so without this you return
+  // to a dead full-screen photo: no words, no close button, and the scroll locked.
+  window.addEventListener('pageshow', (e) => {
+    if (!e.persisted) return;
+    document.documentElement.classList.remove('is-curtain');
+    document.body.classList.add('is-loaded');
+    closeNav();
+  });
 }
 
 // ===== Newsletter form =====
@@ -187,11 +332,11 @@ if (form && note) {
 
 // ===== Opening announcement pop-up (once per session) =====
 const announce = document.getElementById('announce');
-if (announce && sessionStorage.getItem('ralf-announce') !== '1') {
+if (announce && store.get('ralf-announce') !== '1') {
   setTimeout(() => announce.classList.add('show'), 4800);
   const dismiss = () => {
     announce.classList.remove('show');
-    sessionStorage.setItem('ralf-announce', '1');
+    store.set('ralf-announce', '1');
   };
   announce.querySelector('.announce-close')?.addEventListener('click', dismiss);
   announce.querySelector('.announce-btn')?.addEventListener('click', dismiss);

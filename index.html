@@ -10,7 +10,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" href="ralf-emblem.png" />
   <link rel="apple-touch-icon" href="ralf-emblem.png" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=2" />
+  <!-- Arrived by clicking a word in the menu? Then the loader is a scrim over this page's own hero, not a cream slab. Must run before first paint. -->
+  <script>try{if(sessionStorage.getItem('ralf:curtain')){sessionStorage.removeItem('ralf:curtain');document.documentElement.className+=' is-curtain'}}catch(e){}</script>
 </head>
 <body class="home">
   <!-- ============ LOADER ============ -->
@@ -22,7 +24,7 @@
   <header class="site-header" id="header">
     <div class="header-brand-row">
       <button class="nav-toggle menu-btn" id="navToggle" aria-label="Open menu"><span class="menu-btn-circle" aria-hidden="true"><span></span><span></span><span></span></span><span class="menu-btn-label">Menu</span></button>
-      <a href="index.html" class="brand brand-stacked" aria-label="The Ralf home"><img class="ralf-dog" src="ralf-emblem.png" alt="The Ralf" /><span class="brand-name">The Ralf</span></a>
+      <a href="index.html" class="brand brand-lockup" aria-label="The Ralf home"><img class="ralf-dog" src="ralf-emblem.png" alt="The Ralf" /><span class="brand-name">The Ralf</span></a>
       <div class="nav-utility">
         <a href="https://app.mews.com/distributor/6bb1de57-7e2d-4c1b-a060-b45000c2c7ea" target="_blank" rel="noopener" class="btn-book">Plan Your Stay</a>
       </div>
@@ -34,7 +36,7 @@
       </div>
       <a href="about.html">About</a>
       <a href="story.html">The House</a>
-      <a href="rooms.html">Rooms</a>
+      <a href="rooms.html">Rooms &amp; Suites</a>
       <a href="presents.html">Just Ask Ralf</a>
       <a href="#shop" class="nav-ext">The Shop &#8599;</a>
       <a href="https://app.mews.com/distributor/6bb1de57-7e2d-4c1b-a060-b45000c2c7ea" target="_blank" rel="noopener" class="btn-book">Plan Your Stay</a>
@@ -44,7 +46,7 @@
 
   <!-- ============ HERO BANNER ============ -->
   <section class="hero" id="top">
-    <div class="hero-bg" style="background-image:url('ralf-house.png')"></div>
+    <video class="hero-bg" src="ralf-video.mp4" poster="ralf-house.png" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
     <div class="hero-overlay"></div>
     <div class="hero-banner">
       <h1 class="hero-lines">
@@ -161,7 +163,7 @@
       <nav class="footer-col">
         <h4>The House</h4>
         <a href="story.html">Our Story</a>
-        <a href="rooms.html">Rooms</a>
+        <a href="rooms.html">Rooms &amp; Suites</a>
         <a href="#dining">The Bar &amp; Table</a>
       </nav>
 
@@ -202,6 +204,6 @@
     </div>
   </div>
 
-  <script src="script.js?v=3"></script>
+  <script src="script.js?v=4"></script>
 </body>
 </html>
