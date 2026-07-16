@@ -364,3 +364,27 @@ if (announce && store.get('ralf-announce') !== '1') {
   }, { rootMargin: '-45% 0px -45% 0px' });
   panels.forEach((p) => railIO.observe(p));
 })();
+
+// ===== Seamless hero-video loop =====
+// The native `loop` attribute lets the video reach end-of-stream, where the
+// browser tears down the decoded frame — a gray flash + re-buffer stall — before
+// it restarts. Instead we drop `loop` and jump back a hair BEFORE the true end,
+// so playback never hits end-of-stream and the last frame is never cleared.
+(() => {
+  const vid = document.querySelector('video.hero-bg');
+  if (!vid) return;
+
+  // Paint the poster behind the video so any residual gap shows a matching
+  // frame, never the element's empty gray box.
+  if (vid.poster) vid.style.backgroundImage = `url("${vid.poster}")`;
+
+  vid.loop = false;
+  const LEAD = 0.12; // seconds before the end to wrap around
+  vid.addEventListener('timeupdate', () => {
+    if (vid.duration && vid.currentTime >= vid.duration - LEAD) {
+      vid.currentTime = 0;
+    }
+  });
+  // fallback: if a frame is ever missed and it does reach the end, restart at once
+  vid.addEventListener('ended', () => { vid.currentTime = 0; vid.play(); });
+})();
