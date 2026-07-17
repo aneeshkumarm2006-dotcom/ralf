@@ -434,6 +434,27 @@ if (announce && store.get('ralf-announce') !== '1') {
   panels.forEach((p) => railIO.observe(p));
 })();
 
+// ===== Rooms: the masthead steps aside while you read down the page =====
+// Scrolling down tucks the fixed header away (html.nav-tucked, styled in CSS);
+// the first upward scroll brings it back. Rooms page only.
+(function () {
+  if (!document.querySelector('.rooms-index') || !header) return;
+  const SHOW_ZONE = 160;                       // this close to the top it always shows
+  const SLACK = 8;                             // ignore direction wobble under 8px
+  const root = document.documentElement;
+  let lastY = window.scrollY;
+  window.addEventListener('scroll', () => {
+    const y = Math.max(0, window.scrollY);     // rubber-band overscroll goes negative
+    if (document.body.classList.contains('nav-open')) { lastY = y; return; }
+    if (y < SHOW_ZONE) { root.classList.remove('nav-tucked'); lastY = y; return; }
+    if (Math.abs(y - lastY) < SLACK) return;   // let tiny moves accumulate until decisive
+    root.classList.toggle('nav-tucked', y > lastY);
+    lastY = y;
+  }, { passive: true });
+  // keyboard: tabbing into a tucked header must bring it back on-screen
+  header.addEventListener('focusin', () => root.classList.remove('nav-tucked'));
+})();
+
 // ===== Rooms: each photo drifts inside its arch as the room passes =====
 // The arch reveal (clip + settle) is CSS on .room-panel.reveal.in; this adds the
 // slow vertical parallax on top, so the image feels alive rather than pasted in.
