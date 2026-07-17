@@ -270,7 +270,7 @@ if (toggle && nav) {
   };
   const closeNav = () => {
     if (leaving) { clearTimeout(leaving); leaving = null; store.del('ralf:curtain'); }
-    nav.classList.remove('open', 'is-leaving', 'is-hovering');
+    nav.classList.remove('open', 'is-leaving', 'is-arching', 'is-hovering');
     words.forEach((w) => w.classList.remove('is-hot'));
     document.body.classList.remove('nav-open');
     toggle.setAttribute('aria-expanded', 'false');
@@ -301,8 +301,17 @@ if (toggle && nav) {
     // hovered, and a fast click may be mid-crossfade — either way the next page
     // must open on the photo we're leaving on.
     show(href);
-    nav.classList.add('is-leaving');
-    leaving = setTimeout(() => { location.href = href; }, 380);
+    if (href === 'rooms.html') {
+      // Rooms gets the arch: the menu photo collapses into the reference shape and
+      // brightens, then rooms.html (is-arch) picks that exact small arch up and
+      // grows it to the full hero. A longer beat than the flat wipe so the arch has
+      // closed before the navigation cut — the cut then lands inside the arch, unseen.
+      nav.classList.add('is-arching');
+      leaving = setTimeout(() => { location.href = href; }, 640);
+    } else {
+      nav.classList.add('is-leaving');
+      leaving = setTimeout(() => { location.href = href; }, 380);
+    }
   });
 
   document.addEventListener('keydown', (e) => {
