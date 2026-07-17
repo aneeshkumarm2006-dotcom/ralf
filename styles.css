@@ -502,15 +502,12 @@ body.nav-open .site-header{transform:none}
 .press-item .date{font-size:.82rem;color:var(--ink-soft);white-space:nowrap}
 
 /* ============ ROOMS & SUITES (sticky rail + arched plates) ============ */
-/* Two columns: a rail that stays with you, and the rooms themselves. The rail
-   column must be left to STRETCH to the full row height — that travel is what
-   its sticky child slides along. Any align-items here would collapse it and the
-   rail would scroll away with the first room. */
-.rooms-index{
-  display:grid;
-  grid-template-columns:minmax(11rem,15rem) minmax(0,1fr);
-  gap:clamp(2rem,6vw,7rem);
-}
+/* The rail overlays the left margin rather than taking a grid column, so the
+   panels span the full width and the arched plate can sit dead-centre on the
+   page. The rail stretches the section's full height — that travel is what its
+   sticky child slides along. */
+.rooms-index{position:relative}
+.rooms-rail{position:absolute;top:0;bottom:0;left:clamp(1.5rem,6vw,8rem)}
 .rooms-rail-list{
   position:sticky;top:calc(50vh - 4rem);
   list-style:none;display:flex;flex-direction:column;gap:1.15rem;
@@ -537,14 +534,16 @@ body.nav-open .site-header{transform:none}
 .rail-link.is-current .rail-arrow{opacity:1;transform:translate(0,-50%)}
 
 .rooms-panels{display:flex;flex-direction:column;gap:clamp(5rem,11vw,10rem)}
+/* Symmetric 1fr flanks around a fixed-width middle column keep the plate on the
+   page's centreline; the info copy lives in the right flank. */
 .room-panel{
   display:grid;
-  grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);
+  grid-template-columns:1fr minmax(0,clamp(21rem,34vw,40rem)) 1fr;
   gap:clamp(2rem,5vw,5.5rem);
   align-items:center;
   scroll-margin-top:clamp(7rem,14vh,10rem);   /* clear the fixed masthead on a rail click */
 }
-.room-plate{padding-top:clamp(2.4rem,4vw,3.4rem)}   /* headroom for the curved name */
+.room-plate{grid-column:2;padding-top:clamp(2.4rem,4vw,3.4rem)}   /* headroom for the curved name */
 .room-plate-inner{position:relative}
 .room-media{aspect-ratio:4/5;overflow:hidden;border-radius:50% 50% 0 0/42% 42% 0 0;
   transition:clip-path 1.2s var(--ease),transform 1.2s var(--ease),opacity 1.2s var(--ease)}
@@ -565,7 +564,7 @@ body.nav-open .site-header{transform:none}
   text-anchor:middle;fill:var(--ink);
 }
 
-.room-info{display:flex;flex-direction:column;align-items:center;text-align:center}
+.room-info{grid-column:3;display:flex;flex-direction:column;align-items:center;text-align:center}
 .room-desc{color:var(--ink-soft);font-size:1.02rem;line-height:1.85;max-width:34ch}
 .room-rule{width:100%;max-width:19rem;height:1px;background:var(--line);margin:2rem 0 1.7rem}
 .room-specs{display:grid;grid-template-columns:1fr 1fr;gap:2rem 2.5rem;width:100%;max-width:21rem}
@@ -729,8 +728,10 @@ body.nav-open .site-header{transform:none}
   .feature-media{aspect-ratio:4/3}
   .dining-cards{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr 1fr}
-  /* the room stacks, but the rail stays — it's still the guide down the page */
+  /* the room stacks and the overlaid rail has no margin left to live in */
+  .rooms-rail{display:none}
   .room-panel{grid-template-columns:1fr;gap:2.4rem}
+  .room-plate,.room-info{grid-column:auto}
   .room-plate{width:100%;max-width:24rem;margin-inline:auto}
 }
 @media(max-width:760px){
@@ -742,9 +743,6 @@ body.nav-open .site-header{transform:none}
   .house-center{position:static;transform:none!important;grid-column:1/-1;max-width:none;margin:0 auto .6rem;padding:0;order:-1;opacity:1!important}
   .house-center::before{display:none}
   .hp{position:static!important;width:auto!important;aspect-ratio:4/3!important;transform:none!important;opacity:1!important;box-shadow:0 14px 34px rgba(20,13,8,.16)}
-  /* no room left for the rail beside the plates — the page itself is the guide now */
-  .rooms-index{grid-template-columns:1fr}
-  .rooms-rail{display:none}
   .rooms-panels{gap:clamp(3.5rem,10vw,5rem)}
   .well-stage{position:static;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:1rem}
   .well-center{position:static;display:block;padding:0;margin-bottom:1.6rem}
