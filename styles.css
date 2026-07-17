@@ -498,9 +498,12 @@ html.is-curtain body.is-loaded .site-header{opacity:1;transition-delay:.85s}
 }
 .room-plate{padding-top:clamp(2.4rem,4vw,3.4rem)}   /* headroom for the curved name */
 .room-plate-inner{position:relative}
-.room-media{aspect-ratio:4/5;overflow:hidden;border-radius:50% 50% 0 0/42% 42% 0 0}
-.room-media img{transition:transform 1.8s var(--ease)}
-.room-panel:hover .room-media img{transform:scale(1.05)}
+.room-media{aspect-ratio:4/5;overflow:hidden;border-radius:50% 50% 0 0/42% 42% 0 0;
+  transition:clip-path 1.2s var(--ease),transform 1.2s var(--ease),opacity 1.2s var(--ease)}
+/* the photo sits a touch oversized so it can drift inside the arch as the room
+   passes through the view — script.js writes the vertical offset into --ry */
+.room-media img{transform:translateY(var(--ry,0px)) scale(1.08)}
+.room-panel:hover .room-media{transform:scale(1.03)}
 
 /* The name, set along the dome. The viewBox is the same 4:5 as the plate, so its
    400x500 units map 1:1 onto it: the arch is the ellipse centred (200,210) with
@@ -520,6 +523,37 @@ html.is-curtain body.is-loaded .site-header{opacity:1;transition-delay:.85s}
 .room-specs{display:grid;grid-template-columns:1fr 1fr;gap:2rem 2.5rem;width:100%;max-width:21rem}
 .room-spec dt{font-family:var(--serif);text-transform:uppercase;letter-spacing:.16em;font-size:.9rem;color:var(--moss);margin-bottom:.5rem}
 .room-spec dd{font-size:.85rem;color:var(--ink-soft);line-height:1.5}
+
+/* ---- Entrance choreography (modelled on lafantaisie.com/rooms) ----
+   Each room resolves as it reaches the middle of the view: the arched photo
+   unveils from its base upward, then the curved name and the specs settle in
+   one after another. We animate the PARTS, so the panel box itself stays put
+   (its generic .reveal fade would otherwise flatten the whole sequence). */
+.room-panel.reveal{opacity:1;transform:none}
+.room-panel.reveal .room-media{
+  clip-path:inset(100% 0 0 0);                 /* closed down to the base */
+  transform:translateY(40px) scale(.965);opacity:0;
+}
+.room-panel.reveal.in .room-media{clip-path:inset(0 0 0 0);transform:none;opacity:1}
+
+.room-panel.reveal .room-arc,
+.room-panel.reveal .room-desc,
+.room-panel.reveal .room-rule,
+.room-panel.reveal .room-specs,
+.room-panel.reveal .btn-frame{
+  opacity:0;transform:translateY(24px);
+  transition:opacity .9s var(--ease),transform .9s var(--ease);
+}
+.room-panel.reveal.in .room-arc,
+.room-panel.reveal.in .room-desc,
+.room-panel.reveal.in .room-rule,
+.room-panel.reveal.in .room-specs,
+.room-panel.reveal.in .btn-frame{opacity:1;transform:none}
+.room-panel.reveal.in .room-arc{transition-delay:.18s}
+.room-panel.reveal.in .room-desc{transition-delay:.30s}
+.room-panel.reveal.in .room-rule{transition-delay:.38s}
+.room-panel.reveal.in .room-specs{transition-delay:.46s}
+.room-panel.reveal.in .btn-frame{transition-delay:.54s}
 
 /* ============ WELLNESS (leitmotiv-style floating pop-up) ============ */
 .well{position:relative;overflow:hidden;background:var(--cream);padding:clamp(3rem,7vw,6rem) clamp(1.5rem,6vw,5rem) clamp(1.75rem,4vw,3.25rem)}

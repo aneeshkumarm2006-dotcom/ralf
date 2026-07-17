@@ -365,6 +365,40 @@ if (announce && store.get('ralf-announce') !== '1') {
   panels.forEach((p) => railIO.observe(p));
 })();
 
+// ===== Rooms: each photo drifts inside its arch as the room passes =====
+// The arch reveal (clip + settle) is CSS on .room-panel.reveal.in; this adds the
+// slow vertical parallax on top, so the image feels alive rather than pasted in.
+// The photo is scaled up in CSS (scale 1.08), so this ±drift never bares an edge.
+(function () {
+  const imgs = Array.prototype.slice.call(document.querySelectorAll('.room-media img'));
+  if (!imgs.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const AMP = 26;                                  // px of travel, well inside the overscan
+  const clamp = (v, a, b) => (v < a ? a : (v > b ? b : v));
+
+  let ticking = false;
+  const render = () => {
+    ticking = false;
+    const vh = window.innerHeight;
+    for (let i = 0; i < imgs.length; i++) {
+      const frame = imgs[i].parentElement;
+      const r = frame.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > vh) continue;    // off-screen: leave it be
+      // 0 as the arch enters from the bottom -> 1 as it leaves past the top
+      const p = clamp((vh - r.top) / (vh + r.height), 0, 1);
+      const y = (p - 0.5) * 2 * AMP;               // -AMP..AMP, neutral when centred
+      imgs[i].style.setProperty('--ry', y.toFixed(1) + 'px');
+    }
+  };
+  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(render); } };
+
+  render();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  window.addEventListener('load', render);
+})();
+
 // ===== Seamless hero-video loop =====
 // The native `loop` attribute lets the video reach end-of-stream, where the
 // browser tears down the decoded frame — a gray flash + re-buffer stall — before
