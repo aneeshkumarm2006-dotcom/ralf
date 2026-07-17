@@ -37,15 +37,6 @@
   --editorial:'Editorial New','Cormorant Garamond',Georgia,serif;
   --policy:'Policy Gothic','Jost',system-ui,sans-serif;
   --ease:cubic-bezier(.6,.01,.15,1);
-  /* the reference arch (same crown as the room plates) the Rooms transition
-     opens from, and the full frame it grows into. Kept as one pair of tokens so
-     the menu it collapses FROM and the hero it grows INTO use the identical shape. */
-  --arch:inset(26% 39% 27% 39% round 50% 50% 0% 0% / 44% 44% 0% 0%);
-  --arch-full:inset(0% 0% 0% 0% round 0% 0% 0% 0% / 0% 0% 0% 0%);
-}
-/* on a narrow portrait screen the same side %s pinch the arch to a sliver — widen it */
-@media (max-width:760px){
-  :root{--arch:inset(25% 16% 29% 16% round 50% 50% 0% 0% / 40% 40% 0% 0%)}
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -190,9 +181,7 @@ a{color:inherit;text-decoration:none}
 /* the photo behind the words. z-index:-1 is load-bearing — a positioned child
    paints above non-positioned in-flow content, so without it the photo would
    cover the links. .primary-nav is a stacking context, so the -1 stays inside. */
-/* clip-path sits at the full frame (visually a no-op) so the Rooms exit can
-   interpolate it down to the arch — a transition from `none` would just pop. */
-.pnav-bg{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none;clip-path:var(--arch-full)}
+.pnav-bg{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
 .pnav-bg::after{content:'';position:absolute;inset:0;background:rgba(30,22,13,.72)}
 /* one layer per destination; script.js crossfades them on hover. they rest at
    scale 1.12 — exactly where .hero-bg sits before is-loaded — so when the next
@@ -234,12 +223,11 @@ a{color:inherit;text-decoration:none}
    touch tap never hovered, so its layer would otherwise still be fading in
    when we navigate, and the next page would open on a photo we never showed */
 .primary-nav.is-leaving .pnav-layer{transition:opacity .3s var(--ease),transform .3s var(--ease)}
-/* leaving for ROOMS: instead of the flat hand-off above, the menu photo collapses
-   into the reference arch and brightens (its scrim lifts) so the arriving Rooms
-   hero can pick that exact small arch up and grow it open. Same shape token both
-   sides, same photo, same 1.12 scale — the navigation cut lands inside the arch. */
-.primary-nav.is-arching{transition:none}                 /* hold the panel; only the photo moves */
-.primary-nav.is-arching .pnav-bg{clip-path:var(--arch);transition:clip-path .62s var(--ease)}
+/* leaving for ROOMS: the arch veil (built in script.js) collapses the menu photo
+   into the reference shape by transform alone. Here we only lift the menu's own
+   scrim, so the photo inside that shrinking arch brightens to match the hero the
+   arriving page opens on, and fade the words out of it. Same espresso, same photo,
+   same arch geometry both sides → the navigation cut lands unseen inside the arch. */
 .primary-nav.is-arching .pnav-bg::after{opacity:0;transition:opacity .5s var(--ease)}
 .primary-nav.is-arching .pnav-top,
 .primary-nav.is-arching .pnav-lang,
@@ -433,30 +421,28 @@ html.is-curtain .site-header{opacity:0;transition:opacity .9s var(--ease)}
 html.is-curtain body.is-loaded .site-header{opacity:1;transition-delay:.85s}
 
 /* ============ ARCH ARRIVAL (Rooms only) ============ */
-/* Arrived from the menu's Rooms word: skip the flat scrim-lift and instead open
-   the hero from the reference arch the menu just collapsed into, then grow it to
-   the full frame. The espresso surround is .hero's own background, so nothing is
-   layered or cloned — one <img>, clipped, growing. Modelled on lafantaisie.com/rooms. */
-html.is-arch .c-loader{display:none}                     /* no bars on this path — the arch is the reveal */
-html.is-arch .hero-bg,
-html.is-arch .hero-overlay{clip-path:var(--arch);will-change:clip-path}
-html.is-arch body.is-loaded .hero-bg{
-  clip-path:var(--arch-full);
-  transition:transform 1.7s var(--ease),clip-path 1.25s var(--ease);
+/* Arrived from the menu's Rooms word. The reveal is an espresso "veil": a full
+   sheet with a single static arch-shaped hole cut out of it (built in script.js),
+   which grows via transform:scale ALONE. Because only the transform changes, the
+   whole reveal runs on the compositor and never repaints — smooth even while the
+   arriving page is still decoding its images. The hero beneath never moves.
+   Modelled on lafantaisie.com/rooms. */
+html.is-arch .c-loader{display:none}                     /* the veil is the reveal, not the bars */
+html.is-arch .hero-bg{opacity:0}                         /* hidden until the veil covers — no full-hero flash before it mounts */
+html.is-arch.arch-ready .hero-bg{opacity:1}
+.arch-veil{
+  position:fixed;inset:0;z-index:500;background:var(--espresso);
+  pointer-events:none;transform:scale(1);transform-origin:center;
+  will-change:transform;backface-visibility:hidden;
 }
-html.is-arch body.is-loaded .hero-overlay{
-  clip-path:var(--arch-full);
-  transition:opacity 1.2s var(--ease),clip-path 1.25s var(--ease);
-}
-/* hold the headline, tag and masthead back until the arch is most of the way open,
-   so no centred word or corner pokes out onto the espresso while it's still small */
-html.is-arch body.is-loaded .hero-lines .ln>span{transition-delay:1.15s}
-html.is-arch body.is-loaded .hero-lines .ln:nth-child(2)>span{transition-delay:1.32s}
-html.is-arch body.is-loaded .hero-tag{transition-delay:1.5s}
-html.is-arch body.is-loaded .site-header{transition-delay:1.05s}
+/* hold the headline, tag and masthead back until the arch has opened out past them */
+html.is-arch body.is-loaded .hero-lines .ln>span{transition-delay:1.05s}
+html.is-arch body.is-loaded .hero-lines .ln:nth-child(2)>span{transition-delay:1.22s}
+html.is-arch body.is-loaded .hero-tag{transition-delay:1.4s}
+html.is-arch body.is-loaded .site-header{transition-delay:1s}
 @media (prefers-reduced-motion:reduce){
-  html.is-arch .hero-bg,
-  html.is-arch .hero-overlay{clip-path:none}
+  html.is-arch .hero-bg{opacity:1}
+  .arch-veil{display:none}
 }
 
 /* ============ SUBPAGE HERO ============ */

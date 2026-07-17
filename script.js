@@ -188,6 +188,58 @@ const store = {
   del(k) { try { sessionStorage.removeItem(k); } catch (_) { /* nothing to do */ } },
 };
 
+// ===== Rooms arch transition =====
+// One espresso veil — a full sheet with a single arch-shaped hole cut out of it —
+// drives both halves of the Rooms hand-off: the menu photo collapsing into the
+// reference arch, and the arriving hero growing back out of it. The hole is static;
+// only transform:scale animates, so the whole reveal lives on the compositor and
+// stays smooth even while the destination is still decoding images. Modelled on
+// lafantaisie.com/rooms.
+const ARCH = {
+  // arch hole as fractions of the viewport; opened wider on a narrow phone so it
+  // reads as an arch and not a sliver. [l,r] sides · [t,b] top/bottom · dome = crown height
+  frac() {
+    return window.matchMedia('(max-width:760px)').matches
+      ? { l: 0.16, r: 0.84, t: 0.25, b: 0.71, dome: 0.40 }
+      : { l: 0.39, r: 0.61, t: 0.26, b: 0.73, dome: 0.44 };
+  },
+  // a veil sized to the viewport: opaque espresso with the arch punched out (evenodd),
+  // origin at the arch's centre, and dataset.max = the scale that just clears every corner
+  build() {
+    const W = innerWidth, H = innerHeight, f = this.frac();
+    const left = f.l * W, right = f.r * W, top = f.t * H, bottom = f.b * H;
+    const dh = (bottom - top) * f.dome, rx = (right - left) / 2;
+    const outer = `M0 0H${W}V${H}H0Z`;                                   // the full sheet
+    const arch = `M${left} ${bottom}V${top + dh}A${rx} ${dh} 0 0 1 ${right} ${top + dh}V${bottom}Z`;  // the hole
+    const veil = document.createElement('div');
+    veil.className = 'arch-veil';
+    veil.style.clipPath = `path(evenodd,'${outer} ${arch}')`;
+    veil.style.transformOrigin = `${(left + right) / 2}px ${(top + bottom) / 2}px`;
+    veil.dataset.max = Math.max(W / (right - left), H / (bottom - top)) * 1.15;
+    return veil;
+  },
+};
+
+// Arriving on Rooms from the menu: mount the veil at the small arch (its default
+// scale 1), then grow it open once the hero has painted. The .hero sits on espresso
+// and .hero-bg starts hidden, so nothing but espresso shows before the veil mounts.
+if (document.documentElement.classList.contains('is-arch')
+    && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const veil = ARCH.build();
+  document.body.appendChild(veil);
+  document.documentElement.classList.add('arch-ready');   // reveal the hero beneath the hole
+  whenLoaded(() => {
+    // hold one frame on the reference shape, then open it out to the full frame
+    requestAnimationFrame(() => {
+      veil.style.transition = 'transform 1.15s var(--ease)';
+      veil.style.transform = `scale(${veil.dataset.max})`;
+      const drop = () => veil.remove();
+      veil.addEventListener('transitionend', drop, { once: true });
+      setTimeout(drop, 1500);                              // fallback if transitionend is missed
+    });
+  });
+}
+
 const toggle = document.getElementById('navToggle');
 const nav = document.getElementById('primaryNav');
 if (toggle && nav) {
@@ -270,6 +322,7 @@ if (toggle && nav) {
   };
   const closeNav = () => {
     if (leaving) { clearTimeout(leaving); leaving = null; store.del('ralf:curtain'); }
+    document.querySelectorAll('.arch-veil').forEach((v) => v.remove());   // drop a half-built Rooms veil
     nav.classList.remove('open', 'is-leaving', 'is-arching', 'is-hovering');
     words.forEach((w) => w.classList.remove('is-hot'));
     document.body.classList.remove('nav-open');
@@ -302,11 +355,18 @@ if (toggle && nav) {
     // must open on the photo we're leaving on.
     show(href);
     if (href === 'rooms.html') {
-      // Rooms gets the arch: the menu photo collapses into the reference shape and
-      // brightens, then rooms.html (is-arch) picks that exact small arch up and
-      // grows it to the full hero. A longer beat than the flat wipe so the arch has
-      // closed before the navigation cut — the cut then lands inside the arch, unseen.
+      // Rooms gets the arch: lay the same veil over the menu, wide open so the whole
+      // photo shows, then collapse it to the reference shape (transform only → smooth)
+      // while the words fade and the scrim lifts. rooms.html (is-arch) mounts the veil
+      // at that exact small arch and grows it — so the two arches meet across the cut.
       nav.classList.add('is-arching');
+      const veil = ARCH.build();
+      veil.style.transform = `scale(${veil.dataset.max})`;   // start wide: the hole clears the frame
+      document.body.appendChild(veil);
+      requestAnimationFrame(() => {
+        veil.style.transition = 'transform .6s var(--ease)';
+        veil.style.transform = 'scale(1)';                   // collapse to the reference arch
+      });
       leaving = setTimeout(() => { location.href = href; }, 640);
     } else {
       nav.classList.add('is-leaving');
