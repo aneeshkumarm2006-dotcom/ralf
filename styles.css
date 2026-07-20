@@ -514,8 +514,11 @@ body.nav-open .site-header{transform:none}
 .rooms-index{position:relative;padding-bottom:0}
 .rooms-rail{
   position:absolute;top:0;bottom:0;left:0;
-  width:calc(50% - clamp(10.5rem,17vw,20rem));   /* = half the plate track */
-  display:flex;justify-content:center;align-items:flex-start;
+  width:calc(50% - clamp(10.5rem,17vw,20rem));   /* ends at the plate's left edge */
+  display:flex;justify-content:flex-end;align-items:flex-start;
+  /* tuck the labels in against the plate, mirroring the arch-to-copy gap on the
+     right, so the arch gets the same breathing room on both sides */
+  padding-right:calc(clamp(2rem,5vw,5.5rem) + 2.5rem);
 }
 .rooms-rail-list{
   position:sticky;top:120px;                        /* the top limit it parks at; the section's end carries it away */
