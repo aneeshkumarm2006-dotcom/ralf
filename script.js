@@ -424,6 +424,19 @@ if (announce && store.get('ralf-announce') !== '1') {
   const panels = links.map((a) => document.querySelector(a.getAttribute('href')));
   if (!panels.length || panels.some((p) => !p)) return;
 
+  // The rail sits in the page flow, starting level with the first room's copy:
+  // it scrolls with the content like anything else, parks at its sticky top
+  // limit, and is carried away by the section's end (both limits are plain CSS
+  // sticky behaviour). JS only measures where that first description actually
+  // starts so the rail's natural position lines up with it.
+  const alignRail = () => {
+    const info = panels[0].querySelector('.room-info');
+    const track = rail.parentElement;   // .rooms-rail spans the whole section
+    if (!info || !track) return;
+    const offset = info.getBoundingClientRect().top - track.getBoundingClientRect().top;
+    rail.style.setProperty('--rail-start', Math.max(0, Math.round(offset)) + 'px');
+  };
+
   const setCurrent = (panel) => {
     links.forEach((a, i) => a.classList.toggle('is-current', panels[i] === panel));
   };
@@ -432,6 +445,10 @@ if (announce && store.get('ralf-announce') !== '1') {
     entries.forEach((e) => { if (e.isIntersecting) setCurrent(e.target); });
   }, { rootMargin: '-45% 0px -45% 0px' });
   panels.forEach((p) => railIO.observe(p));
+
+  alignRail();
+  window.addEventListener('resize', alignRail, { passive: true });
+  window.addEventListener('load', alignRail);
 })();
 
 // ===== Rooms: the masthead steps aside while you read down the page =====

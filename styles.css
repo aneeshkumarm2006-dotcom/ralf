@@ -511,14 +511,15 @@ body.nav-open .site-header{transform:none}
    stretches the section's full height — that travel is what its sticky child
    slides along; align-items:flex-start keeps the list unstretched so sticky
    can work. */
-.rooms-index{position:relative}
+.rooms-index{position:relative;padding-bottom:0}
 .rooms-rail{
   position:absolute;top:0;bottom:0;left:0;
   width:calc(50% - clamp(10.5rem,17vw,20rem));   /* = half the plate track */
   display:flex;justify-content:center;align-items:flex-start;
 }
 .rooms-rail-list{
-  position:sticky;top:calc(50vh - 4rem);
+  position:sticky;top:120px;                        /* the top limit it parks at; the section's end carries it away */
+  margin-top:var(--rail-start,calc(50vh - 4rem));   /* script.js: natural start level with the first room's copy */
   list-style:none;display:flex;flex-direction:column;gap:1.15rem;
   padding-left:3.6rem;   /* the gutter the active arrow slides into */
 }
