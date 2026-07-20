@@ -502,19 +502,22 @@ body.nav-open .site-header{transform:none}
 .press-item .date{font-size:.82rem;color:var(--ink-soft);white-space:nowrap}
 
 /* ============ ROOMS & SUITES (sticky rail + arched plates) ============ */
-/* The rail is pinned to the viewport, not the page: it never travels with the
-   scroll. It spans from the screen's left edge to the plate's left edge (50%
-   minus half the plate track below) and centres its list in that void —
-   mirroring the info copy centred in the right flank — and vertically on the
-   screen's midline. script.js switches .is-on while the rooms index straddles
-   that midline, so the names fade in as the rooms arrive, hold perfectly
-   still, and fade away after the last one. */
-.rooms-index{position:relative}
+/* The rail is STICKY to the rooms section, not fixed to the viewport (modelled
+   on lafantaisie.com/rooms): as you scroll down from the top it rides up with
+   the first plate, then pins beside the images at `top` and holds there while
+   you read through the rooms. Being bounded by .rooms-index, it can never float
+   above the first image nor sink below the last — it releases with the section
+   at each end. It lives in a zero-width first grid column pinned to the page's
+   left edge, so it overlays the plate's left flank without shifting the plate
+   off the page centre. script.js switches .is-on while the section is in view
+   so the names fade in and out gently. */
+.rooms-index{position:relative;display:grid;grid-template-columns:0 minmax(0,1fr)}
 .rooms-rail{
-  position:fixed;top:0;bottom:0;left:0;z-index:10;   /* under the masthead (100) */
-  width:calc(50% - clamp(10.5rem,17vw,20rem));       /* = half the plate track */
-  display:flex;justify-content:center;align-items:center;
-  pointer-events:none;   /* a viewport-tall box — only the links may catch clicks */
+  grid-column:1;align-self:start;
+  position:sticky;top:clamp(9rem,17vh,13rem);z-index:10;   /* under the masthead (100) */
+  width:calc(50% - clamp(10.5rem,17vw,20rem));             /* = half the plate track */
+  display:flex;justify-content:center;
+  pointer-events:none;   /* only the links may catch clicks */
   opacity:0;visibility:hidden;
   transition:opacity .6s var(--ease),visibility 0s .6s;
 }
@@ -544,7 +547,7 @@ body.nav-open .site-header{transform:none}
 }
 .rail-link.is-current .rail-arrow{opacity:1;transform:translate(0,-50%)}
 
-.rooms-panels{display:flex;flex-direction:column;gap:clamp(5rem,11vw,10rem)}
+.rooms-panels{grid-column:2;display:flex;flex-direction:column;gap:clamp(5rem,11vw,10rem)}
 /* Symmetric flanks around a fixed-width middle column keep the plate on the
    page's centreline — minmax(0,1fr) so the info copy's min-content can never
    push the plate off axis at mid widths; the copy lives in the right flank. */

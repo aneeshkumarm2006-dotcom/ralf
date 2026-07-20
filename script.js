@@ -433,15 +433,15 @@ if (announce && store.get('ralf-announce') !== '1') {
   }, { rootMargin: '-45% 0px -45% 0px' });
   panels.forEach((p) => railIO.observe(p));
 
-  // The rail itself is fixed to the viewport (see .rooms-rail in CSS), so it
-  // must only exist while the rooms index is under it: a zero-height root on
-  // the screen's midline flips .is-on exactly while the section straddles it.
+  // The rail is sticky within the rooms index (see .rooms-rail in CSS), so it
+  // only ever sits beside the images. Fade it in while the section is in view
+  // and out once it has scrolled well past, so the names arrive with the rooms.
   const wrap = document.querySelector('.rooms-rail');
   const index = document.querySelector('.rooms-index');
   if (wrap && index) {
     const onIO = new IntersectionObserver((entries) => {
       wrap.classList.toggle('is-on', entries[0].isIntersecting);
-    }, { rootMargin: '-50% 0px -50% 0px' });
+    }, { rootMargin: '-12% 0px -18% 0px' });
     onIO.observe(index);
   }
 })();
