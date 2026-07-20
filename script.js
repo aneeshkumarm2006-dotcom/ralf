@@ -432,6 +432,18 @@ if (announce && store.get('ralf-announce') !== '1') {
     entries.forEach((e) => { if (e.isIntersecting) setCurrent(e.target); });
   }, { rootMargin: '-45% 0px -45% 0px' });
   panels.forEach((p) => railIO.observe(p));
+
+  // The rail itself is fixed to the viewport (see .rooms-rail in CSS), so it
+  // must only exist while the rooms index is under it: a zero-height root on
+  // the screen's midline flips .is-on exactly while the section straddles it.
+  const wrap = document.querySelector('.rooms-rail');
+  const index = document.querySelector('.rooms-index');
+  if (wrap && index) {
+    const onIO = new IntersectionObserver((entries) => {
+      wrap.classList.toggle('is-on', entries[0].isIntersecting);
+    }, { rootMargin: '-50% 0px -50% 0px' });
+    onIO.observe(index);
+  }
 })();
 
 // ===== Rooms: the masthead steps aside while you read down the page =====
