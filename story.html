@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The House | The Ralf</title>
-  <meta name="description" content="The story of The Ralf, a guesthouse imagined as the house of Ralf, the doorman of 164 Notre-Dame Est in Old Montréal." />
+  <meta name="description" content="No one is quite sure when Ralf first arrived at 164 Notre-Dame Est. The story of The House, told one moment at a time, in Old Montréal." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" href="ralf-logo-wolf-black.png" />
   <link rel="apple-touch-icon" href="ralf-logo-wolf-black.png" />
-  <link rel="stylesheet" href="styles.css?v=6" />
+  <link rel="stylesheet" href="styles.css?v=9" />
   <!-- Arrived by clicking a word in the menu? Then the loader is a scrim over this page's own hero, not a cream slab. Must run before first paint. -->
   <script>try{if(sessionStorage.getItem('ralf:curtain')){sessionStorage.removeItem('ralf:curtain');document.documentElement.className+=' is-curtain'}}catch(e){}</script>
 </head>
@@ -49,61 +49,83 @@
     <div class="hero-overlay"></div>
     <div class="hero-banner">
       <h1 class="hero-lines">
-        <span class="ln"><span class="hero-title">Meet Ralf</span></span>
-        <span class="ln"><span class="hero-sub">164 Notre-Dame Est, Old Montréal</span></span>
+        <span class="ln"><span class="hero-title script">The House &middot; Meet Ralf</span></span>
+        <span class="ln"><span class="hero-sub strong">No one is quite sure when Ralf first arrived at 164 Notre-Dame Est.</span></span>
+        <span class="ln"><span class="hero-sub em">Some say he&rsquo;s always been here&hellip;</span></span>
       </h1>
     </div>
     <p class="hero-tag">The House</p>
     <a href="#story" class="hero-scroll">Discover more<span class="hero-scroll-arrow">&darr;</span></a>
   </section>
 
-  <!-- ============ EDITORIAL: few words, many photos ============ -->
-  <section class="ed" id="story">
-    <div class="ed-duo">
-      <div class="ed-duo-col">
-        <figure class="ed-ph reveal"><img src="ralf-bedroom-day.jpg" alt="A guest room overlooking Old Montréal" /></figure>
-        <figure class="ed-ph sq reveal"><img src="ralf-pillow.png" alt="Pillow detail at The Ralf" /></figure>
+  <!-- ============ EDITORIAL STORY ============ -->
+  <!-- One beat per scroll: short storytelling moments, each image revealing a
+       different part of the story. Sequence follows the design deck (slide 4). -->
+  <section class="story" id="story">
+
+    <!-- 01 · Every old house has a story -->
+    <div class="story-trio">
+      <p class="story-caption reveal">Every old house<br />has a story.</p>
+      <figure class="story-media reveal" style="aspect-ratio:965/879">
+        <img src="ralf-house-watercolor.jpg" alt="Watercolour illustration of the house at dusk, its windows lit from within" />
+      </figure>
+      <p class="story-caption reveal">This one remembers<br />them all.</p>
+    </div>
+
+    <!-- 02 · The doorman who is none of those things -->
+    <!-- full-bleed like the hero; the interim art is only 250px square, so it is
+         upscaled and softened by the veil until the final photograph arrives -->
+    <div class="story-full doorman align-left flush-below reveal">
+      <img src="ralf-doorman.jpg" alt="" aria-hidden="true" />
+      <div class="story-full-text">
+        <p>Ralf isn&rsquo;t the owner.<br />He isn&rsquo;t the concierge.<br />He isn&rsquo;t the doorman.</p>
+        <p>He&rsquo;s simply always been here.</p>
       </div>
-      <figure class="ed-ph tall reveal"><img src="ralf-arrival.jpg" alt="Arrival at The Ralf" /></figure>
     </div>
 
-    <div class="ed-statement reveal">
-      <p>No one is quite sure when Ralf first arrived at 164 Notre-Dame Est. Some say he's <em>always</em> been here.</p>
-    </div>
-
-    <div class="ed-wide reveal">
-      <img src="ralf-living.jpg" alt="The living and dining space of a Ralf suite" />
-    </div>
-
-    <div class="ed-statement reveal">
-      <p>We believe a guesthouse should feel like an <em>arrival</em>, and a <em>return</em>.</p>
-      <p>We keep fewer keys, so every guest is known, even if only for a few days.</p>
-      <p>We celebrate Old Montréal: its makers, its mornings, and its quiet corners.</p>
-    </div>
-
-    <div class="ed-duo">
-      <div class="ed-duo-col">
-        <figure class="ed-ph reveal"><img src="ralf-bath.jpg" alt="A Ralf guestroom bathroom" /></figure>
-        <figure class="ed-ph sq reveal"><img src="ralf-pillow.png" alt="Pillow detail at The Ralf" /></figure>
+    <!-- 03 · Not quite a hotel — photo owns its half of the band, flush to the page edge -->
+    <div class="story-split flush">
+      <figure class="story-media reveal"><img src="ralf-living.jpg" alt="The living and dining space of a Ralf suite, Old Montréal beyond the windows" /></figure>
+      <div class="story-caption reveal">
+        <p>Not quite a hotel.<br />Not quite home.<br />Somewhere in between.</p>
+        <img class="wolf-mark" src="ralf-logo-wolf-black.png" alt="" />
       </div>
-      <figure class="ed-ph tall reveal"><img src="ralf-room-view.jpg" alt="A guest room with a view" /></figure>
     </div>
 
-    <div class="ed-wide reveal">
-      <img src="ralf-hall.jpg" alt="The panelled corridor at The Ralf" />
+    <!-- 04 · Every guest known — full-bleed like the hero, the room carrying the
+         whole band and the line centred on it -->
+    <div class="story-full align-center known reveal">
+      <img src="ralf-bedroom-day.jpg" alt="" aria-hidden="true" />
+      <div class="story-full-text">
+        <p>We believe every guest should feel expected.<br />Known.<br />Even if only for a few days.</p>
+      </div>
     </div>
 
-    <div class="ed-statement reveal">
-      <p>Here, history isn't behind glass. It lives in the walls, the keys, and the way you're welcomed at the door.</p>
+    <!-- 05 · Ralf knows this city differently -->
+    <div class="story-pair wide media-right">
+      <div class="story-caption reveal">
+        <p>Ralf knows this city differently.<br />Not by landmarks.<br />By favourite tables.<br />Morning walks.<br />Quiet corners.</p>
+      </div>
+      <figure class="story-media land reveal"><img src="ralf-about-mission.jpg" alt="A vintage photograph of a Bank of Montreal branch, two old cars parked out front" /></figure>
     </div>
-  </section>
 
-  <section class="cta section" id="book">
-    <div class="reveal">
-      <p class="section-eyebrow">Your room in Old Montréal</p>
-      <h2 class="cta-title">Stay at The Ralf</h2>
-      <p class="cta-body">Ten rooms and a penthouse, each with a kitchenette and living space. Home away from home.</p>
-      <a href="rooms.html" class="btn-line light">Explore the Rooms</a>
+    <!-- 06 · During your stay -->
+    <div class="story-pair wide media-left">
+      <figure class="story-media land reveal"><img src="ralf-bedroom-evening.jpg" alt="A Ralf guest room at dusk, City Hall lit beyond the window" /></figure>
+      <div class="story-caption reveal">
+        <p>During your stay&hellip;</p>
+        <p>&hellip;find your favourite room,<br />&hellip;discover your favourite street,<br />&hellip;keep a secret or two.</p>
+      </div>
+    </div>
+
+    <!-- 07 · Finale — the invitation -->
+    <div class="story-full finale align-center reveal" id="book">
+      <img src="ralf-etching-dark.jpg" alt="" aria-hidden="true" />
+      <div class="story-full-text">
+        <p>Some stories are told.<br />The best ones are lived.</p>
+        <p>Stay at The Ralf.</p>
+        <a href="https://app.mews.com/distributor/6bb1de57-7e2d-4c1b-a060-b45000c2c7ea" target="_blank" rel="noopener" class="btn-line light">Plan Your Stay</a>
+      </div>
     </div>
   </section>
 

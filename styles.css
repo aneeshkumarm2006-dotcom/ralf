@@ -835,6 +835,228 @@ body.is-loaded .hero-scroll{opacity:.8;transition-delay:1.9s}
 .amenity-list li{break-inside:avoid;padding:.85rem 0;border-bottom:1px solid var(--line);color:var(--ink-soft);font-size:.98rem;line-height:1.55}
 @media(max-width:640px){.amenity-list{columns:1}}
 
+/* ============ THE HOUSE — editorial story (deck: slides 2-4) ============ */
+/* Script hero title — "The House · Meet Ralf". Extra side/bottom padding keeps
+   Pinyon's long swashes and descenders clear of the .ln overflow crop. */
+.hero-lines .hero-title.script{
+  font-family:var(--script);font-weight:400;letter-spacing:.01em;
+  font-size:clamp(2.6rem,6.5vw,5rem);line-height:1.25;
+  padding:0 .35em .12em;
+}
+.hero-lines .hero-sub.strong{font-weight:400;letter-spacing:.04em}
+.hero-lines .hero-sub.em{font-style:italic;opacity:.9;padding-top:.15rem;font-size:clamp(.95rem,1.8vw,1.3rem)}
+body.is-loaded .hero-lines .ln:nth-child(3)>span{transition-delay:1.25s}
+
+/* Short storytelling moments paired with imagery — each block is one "beat"
+   of the scroll story, alternating framed photos and full-bleed pauses. */
+.story{padding-top:clamp(5rem,10vw,9rem);overflow:hidden}
+
+/* caption · portrait image · caption (the "every old house" beat) */
+.story-trio{
+  display:grid;grid-template-columns:1fr minmax(0,clamp(19rem,38vw,33rem)) 1fr;
+  gap:clamp(1.5rem,4vw,3.5rem);align-items:center;
+  max-width:1320px;margin:0 auto clamp(5rem,10vw,9rem);
+  padding:0 clamp(1.5rem,5vw,4rem);
+}
+/* the watercolour is near-square, so height comes from scaling the whole plate
+   up rather than cropping its sides */
+.story-trio .story-media{aspect-ratio:965/879}
+.story-trio .story-caption:first-child{text-align:right;justify-self:end;align-self:start;margin-top:14%}
+.story-trio .story-caption:last-child{text-align:left;justify-self:start;align-self:end;margin-bottom:14%}
+
+/* photo beside a few words */
+.story-pair{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(2rem,6vw,6rem);align-items:center;
+  max-width:1080px;margin:0 auto clamp(5rem,10vw,9rem);
+  padding:0 clamp(1.5rem,5vw,4rem);
+}
+.story-pair .story-caption{max-width:26ch;justify-self:center;text-align:center}
+/* wider beat — the photograph carries the block and the words sit to one side */
+.story-pair.wide{max-width:1400px;gap:clamp(2rem,5vw,5rem);padding:0 clamp(1.5rem,4vw,3rem)}
+.story-pair.wide.media-left{grid-template-columns:1.55fr 1fr}
+.story-pair.wide.media-right{grid-template-columns:1fr 1.55fr}
+
+/* full-width split — the photograph covers its half of the band edge to edge,
+   a few words held on the other half (beats 03 and 04) */
+.story-split{
+  display:grid;grid-template-columns:1.1fr 1fr;align-items:stretch;
+  margin:0 0 clamp(5rem,10vw,9rem);
+}
+.story-split .story-media{height:100%;min-height:clamp(24rem,58vh,38rem);aspect-ratio:auto}
+.story-split .story-caption{
+  display:grid;align-content:center;justify-items:center;text-align:center;
+  padding:clamp(3rem,7vw,6rem) clamp(1.5rem,5vw,5rem);
+}
+.story-split .story-caption p{max-width:26ch}
+.story-split.dark{background:var(--espresso)}
+.story-split.dark .story-caption{color:var(--cream)}
+
+/* flush variant (beat 03) — the band runs the full height of the screen and sits
+   hard against the bands above and below. A thin margin of cream is left around the
+   photograph so it reads as a plate rather than a bleed. The media column is widened
+   a little to soften the crop. */
+.story-full.flush-below{margin-bottom:0}
+.story-split.flush{
+  grid-template-columns:1.35fr 1fr;
+  margin-bottom:0;
+  min-height:100vh;min-height:100svh;
+}
+.story-split.flush .story-media{
+  min-height:0;height:auto;
+  margin:clamp(.9rem,1.8vw,1.9rem);
+}
+
+.story-caption{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(1.3rem,2.3vw,1.8rem);line-height:1.7;color:var(--ink);
+}
+.story-caption p{margin-bottom:1.1rem}
+.story-caption p:last-child{margin-bottom:0}
+.story-caption .wolf-mark{height:1.7rem;width:auto;margin:1.5rem auto 0;opacity:.85;object-fit:contain}
+
+.story-media{overflow:hidden;margin:0}
+.story-media.tall{aspect-ratio:3/4}
+.story-media.land{aspect-ratio:4/3}
+.story-media img{transition:transform 1.6s var(--ease)}
+.story-media:hover img{transform:scale(1.04)}
+
+/* full-bleed pauses — a photo the width of the page with a line or two on it */
+.story-full{
+  position:relative;overflow:hidden;display:grid;align-items:center;
+  min-height:clamp(28rem,85vh,42rem);
+  color:#fff;background:var(--espresso);
+  margin-bottom:clamp(5rem,10vw,9rem);
+}
+.story-full>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.story-full::after{content:'';position:absolute;inset:0;background:rgba(20,13,8,.4)}
+.story-full.finale::after{background:rgba(20,13,8,.62)}
+.story-full.finale{margin-bottom:0}   /* last beat sits hard against the footer */
+.story-full.is-ph::after{background:rgba(20,13,8,.12)}   /* placeholder art is already quiet — barely veil it */
+/* doorman beat — interim art is small, so hold the crop high on the figure and
+   let a left-weighted scrim carry the copy instead of a flat veil */
+.story-full.doorman>img{object-position:50% 24%}   /* headroom above the cap; a wide band has to crop his legs */
+.story-full.doorman::after{
+  background:linear-gradient(90deg,rgba(20,13,8,.86) 0%,rgba(20,13,8,.7) 38%,rgba(20,13,8,.34) 70%,rgba(20,13,8,.28) 100%);
+}
+.story-full.is-ph .story-full-text{padding-bottom:clamp(8rem,16vh,10rem)}   /* keep the overlay copy clear of the bottom-anchored placeholder note */
+.story-full-text{
+  position:relative;z-index:2;
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(1.35rem,2.6vw,2rem);line-height:1.7;
+  padding:clamp(3rem,8vw,6rem) clamp(1.5rem,6vw,8rem);
+  text-shadow:0 1px 16px rgba(20,13,8,.5);
+}
+.story-full-text p{margin-bottom:1.2rem}
+.story-full-text p:last-child{margin-bottom:0}
+.story-full.align-left .story-full-text{max-width:36rem}
+/* framed variant — the artwork sits in a panel on the espresso band instead of
+   bleeding full width (used while an image only exists at small size) */
+.story-full.framed{grid-template-columns:1fr auto;align-items:center;background:#241a12}
+.story-full.framed::after{display:none}
+.story-full-frame{
+  position:relative;z-index:2;overflow:hidden;
+  width:clamp(17rem,40vw,31rem);aspect-ratio:1/1;
+  margin:clamp(2.5rem,7vw,5rem) clamp(1.5rem,4vw,4rem) clamp(2.5rem,7vw,5rem) 0;
+}
+.story-full-frame img{transition:transform 1.6s var(--ease)}
+.story-full-frame:hover img{transform:scale(1.05)}
+.story-full.align-center{text-align:center}
+.story-full.align-center .story-full-text{margin:0 auto;max-width:44rem}
+/* beat 04 — the line sits over the middle of the room, where the window is the
+   brightest part of the frame, so the veil is weighted to the centre */
+.story-full.known .story-full-text{max-width:38rem}
+.story-full.known::after{
+  background:radial-gradient(ellipse 60% 70% at 50% 50%,rgba(20,13,8,.72) 0%,rgba(20,13,8,.6) 45%,rgba(20,13,8,.38) 100%);
+}
+/* copy held on the right — scrim weighted the same way so the words sit on the
+   quiet wall of the room rather than over the window (beat 04) */
+.story-full.align-right{justify-items:end;text-align:center}
+.story-full.align-right .story-full-text{max-width:34rem}
+.story-full.align-right::after{
+  background:linear-gradient(270deg,rgba(20,13,8,.82) 0%,rgba(20,13,8,.62) 34%,rgba(20,13,8,.3) 66%,rgba(20,13,8,.24) 100%);
+}
+.story-full .btn-line.light{margin-top:2.4rem;font-family:var(--sans)}
+
+/* ============ IMAGE PLACEHOLDER (final art still to come) ============ */
+.ph-media{
+  position:relative;width:100%;height:100%;
+  background:var(--cream-2);border:1px dashed rgba(29,30,25,.35);
+  display:grid;place-content:center;justify-items:center;gap:1rem;
+  text-align:center;padding:2rem;
+}
+/* inside a full-bleed block the overlay copy owns the middle — the placeholder
+   note keeps to the bottom edge so the two never collide at any width */
+.ph-media.full{position:absolute;inset:0;border-width:0;place-content:end center;padding-bottom:1.6rem}
+.ph-media .ph-mark{width:auto;height:2.8rem;opacity:.25;object-fit:contain}
+.ph-label{
+  font-family:var(--sans);font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--ink-soft);line-height:2.1;
+}
+.ph-label em{
+  display:block;font-family:var(--serif);font-style:italic;text-transform:none;
+  letter-spacing:.04em;font-size:1rem;opacity:.9;
+}
+.ph-media.dark{background:#241a12;border-color:rgba(241,234,214,.3)}
+.ph-media.dark .ph-label{color:var(--sand)}
+
+/* ============ ABOUT — belief intro, values, closing (deck: slides 6-9) ============ */
+.belief{max-width:40rem;margin:2.2rem auto 0;color:var(--ink-soft);font-size:1.08rem;line-height:1.95}
+.belief p{margin-bottom:1.3rem}
+.belief p:last-child{margin-bottom:0}
+.belief-tag{font-family:var(--serif);font-style:italic;font-size:1.35rem;line-height:1.6;color:var(--ink)}
+
+.values-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:clamp(1.8rem,3.5vw,3rem);max-width:76rem;margin:3.2rem auto 0;
+}
+.value h3{
+  font-family:var(--sans);font-weight:400;letter-spacing:.26em;text-transform:uppercase;
+  font-size:.82rem;color:var(--ink);margin-bottom:1rem;
+}
+.value p{font-family:var(--serif);font-style:italic;font-size:1.1rem;line-height:1.75;color:var(--ink-soft)}
+.about-close{padding-top:0}
+
+@media(max-width:1100px){
+  .values-grid{grid-template-columns:repeat(3,1fr);max-width:48rem}
+}
+@media(max-width:760px){
+  .story-trio{grid-template-columns:1fr;text-align:center}
+  .story-trio .story-caption:first-child,
+  .story-trio .story-caption:last-child{text-align:center;justify-self:center;align-self:auto;margin:0 auto}
+  .story-trio .story-media{width:100%;max-width:22rem;margin:0 auto}
+  .story-pair{grid-template-columns:1fr;gap:1.8rem}
+  .story-pair.wide.media-left,
+  .story-pair.wide.media-right{grid-template-columns:1fr}
+  .story-pair .story-caption{max-width:none}
+  .story-split{grid-template-columns:1fr}
+  .story-split .story-media{min-height:0;aspect-ratio:4/3}
+  .story-split .story-caption{padding:2.4rem 1.5rem 0}
+  .story-split.dark .story-caption{padding-bottom:3rem}
+  /* a full-height band is only worth it side by side — stack it like the rest */
+  .story-split.flush{grid-template-columns:1fr;min-height:0;margin-bottom:clamp(5rem,10vw,9rem)}
+  .story-split.flush .story-media{height:auto;aspect-ratio:4/3}
+  .story-full{min-height:24rem}
+  /* narrow band shows the whole frame — scrim from the bottom up instead */
+  .story-full.doorman::after{
+    background:linear-gradient(180deg,rgba(20,13,8,.35) 0%,rgba(20,13,8,.6) 45%,rgba(20,13,8,.85) 100%);
+  }
+  .story-full.doorman .story-full-text{align-self:end}
+  /* same on a narrow band for the right-aligned beat — the copy can't hold a
+     side column, so it drops to the foot over a bottom-up scrim */
+  .story-full.align-right{justify-items:stretch}
+  .story-full.align-right .story-full-text{max-width:none;align-self:end}
+  .story-full.align-right::after{
+    background:linear-gradient(180deg,rgba(20,13,8,.3) 0%,rgba(20,13,8,.55) 45%,rgba(20,13,8,.84) 100%);
+  }
+  .story-full.framed{grid-template-columns:1fr}
+  .story-full-frame{margin:0 auto clamp(2.5rem,8vw,4rem);width:min(70%,18rem)}
+  .story-full.framed .story-full-text{padding-bottom:1.5rem}
+}
+@media(max-width:640px){
+  .values-grid{grid-template-columns:1fr;max-width:26rem;gap:2.2rem}
+}
+
 /* ---- Room amenities band (rooms page) — serif/script title over a bulleted ledger ---- */
 .room-amenities{text-align:center}
 .ra-title{display:inline-block;line-height:.9;font-weight:300}
