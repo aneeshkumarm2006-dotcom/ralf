@@ -240,6 +240,36 @@ if (document.documentElement.classList.contains('is-arch')
   });
 }
 
+// Arch hand-off into Rooms — the espresso veil collapses to the reference arch;
+// rooms.html (is-arch) then grows it back open, so the two arches meet across the
+// cut. Shared by the MENU's "Rooms" word and the homepage "See our rooms" button.
+// The caller owns the reduced-motion + storage guards. Returns the pending
+// navigation timeout so a cancel (e.g. closing the menu) can clear it.
+const archCollapseToRooms = (href) => {
+  const veil = ARCH.build();
+  veil.style.transform = `scale(${veil.dataset.max})`;   // start wide: the hole clears the frame
+  document.body.appendChild(veil);
+  requestAnimationFrame(() => {
+    veil.style.transition = 'transform .6s var(--ease)';
+    veil.style.transform = 'scale(1)';                   // collapse to the reference arch
+  });
+  return setTimeout(() => { location.href = href; }, 640);
+};
+
+// The homepage hero "See our rooms" button gets the same arch transition as the
+// menu's Rooms word. There's no menu photo to hold here, so the arch simply
+// collapses over the hero and rooms.html grows it back open on arrival.
+const heroRooms = document.querySelector('.hero-rooms');
+if (heroRooms) {
+  heroRooms.addEventListener('click', (e) => {
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;  // straight there
+    if (!store.set('ralf:curtain', '1')) return;                                // storage blocked: let the link go
+    e.preventDefault();
+    archCollapseToRooms(heroRooms.getAttribute('href') || 'rooms.html');
+  });
+}
+
 const toggle = document.getElementById('navToggle');
 const nav = document.getElementById('primaryNav');
 if (toggle && nav) {
@@ -360,14 +390,7 @@ if (toggle && nav) {
       // while the words fade and the scrim lifts. rooms.html (is-arch) mounts the veil
       // at that exact small arch and grows it — so the two arches meet across the cut.
       nav.classList.add('is-arching');
-      const veil = ARCH.build();
-      veil.style.transform = `scale(${veil.dataset.max})`;   // start wide: the hole clears the frame
-      document.body.appendChild(veil);
-      requestAnimationFrame(() => {
-        veil.style.transition = 'transform .6s var(--ease)';
-        veil.style.transform = 'scale(1)';                   // collapse to the reference arch
-      });
-      leaving = setTimeout(() => { location.href = href; }, 640);
+      leaving = archCollapseToRooms(href);
     } else {
       nav.classList.add('is-leaving');
       leaving = setTimeout(() => { location.href = href; }, 380);

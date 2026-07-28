@@ -348,6 +348,10 @@ body.is-loaded .hero-tag{opacity:.92;transform:none;transition-delay:1.45s}
 .cta .section-eyebrow{color:var(--sand)}
 .cta-title{font-family:var(--serif);font-weight:300;font-size:clamp(2.4rem,5vw,4rem);margin-bottom:1rem}
 .cta-body{max-width:38ch;margin:0 auto 2.4rem;opacity:.85}
+/* room "Book with us" CTA: btn-line is inline-block so its top margin adds to the
+   body's bottom margin — pull them together so the button sits closer to the copy */
+.cta-book .cta-body{margin-bottom:1.6rem}
+.cta-book .btn-line{margin-top:0}
 .cta-form{display:flex;max-width:30rem;margin:0 auto;gap:.6rem;flex-wrap:wrap;justify-content:center}
 .cta-form input{
   flex:1;min-width:220px;background:transparent;border:1px solid rgba(241,234,214,.4);
