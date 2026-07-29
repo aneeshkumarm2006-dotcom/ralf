@@ -178,6 +178,7 @@ const HERO = {
   'story.html': 'ralf-bedroom-dusk.jpg',
   'rooms.html': 'V2_Guestroom_day.png',
   'presents.html': 'presents.jpg',
+  'contact.html': 'ralf-arrival.jpg',
 };
 const MENU_IMG = 'ralf-menu.png';   // idle, nothing hovered
 
@@ -411,16 +412,22 @@ if (toggle && nav) {
   });
 }
 
-// ===== Newsletter form =====
-const form = document.getElementById('newsletterForm');
-const note = document.getElementById('formNote');
-if (form && note) {
+// ===== Forms (newsletter sign-up, contact) =====
+// PRE-LAUNCH: neither of these posts anywhere. They clear and confirm so the
+// pages can be demoed; both need a real endpoint before the site goes live.
+[['newsletterForm', 'formNote'], ['contactForm', 'contactNote']].forEach(([formId, noteId]) => {
+  const form = document.getElementById(formId);
+  const note = document.getElementById(noteId);
+  if (!form || !note) return;
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+    // the contact form is novalidate so the browser doesn't fight the styling —
+    // check it here instead, or an empty message would read back as "sent"
+    if (!form.checkValidity()) { form.reportValidity(); return; }
     form.reset();
     note.hidden = false;
   });
-}
+});
 
 // ===== Opening announcement pop-up (once per session) =====
 const announce = document.getElementById('announce');
