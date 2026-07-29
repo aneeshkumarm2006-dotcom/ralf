@@ -975,9 +975,9 @@ body.is-loaded .hero-lines .ln:nth-child(3)>span{transition-delay:1.25s}
 .story-full.finale::after{background:rgba(20,13,8,.62)}
 .story-full.finale{margin-bottom:0}   /* last beat sits hard against the footer */
 .story-full.is-ph::after{background:rgba(20,13,8,.12)}   /* placeholder art is already quiet — barely veil it */
-/* doorman beat — interim art is small, so hold the crop high on the figure and
-   let a left-weighted scrim carry the copy instead of a flat veil */
-.story-full.doorman>img{object-position:50% 24%}   /* headroom above the cap; a wide band has to crop his legs */
+/* doorman beat — a left-weighted scrim carries the copy instead of a flat veil;
+   the figure sits right of centre in the frame, clear of the darkest edge */
+.story-full.doorman>img{object-position:50% 44%}   /* headroom above the cap; a wide band has to crop his legs */
 .story-full.doorman::after{
   background:linear-gradient(90deg,rgba(20,13,8,.86) 0%,rgba(20,13,8,.7) 38%,rgba(20,13,8,.34) 70%,rgba(20,13,8,.28) 100%);
 }
