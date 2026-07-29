@@ -1141,13 +1141,56 @@ body.is-loaded .hero-lines .ln:nth-child(3)>span{transition-delay:1.25s}
 .contact-lines a{font-size:1.15rem;border-bottom:1px solid transparent;transition:border-color .4s var(--ease)}
 .contact-lines a:hover{border-bottom-color:var(--line)}
 
-/* The map is a keyless Google embed, which arrives bright and blue-grey. The
-   filter warms it into the heirloom palette so it reads as part of the page
-   rather than a window cut into it. */
-.contact-map{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--cream-2)}
-.contact-map iframe{
-  width:100%;height:100%;border:0;display:block;
-  filter:sepia(.42) saturate(.74) hue-rotate(-8deg) brightness(1.02) contrast(.96);
+/* The map plate. 4:3 is load-bearing and must stay 4:3 at every width: the SVG
+   is generated at exactly that ratio, so `cover` neither crops nor letterboxes
+   it, and the pin's percentage position lands on the real address. Change one
+   without the other and the marker drifts off the door. */
+/* container-type lets the overlaid labels size in cqw, so they scale with the
+   plate exactly as drawn type would instead of drifting at other widths */
+.contact-map{
+  position:relative;display:block;aspect-ratio:4/3;overflow:hidden;
+  background:var(--cream-2);container-type:inline-size;
+}
+.map-plate{width:100%;height:100%;object-fit:cover;display:block}
+
+/* place names, set like the rest of the house's signage */
+.map-label{
+  position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);
+  font-family:var(--display);text-transform:uppercase;white-space:nowrap;
+  color:var(--moss);pointer-events:none;line-height:1;
+  /* a soft halo in the map's land colour, so a name crossing a street stays readable */
+  text-shadow:0 0 5px #eee0be,0 0 5px #eee0be,0 0 9px #eee0be;
+}
+.map-label.lg{font-size:2.9cqw;letter-spacing:.3em}
+.map-label.md{font-size:2.1cqw;letter-spacing:.26em}
+.map-label.sm{font-size:1.85cqw;letter-spacing:.24em;opacity:.85}
+
+/* The marker: a heirloom disc carrying the wolf, on a tail whose point is the
+   anchor. translate(-50%,-100%) puts the bottom of that tail on the coordinate. */
+/* --pin-x/--pin-y come from the map generator and are set on .contact-map in
+   the markup, so the two numbers sit next to the plate they belong to. */
+.map-pin{
+  position:absolute;left:var(--pin-x,50%);top:var(--pin-y,50%);
+  transform:translate(-50%,-100%);
+  display:flex;flex-direction:column;align-items:center;pointer-events:none;
+}
+.map-pin-badge{
+  display:grid;place-items:center;
+  width:clamp(2.9rem,4.6vw,3.8rem);aspect-ratio:1;border-radius:50%;
+  background:var(--espresso);box-shadow:0 7px 22px rgba(40,22,14,.3);
+  transition:transform .5s var(--ease);
+}
+.map-pin-badge img{width:60%;height:auto;object-fit:contain}
+.map-pin::after{                        /* the tail, as the second flex child */
+  content:'';width:0;height:0;
+  border:.44rem solid transparent;border-bottom:0;border-top-color:var(--espresso);
+}
+.contact-map:hover .map-pin-badge{transform:translateY(-4px)}
+/* ODbL asks that the source be credited wherever the map is shown */
+.map-credit{
+  position:absolute;right:.7rem;bottom:.55rem;
+  font-family:var(--display);font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);opacity:.55;
 }
 
 /* ---- the form ---- */
@@ -1206,7 +1249,7 @@ body.is-loaded .hero-lines .ln:nth-child(3)>span{transition-delay:1.25s}
 
 @media(max-width:900px){
   .contact-grid{grid-template-columns:1fr}
-  .contact-map{aspect-ratio:3/2}
+  /* aspect-ratio deliberately NOT changed here — see .contact-map above */
   .other-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:620px){
