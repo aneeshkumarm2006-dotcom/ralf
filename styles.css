@@ -53,6 +53,9 @@
   --script:'Policy Gothic','Editorial New',Georgia,serif;
   --editorial:'Editorial New',Georgia,serif;
   --policy:'Policy Gothic','Editorial New',Georgia,serif;
+  /* hero-only override: the two landing-page hero lines run on a plain
+     grotesque instead of either brand face. Used nowhere else. */
+  --hero-sans:'Helvetica Neue',Helvetica,Arial,sans-serif;
   --ease:cubic-bezier(.6,.01,.15,1);
 }
 
@@ -292,11 +295,11 @@ body.is-loaded .hero-bg{transform:scale(1)}
 .hero-lines .ln>span{display:block;transform:translateY(130%);transition:transform 1.1s var(--ease)}
 body.is-loaded .hero-lines .ln>span{transform:none;transition-delay:.9s}
 body.is-loaded .hero-lines .ln:nth-child(2)>span{transition-delay:1.1s}
-/* "Bienvenue" set in Policy Gothic — unicase caps at the old 12rem cap would
-   swallow the frame, so the ceiling drops and the letters get room to breathe. */
-.hero-welcome{font-size:clamp(2.7rem,9vw,7.6rem);line-height:1.02;letter-spacing:.05em;font-weight:400}
-/* the tagline underneath is a sentence, not a title — it stays on the text face */
-.hero-subline{font-family:var(--serif);font-size:clamp(1rem,2vw,1.45rem);line-height:1.75;letter-spacing:.07em;margin-top:clamp(.9rem,2.2vw,1.6rem)}
+/* The two hero lines are the one exception to the two-face rule: both are set
+   in a plain grotesque rather than Policy Gothic / Editorial New. Unicase caps
+   at the old 12rem cap would swallow the frame, so the ceiling stays low. */
+.hero-welcome{font-family:var(--hero-sans);font-size:clamp(2.7rem,9vw,7.6rem);line-height:1.02;letter-spacing:.05em;font-weight:400}
+.hero-subline{font-family:var(--hero-sans);font-size:clamp(1rem,2vw,1.45rem);line-height:1.75;letter-spacing:.07em;margin-top:clamp(.9rem,2.2vw,1.6rem)}
 /* La Fantaisie–style chip CTA: chalk fill, heirloom outline, squared corners */
 .hero-rooms{
   display:inline-block;margin-top:clamp(1.6rem,3.5vw,2.6rem);
