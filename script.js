@@ -174,11 +174,11 @@ if (well) {
 
 // where each word leads, and the hero it lands on. the only copy of this map.
 const HERO = {
-  'about.html': 'ralf-house.png',
+  'about.html': 'The%20Bar_Lobby%20at%20The%20Ralf%20.png',
   'story.html': 'ralf-bar-lobby.png',
   'rooms.html': 'V2_Guestroom_day.png',
   'presents.html': 'presents.jpg',
-  'contact.html': 'ralf-arrival.jpg',
+  'contact.html': 'ralf-reception.png',
 };
 const MENU_IMG = 'ralf-menu.png';   // idle, nothing hovered
 
@@ -311,8 +311,8 @@ if (toggle && nav) {
   const words = [...nav.querySelectorAll(':scope > a')].filter((a) => !a.classList.contains('btn-book'));
   words.forEach((a) => a.classList.add('pnav-word'));
 
-  // a link we can take over: one of ours, opening in this tab. leaves #shop,
-  // EN/FR and the Mews booking tab exactly as they were.
+  // a link we can take over: one of ours, opening in this tab. leaves EN/FR
+  // and the Mews booking tab exactly as they were.
   const isOurs = (a) => !a.target && !!HERO[a.getAttribute('href') || ''];
 
   // --- hover: swap the photo, step the other words back, warm the next page
