@@ -175,7 +175,7 @@ if (well) {
 // where each word leads, and the hero it lands on. the only copy of this map.
 const HERO = {
   'about.html': 'ralf-house.png',
-  'story.html': 'ralf-bedroom-dusk.jpg',
+  'story.html': 'ralf-bar-lobby.png',
   'rooms.html': 'V2_Guestroom_day.png',
   'presents.html': 'presents.jpg',
   'contact.html': 'ralf-arrival.jpg',

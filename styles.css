@@ -1,7 +1,7 @@
 /* ============ CUSTOM FONTS ============ */
-/* The house runs on two faces only, both supplied by the client (Drive: FONTS).
+/* Two client faces (Drive: FONTS) plus Cormorant Garamond for the large titles.
    Files live in ./fonts — .woff2 first, original .otf/.ttf as the fallback.
-   Both cover full Latin + French accents, so accented copy needs no substitute.
+   All cover full Latin + French accents, so accented copy needs no substitute.
 
    Editorial New ships as a single Ultralight (weight 200). The 200-400 range
    below claims that span for this one face, so the many `font-weight:300` and
@@ -25,6 +25,27 @@
   font-style:normal;
   font-display:swap;
 }
+/* Cormorant Garamond — the large-title face (page titles and section titles).
+   Self-hosted like the other two: no Google Fonts request at runtime. One
+   variable file per subset serves the whole 300-700 range, so the range is
+   claimed below and titles ask for 300 (Light) — the airiest cut, closest in
+   colour to Editorial New Ultralight beside it. */
+@font-face{
+  font-family:'Cormorant Garamond';
+  src:url('fonts/CormorantGaramond-latin.woff2') format('woff2');
+  font-weight:300 700;
+  font-style:normal;
+  font-display:swap;
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:'Cormorant Garamond';
+  src:url('fonts/CormorantGaramond-latin-ext.woff2') format('woff2');
+  font-weight:300 700;
+  font-style:normal;
+  font-display:swap;
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
 
 /* ============ TOKENS ============ */
 /* Palette is heirloom (#28160e) on its own paper (rgb 249 238 215). Everything
@@ -38,15 +59,21 @@
   --moss:#7a5842;        /* quiet accent for eyebrows + labels (5.5:1 on paper) */
   --sand:#d8c39a;        /* light accent on the dark panels */
   --line:rgba(40,22,14,.18);
-  /* TYPE ROLES — two faces, two jobs.
-     --display  Policy Gothic: every title and every small tracked label. The
-                signage voice: page titles, section titles, eyebrows, buttons,
-                nav words, footer headings.
+  /* TYPE ROLES — three faces, three jobs.
+     --title    Cormorant Garamond: the large titles only — page (hero) titles
+                and section titles. Set Light (300); it is a delicate, small-on-
+                the-body serif, so every clamp it took over was raised ~35% to
+                hold the same optical size Policy Gothic had, and the positive
+                tracking was pulled back — a Garamond wants no extra air.
+     --display  Policy Gothic: the remaining titles and every small tracked
+                label. The signage voice: eyebrows, buttons, nav words, footer
+                headings, tile and room headings, the newsletter call.
      --serif / --sans  Editorial New: everything you actually read. Body copy,
                 ledes, pull quotes, sub-heads, prices. Both tokens point at the
                 one text face so existing rules keep working unchanged.
      Editorial New has no italic — `font-style:italic` anywhere would be a
      sheared fake, so emphasis is carried by colour and tracking instead. */
+  --title:'Cormorant Garamond','Editorial New',Georgia,serif;
   --display:'Policy Gothic','Editorial New',Georgia,serif;
   --serif:'Editorial New',Georgia,serif;
   --sans:'Editorial New',Georgia,serif;
@@ -80,16 +107,17 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 a{color:inherit;text-decoration:none}
 
 .section{padding:clamp(5rem,11vw,11rem) clamp(1.5rem,6vw,8rem)}
-/* Titles are Policy Gothic. Its unicase caps read far larger than a lowercase
-   serif at the same px, so every title in this sheet sits on a smaller clamp
-   than it did, with positive tracking — the rough drawing needs air between
-   letters, and negative tracking would jam them together. */
+/* Smaller titles and labels stay on Policy Gothic. Its unicase caps read far
+   larger than a lowercase serif at the same px, so those clamps sit low, with
+   positive tracking — the rough drawing needs air between letters, and negative
+   tracking would jam them together. The large titles run on Cormorant Garamond
+   instead and take the opposite treatment: a bigger clamp, tracking near zero. */
 .display-line{
-  font-family:var(--display);
-  font-weight:400;
-  font-size:clamp(1.7rem,3.4vw,3.1rem);
-  line-height:1.22;
-  letter-spacing:.03em;
+  font-family:var(--title);
+  font-weight:300;
+  font-size:clamp(2.3rem,4.6vw,4.2rem);
+  line-height:1.18;
+  letter-spacing:.01em;
   max-width:18ch;
 }
 .section-eyebrow{
@@ -351,7 +379,7 @@ body.is-loaded .hero-tag{opacity:.92;transform:none;transition-delay:1.45s}
 .feature-media{aspect-ratio:4/5;overflow:hidden}
 .feature-media img{transition:transform 1.4s var(--ease)}
 .feature-media:hover img{transform:scale(1.05)}
-.feature-title{font-family:var(--display);font-weight:400;font-size:clamp(1.75rem,3.3vw,2.8rem);line-height:1.2;letter-spacing:.03em;margin-bottom:1.4rem}
+.feature-title{font-family:var(--title);font-weight:300;font-size:clamp(2.35rem,4.4vw,3.8rem);line-height:1.16;letter-spacing:.01em;margin-bottom:1.4rem}
 .feature-body{max-width:34ch;color:var(--ink-soft);font-size:1.05rem}
 
 /* ============ DINING ============ */
@@ -381,7 +409,10 @@ body.is-loaded .hero-tag{opacity:.92;transform:none;transition-delay:1.45s}
 /* ============ CTA ============ */
 .cta{background:var(--espresso);color:var(--cream);text-align:center}
 .cta .section-eyebrow{color:var(--sand)}
-.cta-title{font-family:var(--display);font-weight:400;font-size:clamp(1.85rem,3.7vw,3rem);line-height:1.2;letter-spacing:.03em;margin-bottom:1rem}
+/* "Be first through the door." stays on Policy Gothic — it is the newsletter
+   call, not a page or section title — but set a step down from the Cormorant
+   titles above it so it reads as the quieter invitation it is. */
+.cta-title{font-family:var(--display);font-weight:400;font-size:clamp(1.35rem,2.5vw,2rem);line-height:1.22;letter-spacing:.03em;margin-bottom:1rem}
 .cta-body{max-width:38ch;margin:0 auto 2.4rem;opacity:.85}
 /* room "Book with us" CTA: btn-line is inline-block so its top margin adds to the
    body's bottom margin — pull them together so the button sits closer to the copy */
@@ -407,7 +438,10 @@ body.is-loaded .hero-tag{opacity:.92;transform:none;transition-delay:1.45s}
 .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:3rem;padding-bottom:4rem;border-bottom:1px solid var(--line)}
 .footer-brand .ralf-dog{color:var(--ink)}
 .footer-address{margin:1.4rem 0 .8rem;color:var(--ink-soft);line-height:1.7}
-.footer-phone{font-family:var(--serif);font-size:1.3rem}
+/* the phone reads as one more line of the address block — same face, size and
+   soft ink as the footer copy, so nothing in here looks like a second font */
+.footer-phone{font-family:var(--serif);font-size:1rem;color:var(--ink-soft);transition:color .3s var(--ease)}
+.footer-phone:hover{color:var(--ink)}
 .footer-col h4{font-family:var(--display);text-transform:uppercase;letter-spacing:.2em;font-size:.76rem;color:var(--moss);margin-bottom:1.4rem;font-weight:400}
 .footer-col a{display:block;margin-bottom:.85rem;color:var(--ink-soft);font-size:.95rem;transition:color .3s var(--ease)}
 .footer-col a:hover{color:var(--ink)}
@@ -501,9 +535,13 @@ body.nav-open .site-header{transform:none}
 /* ============ SUBPAGE HERO ============ */
 /* Subpages use the landing hero verbatim (.hero / .hero-bg / .hero-banner);
    only the banner's first line carries a page title instead of the tagline. */
+/* The .ln wrapper crops with overflow:hidden for the reveal, and Cormorant has
+   real descenders where Policy Gothic had none — hence the looser line-height
+   and the sliver of bottom padding, so a "y" is never sheared off. */
 .hero-lines .hero-title{
-  font-family:var(--display);font-weight:400;letter-spacing:.05em;
-  font-size:clamp(1.9rem,4.2vw,3.3rem);line-height:1.3;
+  font-family:var(--title);font-weight:300;letter-spacing:.015em;
+  font-size:clamp(2.6rem,5.6vw,4.5rem);line-height:1.22;
+  padding-bottom:.08em;
 }
 .hero-lines .hero-sub{font-family:var(--serif);padding-top:.7rem;font-size:clamp(1.05rem,2.1vw,1.6rem);line-height:1.9;letter-spacing:.06em}
 
@@ -879,14 +917,14 @@ body.is-loaded .hero-scroll{opacity:.8;transition-delay:1.9s}
 @media(max-width:640px){.amenity-list{columns:1}}
 
 /* ============ THE HOUSE — editorial story (deck: slides 2-4) ============ */
-/* The .script variant used to be Pinyon; with the house down to two faces it is
-   Policy Gothic set larger than a plain hero title — the flourish is now the
-   drawn letterform itself. The side padding stays: it keeps the widest caps
-   clear of the .ln overflow crop. */
+/* The .script variant used to be Pinyon, then Policy Gothic; it now takes the
+   same Cormorant Garamond as every other page title, one step larger — this is
+   the longest title on the site and the story page opens on it. The side
+   padding stays: it keeps the widest letters clear of the .ln overflow crop. */
 .hero-lines .hero-title.script{
-  font-family:var(--display);font-weight:400;letter-spacing:.06em;
-  font-size:clamp(2.1rem,4.8vw,3.7rem);line-height:1.3;
-  padding:0 .35em .12em;
+  font-family:var(--title);font-weight:300;letter-spacing:.02em;
+  font-size:clamp(2.8rem,6.2vw,5rem);line-height:1.22;
+  padding:0 .35em .14em;
 }
 .hero-lines .hero-sub.strong{font-weight:400;letter-spacing:.04em}
 .hero-lines .hero-sub.em{opacity:.9;letter-spacing:.09em;padding-top:.15rem;font-size:clamp(.95rem,1.8vw,1.3rem)}
@@ -1137,9 +1175,11 @@ body.is-loaded .hero-lines .ln:nth-child(3)>span{transition-delay:1.25s}
 .contact .btn-frame{margin-top:2rem}
 .contact-lines{list-style:none;margin-top:2.9rem;display:grid;gap:1.4rem}
 .contact-lines li{display:grid;gap:.3rem;justify-items:start}
+/* Set in Editorial New, not Policy Gothic, so the whole column reads in one
+   voice — only the Get directions button keeps the display face */
 .contact-key{
-  font-family:var(--display);text-transform:uppercase;letter-spacing:.26em;
-  font-size:.7rem;color:var(--moss);
+  font-family:var(--serif);text-transform:uppercase;letter-spacing:.26em;
+  font-size:.78rem;color:var(--moss);
 }
 .contact-lines a{font-size:1.15rem;border-bottom:1px solid transparent;transition:border-color .4s var(--ease)}
 .contact-lines a:hover{border-bottom-color:var(--line)}
