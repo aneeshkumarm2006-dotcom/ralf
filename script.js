@@ -177,10 +177,10 @@ const HERO = {
   'about.html': 'The%20Bar_Lobby%20at%20The%20Ralf%20.png',
   'story.html': 'ralf-bar-lobby.png',
   'rooms.html': 'V2_Guestroom_day.png',
-  'presents.html': 'presents.jpg',
+  'presents.html': 'The%20Bar%20at%20The%20Ralf.png',
   'contact.html': 'ralf-reception.png',
 };
-const MENU_IMG = 'ralf-menu.png';   // idle, nothing hovered
+const MENU_IMG = 'The%20Bar%20at%20The%20Ralf.png';   // idle, nothing hovered
 
 // sessionStorage throws outright in some privacy modes — never let it kill a link
 const store = {

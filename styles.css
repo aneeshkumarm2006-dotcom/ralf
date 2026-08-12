@@ -775,8 +775,9 @@ body.nav-open .site-header{transform:none}
 
 /* ============ WELLNESS PILLAR TAGLINE ============ */
 /* pull-line under a split. Editorial New has no italic, so the lift comes from
-   size + tracking + the accent colour rather than a sheared fake. */
-.split-tag{font-family:var(--serif);font-size:1.3rem;letter-spacing:.02em;color:var(--moss);margin-top:1.1rem}
+   tracking and the accent colour rather than a sheared fake — it sits at the
+   same size as the paragraph above it, so the pair reads as one statement. */
+.split-tag{font-family:var(--serif);font-size:inherit;letter-spacing:.02em;color:var(--moss);margin-top:1.1rem}
 
 /* ============ EDITORIAL STORY (few words, many photos) ============ */
 .ed{padding:clamp(5rem,10vw,9rem) clamp(1.5rem,6vw,8rem)}
