@@ -473,6 +473,9 @@ html.is-loading body{overflow:hidden}
 /* exit — each bar lifts up (staggered), carrying its slice of the logo with it */
 body.is-loaded .c-loader_bg .bar{transform:translateY(-100%);transition-delay:calc(var(--i)*.05s)}
 body.is-loaded .c-loader{transition:visibility 0s 1s;visibility:hidden}
+/* Home page: the logo still shows, but the whole cream screen lifts as ONE solid
+   panel (no staggered strip-tear) — the same simple upward move as the House curtain */
+body.home.is-loaded .c-loader_bg .bar{transition-delay:0s}
 
 /* ============ CURTAIN (arriving from the menu) ============ */
 /* The menu you just clicked was this page's hero photo under a .72 scrim. So
@@ -866,9 +869,14 @@ body.nav-open .site-header{transform:none}
   .header-brand-row{padding:.95rem 1.1rem .85rem}
   .brand-name{height:1.95rem}
   .brand .ralf-dog{height:2.15rem}
-  .brand-lockup{gap:.6rem}
-  .brand-lockup .brand-name{height:1.85rem}
-  .brand-lockup .ralf-dog{height:1.65rem}
+  .brand-lockup{gap:.55rem}
+  .brand-lockup .brand-name{height:1.7rem}
+  .brand-lockup .ralf-dog{height:1.5rem}
+  /* shrink the MENU chip so it clears the centred logo instead of crowding it */
+  .nav-toggle{left:.9rem}
+  .nav-toggle.menu-btn{padding:.48rem .7rem;gap:.45rem}
+  .menu-btn .menu-btn-circle span{width:14px}
+  .menu-btn .menu-btn-label{font-size:.7rem;letter-spacing:.18em}
   .pnav-wolf{height:1.6rem}
   .pnav-text{height:1.2rem}
   .section{padding:clamp(3.25rem,13vw,5.5rem) 1.3rem}

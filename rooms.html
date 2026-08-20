@@ -9,7 +9,7 @@
   <link rel="preload" as="font" type="font/woff2" href="fonts/PolicyGothic.woff2" crossorigin />
   <link rel="icon" type="image/png" href="ralf-logo-wolf-black.png" />
   <link rel="apple-touch-icon" href="ralf-logo-wolf-black.png" />
-  <link rel="stylesheet" href="styles.css?v=23" />
+  <link rel="stylesheet" href="styles.css?v=24" />
   <!-- Arrived by clicking Rooms in the menu? The menu just collapsed into the reference arch; open this page's hero from that same arch and grow it. Must run before first paint. -->
   <script>try{if(sessionStorage.getItem('ralf:curtain')){sessionStorage.removeItem('ralf:curtain');document.documentElement.className+=' is-curtain is-arch'}}catch(e){}</script>
 </head>
@@ -64,22 +64,64 @@
     <nav class="rooms-rail" aria-label="Rooms">
       <ul class="rooms-rail-list">
         <li>
-          <a class="rail-link is-current" href="#art-suite">
+          <a class="rail-link is-current" href="#art-room">
+            <svg class="rail-arrow" viewBox="0 0 46 10" aria-hidden="true"><path d="M0 5h42M37.5 1.5 42 5l-4.5 3.5" /></svg>
+            <span>Art Room</span>
+          </a>
+        </li>
+        <li>
+          <a class="rail-link" href="#art-suite">
             <svg class="rail-arrow" viewBox="0 0 46 10" aria-hidden="true"><path d="M0 5h42M37.5 1.5 42 5l-4.5 3.5" /></svg>
             <span>Art Suite</span>
           </a>
         </li>
         <li>
-          <a class="rail-link" href="#cosy-room">
+          <a class="rail-link" href="#cozy-room">
             <svg class="rail-arrow" viewBox="0 0 46 10" aria-hidden="true"><path d="M0 5h42M37.5 1.5 42 5l-4.5 3.5" /></svg>
-            <span>Cosy Room</span>
+            <span>Cozy Room</span>
+          </a>
+        </li>
+        <li>
+          <a class="rail-link" href="#cozy-accessible-room">
+            <svg class="rail-arrow" viewBox="0 0 46 10" aria-hidden="true"><path d="M0 5h42M37.5 1.5 42 5l-4.5 3.5" /></svg>
+            <span>Cozy Accessible Room</span>
+          </a>
+        </li>
+        <li>
+          <a class="rail-link" href="#ralf-penthouse">
+            <svg class="rail-arrow" viewBox="0 0 46 10" aria-hidden="true"><path d="M0 5h42M37.5 1.5 42 5l-4.5 3.5" /></svg>
+            <span>Ralf&rsquo;s Penthouse</span>
           </a>
         </li>
       </ul>
     </nav>
 
     <div class="rooms-panels">
-      <!-- Room copy & specs below are placeholder content from Casa Monti Roma; final names, copy & rates to be supplied by the client. -->
+      <!-- Room copy & specs below are placeholder content; final names, copy & rates to be supplied by the client.
+           Art Suite and Cozy Room link to their detail pages; the other three await theirs. -->
+      <article class="room-panel reveal" id="art-room">
+        <h2 class="sr-only">Art Room</h2>
+        <div class="room-plate">
+          <div class="room-plate-inner">
+            <svg class="room-arc" viewBox="0 0 400 500" aria-hidden="true">
+              <path id="arc-art-room" d="M-26 210A226 236 0 0 1 426 210" />
+              <text><textPath href="#arc-art-room" startOffset="50%" text-anchor="middle">Art Room</textPath></text>
+            </svg>
+            <div class="room-media"><img src="artsuites.jpg" alt="The Art Room" /></div>
+          </div>
+        </div>
+        <div class="room-info">
+          <p class="room-desc">A more intimate canvas for the same spirit — a room touched by the artist-in-residence, where colour and comfort share the walls.</p>
+          <span class="room-rule" aria-hidden="true"></span>
+          <dl class="room-specs">
+            <div class="room-spec"><dt>Occupancy</dt><dd>2 max</dd></div>
+            <div class="room-spec"><dt>Size</dt><dd>26 sqm</dd></div>
+            <div class="room-spec"><dt>View</dt><dd>Courtyard</dd></div>
+            <div class="room-spec"><dt>Bed</dt><dd>Queen</dd></div>
+          </dl>
+        </div>
+      </article>
+
       <article class="room-panel reveal" id="art-suite">
         <h2 class="sr-only">Art Suite</h2>
         <div class="room-plate">
@@ -104,19 +146,19 @@
         </div>
       </article>
 
-      <article class="room-panel reveal" id="cosy-room">
-        <h2 class="sr-only">Cosy Room</h2>
+      <article class="room-panel reveal" id="cozy-room">
+        <h2 class="sr-only">Cozy Room</h2>
         <div class="room-plate">
           <div class="room-plate-inner">
             <svg class="room-arc" viewBox="0 0 400 500" aria-hidden="true">
-              <path id="arc-cosy-room" d="M-26 210A226 236 0 0 1 426 210" />
-              <text><textPath href="#arc-cosy-room" startOffset="50%" text-anchor="middle">Cosy Room</textPath></text>
+              <path id="arc-cozy-room" d="M-26 210A226 236 0 0 1 426 210" />
+              <text><textPath href="#arc-cozy-room" startOffset="50%" text-anchor="middle">Cozy Room</textPath></text>
             </svg>
-            <div class="room-media"><img src="cosyrooms.jpg" alt="The Cosy Room" /></div>
+            <div class="room-media"><img src="cosyrooms.jpg" alt="The Cozy Room" /></div>
           </div>
         </div>
         <div class="room-info">
-          <p class="room-desc">Dive into our Cosy Room's enchanting allure, drawing inspiration from the artistic atmosphere of Monti with a view on Via Panisperna or the patio.</p>
+          <p class="room-desc">Dive into our Cozy Room's enchanting allure, drawing inspiration from the artistic atmosphere of Monti with a view on Via Panisperna or the patio.</p>
           <span class="room-rule" aria-hidden="true"></span>
           <dl class="room-specs">
             <div class="room-spec"><dt>Occupancy</dt><dd>1 max</dd></div>
@@ -125,6 +167,52 @@
             <div class="room-spec"><dt>Bed</dt><dd>Queen</dd></div>
           </dl>
           <a href="cosy-room.html" class="btn-frame">Find out more</a>
+        </div>
+      </article>
+
+      <article class="room-panel reveal" id="cozy-accessible-room">
+        <h2 class="sr-only">Cozy Accessible Room</h2>
+        <div class="room-plate">
+          <div class="room-plate-inner">
+            <svg class="room-arc" viewBox="0 0 400 500" aria-hidden="true">
+              <path id="arc-cozy-accessible-room" d="M-26 210A226 236 0 0 1 426 210" />
+              <text><textPath href="#arc-cozy-accessible-room" startOffset="50%" text-anchor="middle">Cozy Accessible Room</textPath></text>
+            </svg>
+            <div class="room-media"><img src="cosyrooms.jpg" alt="The Cozy Accessible Room" /></div>
+          </div>
+        </div>
+        <div class="room-info">
+          <p class="room-desc">All the warmth of the Cozy Room, thoughtfully reworked for step-free ease — a wider approach, lowered fittings and a spacious roll-in bathroom.</p>
+          <span class="room-rule" aria-hidden="true"></span>
+          <dl class="room-specs">
+            <div class="room-spec"><dt>Occupancy</dt><dd>2 max</dd></div>
+            <div class="room-spec"><dt>Size</dt><dd>22 sqm</dd></div>
+            <div class="room-spec"><dt>Access</dt><dd>Step-free &middot; Roll-in</dd></div>
+            <div class="room-spec"><dt>Bed</dt><dd>Queen</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="room-panel reveal" id="ralf-penthouse">
+        <h2 class="sr-only">Ralf&rsquo;s Penthouse</h2>
+        <div class="room-plate">
+          <div class="room-plate-inner">
+            <svg class="room-arc" viewBox="0 0 400 500" aria-hidden="true">
+              <path id="arc-ralf-penthouse" d="M-26 210A226 236 0 0 1 426 210" />
+              <text><textPath href="#arc-ralf-penthouse" startOffset="50%" text-anchor="middle">Ralf&rsquo;s Penthouse</textPath></text>
+            </svg>
+            <div class="room-media"><img src="ralf-room-view.jpg" alt="Ralf&rsquo;s Penthouse" /></div>
+          </div>
+        </div>
+        <div class="room-info">
+          <p class="room-desc">The house at its most generous — a top-floor retreat with wraparound light and the best view Ralf keeps for last.</p>
+          <span class="room-rule" aria-hidden="true"></span>
+          <dl class="room-specs">
+            <div class="room-spec"><dt>Occupancy</dt><dd>4 max</dd></div>
+            <div class="room-spec"><dt>Size</dt><dd>68 sqm</dd></div>
+            <div class="room-spec"><dt>View</dt><dd>Old Port skyline</dd></div>
+            <div class="room-spec"><dt>Bed</dt><dd>King</dd></div>
+          </dl>
         </div>
       </article>
     </div>
