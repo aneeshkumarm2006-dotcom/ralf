@@ -81,6 +81,16 @@
   --editorial:'Editorial New',Georgia,serif;
   --policy:'Policy Gothic','Editorial New',Georgia,serif;
   --ease:cubic-bezier(.6,.01,.15,1);
+  /* MASTHEAD CHIPS — the MENU chip (left) and the Plan Your Stay chip (right)
+     are one pair and must read as one pair at every width. Both take their box
+     from these four tokens and nothing else, so the two can never drift apart:
+     a breakpoint retunes the tokens once and both chips follow. Height is set
+     explicitly rather than left to padding + line-height, which is what let
+     them diverge before — the two labels sit on different type sizes. */
+  --chip-h:2.75rem;      /* outer height, borders included (border-box) */
+  --chip-px:1.5rem;      /* side padding; vertical padding is 0 by design */
+  --chip-fs:.8rem;
+  --chip-ls:.2em;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -191,7 +201,21 @@ a{color:inherit;text-decoration:none}
   position:absolute;right:clamp(1.5rem,5vw,4rem);top:50%;
   transform:translateY(-50%);display:flex;align-items:center;gap:1.3rem;
 }
-/* La Fantaisie–style chip: chalk fill, heirloom outline, squared corners */
+/* La Fantaisie–style chip: chalk fill, heirloom outline, squared corners.
+   The one box both masthead chips share — see the --chip-* tokens. Centring is
+   done by inline-flex against a fixed height, so the label's own line-height
+   can't push the box taller on one side of the logo than the other. */
+.header-brand-row .btn-book,
+.nav-toggle.menu-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  height:var(--chip-h);padding:0 var(--chip-px);
+  font-family:var(--display);font-size:var(--chip-fs);
+  letter-spacing:var(--chip-ls);text-transform:uppercase;line-height:1;
+  border:1px solid var(--espresso);border-radius:3px;
+  background:var(--cream);color:var(--espresso);cursor:pointer;
+  white-space:nowrap;
+  transition:background .4s var(--ease),color .4s var(--ease),border-color .4s var(--ease);
+}
 .btn-book{
   background:var(--cream);color:var(--espresso);
   border:1px solid var(--espresso);cursor:pointer;
@@ -206,18 +230,19 @@ a{color:inherit;text-decoration:none}
 .nav-toggle{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;position:absolute;left:clamp(1.1rem,5vw,2rem);top:50%;transform:translateY(-50%);z-index:120}
 .nav-toggle span{width:24px;height:1.5px;background:var(--ink);transition:background .4s var(--ease)}
 
-/* Squared MENU chip: chalk fill, heirloom outline (La Fantaisie–style) */
-.nav-toggle.menu-btn{
-  flex-direction:row;align-items:center;gap:.6rem;
-  background:var(--cream);color:var(--espresso);
-  border:1px solid var(--espresso);border-radius:3px;
-  padding:.55rem 1.1rem;
-  transition:background .4s var(--ease),color .4s var(--ease),border-color .4s var(--ease);
-}
+/* Squared MENU chip: chalk fill, heirloom outline (La Fantaisie–style).
+   Box, type size and tracking all come from the shared chip rule above; only
+   the bar icon and its gap are this chip's own. */
+.nav-toggle.menu-btn{flex-direction:row;gap:.6rem}
 .menu-btn .menu-btn-circle{width:auto;height:auto;background:none;border:none;border-radius:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;flex:none;transition:none}
 .menu-btn .menu-btn-circle span{width:16px;height:1px;background:currentColor}
-.menu-btn .menu-btn-label{width:auto;height:auto;background:none;font-family:var(--display);font-size:.8rem;letter-spacing:.3em;text-transform:uppercase;color:currentColor}
+/* label inherits the chip's face, size and tracking — never sets its own */
+.menu-btn .menu-btn-label{width:auto;height:auto;background:none;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;line-height:1;color:currentColor}
 .nav-toggle.menu-btn:hover{background:var(--espresso);color:var(--cream);border-color:var(--espresso)}
+/* One place where the chip pair rescales — order matters: narrower last, since
+   both queries match on a small phone and the last matching one wins. */
+@media(max-width:640px){:root{--chip-h:2.35rem;--chip-px:1rem;--chip-fs:.72rem;--chip-ls:.16em}}
+@media(max-width:560px){:root{--chip-h:2.15rem;--chip-px:.8rem;--chip-fs:.68rem;--chip-ls:.14em}}
 .brand-lockup{flex-direction:row;align-items:center;gap:.8rem}
 .brand-lockup .ralf-dog{height:1.9rem;transform:translateY(-.22rem)}
 .brand-lockup .brand-name{height:2.8rem;transform:translateY(.22rem)}
@@ -251,7 +276,7 @@ a{color:inherit;text-decoration:none}
 .primary-nav a{color:var(--cream);font-family:var(--display);font-size:1.1rem;letter-spacing:.22em;text-transform:uppercase}
 .primary-nav .btn-book{
   margin-top:.9rem;background:rgba(154,133,82,.9);color:var(--cream);
-  font-size:.68rem;padding:.85rem 1.9rem;
+  font-size:.68rem;padding:.85rem 1.9rem;height:auto;
 }
 .primary-nav .btn-book:hover{background:var(--moss)}
 .pnav-top{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.4rem}
@@ -874,11 +899,11 @@ body.nav-open .site-header{transform:none}
   .brand-lockup{gap:.55rem}
   .brand-lockup .brand-name{height:1.7rem}
   .brand-lockup .ralf-dog{height:1.5rem}
-  /* shrink the MENU chip so it clears the centred logo instead of crowding it */
+  /* shrink BOTH chips so the MENU one clears the centred logo instead of
+     crowding it — one token change, both sides of the logo follow */
   .nav-toggle{left:.9rem}
-  .nav-toggle.menu-btn{padding:.48rem .7rem;gap:.45rem}
+  .nav-toggle.menu-btn{gap:.45rem}
   .menu-btn .menu-btn-circle span{width:14px}
-  .menu-btn .menu-btn-label{font-size:.7rem;letter-spacing:.18em}
   .pnav-wolf{height:1.6rem}
   .pnav-text{height:1.2rem}
   .section{padding:clamp(3.25rem,13vw,5.5rem) 1.3rem}
@@ -907,7 +932,6 @@ body.nav-open .site-header{transform:none}
    both as clean text chips. Bring the Book chip back and drop the MENU hamburger. */
 @media(max-width:640px){
   .header-brand-row .nav-utility{display:flex;gap:0}
-  .nav-utility .btn-book{padding:.5rem .95rem;font-size:.72rem;letter-spacing:.14em}
   .nav-utility .bk-long{display:none}        /* mobile Book chip: short label, like the reference */
   .nav-utility .bk-short{display:inline}
   .menu-btn .menu-btn-circle{display:none}   /* text-only MENU, like the reference */
