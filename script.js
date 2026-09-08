@@ -181,6 +181,10 @@ const HERO = {
   'contact.html': 'ralf-reception.png',
 };
 const MENU_IMG = 'ralf-menu.png';   // idle, nothing hovered
+// The French pages live one folder down (site/fr/), so the menu photographs
+// above — which sit at the site root — need a hop up. <html data-root> carries
+// that hop; it is empty on the English pages, so their paths are unchanged.
+const ASSET_ROOT = document.documentElement.getAttribute('data-root') || '';
 
 // sessionStorage throws outright in some privacy modes — never let it kill a link
 const store = {
@@ -290,8 +294,8 @@ if (toggle && nav) {
     bg.appendChild(img);
     layers[key] = img;
   };
-  addLayer('default', MENU_IMG);
-  Object.keys(HERO).forEach((href) => addLayer(href, HERO[href]));
+  addLayer('default', ASSET_ROOT + MENU_IMG);
+  Object.keys(HERO).forEach((href) => addLayer(href, ASSET_ROOT + HERO[href]));
   nav.prepend(bg);
   layers.default.classList.add('is-active');
 

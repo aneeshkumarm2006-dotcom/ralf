@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr-CA" data-root="../">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Maison | The Ralf</title>
+  <meta name="description" content="Personne ne sait au juste quand Ralf est arrivé au 164 Notre-Dame Est. L&rsquo;histoire de la maison, racontée un moment à la fois, dans le Vieux-Montréal." />
+  <link rel="preload" as="font" type="font/woff2" href="../fonts/EditorialNew-Ultralight.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="../fonts/PolicyGothic.woff2" crossorigin />
+  <link rel="alternate" hreflang="en-CA" href="../story.html" />
+  <link rel="alternate" hreflang="fr-CA" href="story.html" />
+  <link rel="alternate" hreflang="x-default" href="../story.html" />
+  <link rel="icon" type="image/png" href="../ralf-logo-wolf-black.png" />
+  <link rel="apple-touch-icon" href="../ralf-logo-wolf-black.png" />
+  <link rel="stylesheet" href="../styles.css?v=32" />
+  <!-- Arrived by clicking a word in the menu? Then the loader is a scrim over this page's own hero, not a cream slab. Must run before first paint. -->
+  <script>try{if(sessionStorage.getItem('ralf:curtain')){sessionStorage.removeItem('ralf:curtain');document.documentElement.className+=' is-curtain'}}catch(e){}</script>
+</head>
+<body>
+  <div class="c-loader" id="loader">
+    <div class="c-loader_bg"><span class="bar" style="--i:0"><span class="bar-logo"><img class="ralf-dog big" src="../ralf-logo-wolf-black.png" alt="" /><img class="c-loader_name" src="../ralf-logo-text-black.png" alt="The Ralf" /></span></span><span class="bar" style="--i:1"><span class="bar-logo"><img class="ralf-dog big" src="../ralf-logo-wolf-black.png" alt="" /><img class="c-loader_name" src="../ralf-logo-text-black.png" alt="The Ralf" /></span></span><span class="bar" style="--i:2"><span class="bar-logo"><img class="ralf-dog big" src="../ralf-logo-wolf-black.png" alt="" /><img class="c-loader_name" src="../ralf-logo-text-black.png" alt="The Ralf" /></span></span><span class="bar" style="--i:3"><span class="bar-logo"><img class="ralf-dog big" src="../ralf-logo-wolf-black.png" alt="" /><img class="c-loader_name" src="../ralf-logo-text-black.png" alt="The Ralf" /></span></span><span class="bar" style="--i:4"><span class="bar-logo"><img class="ralf-dog big" src="../ralf-logo-wolf-black.png" alt="" /><img class="c-loader_name" src="../ralf-logo-text-black.png" alt="The Ralf" /></span></span><span class="bar" style="--i:5"><span class="bar-logo"><img class="ralf-dog big" src="../ralf-logo-wolf-black.png" alt="" /><img class="c-loader_name" src="../ralf-logo-text-black.png" alt="The Ralf" /></span></span></div>
+  </div>
+
+  <!-- ============ HEADER (Rosewood-style) ============ -->
+  <header class="site-header" id="header">
+    <div class="header-brand-row">
+      <button class="nav-toggle menu-btn" id="navToggle" aria-label="Ouvrir le menu"><span class="menu-btn-circle" aria-hidden="true"><span></span><span></span><span></span></span><span class="menu-btn-label">Menu</span></button>
+      <a href="index.html" class="brand brand-lockup" aria-label="Accueil The Ralf"><img class="ralf-dog" src="../ralf-logo-wolf-black.png" alt="" /><img class="brand-name" src="../ralf-logo-text-black.png" alt="The Ralf" /></a>
+      <div class="nav-utility">
+        <a class="btn-lang" href="../story.html" hreflang="en-CA" lang="en-CA" aria-label="View this page in English">EN</a>
+        <a href="https://app.mews.com/distributor/6bb1de57-7e2d-4c1b-a060-b45000c2c7ea" target="_blank" rel="noopener" class="btn-book"><span class="bk-long">Votre séjour</span><span class="bk-short">Séjour</span></a>
+      </div>
+    </div>
+    <nav class="primary-nav" id="primaryNav">
+      <div class="pnav-top">
+        <span class="pnav-logo"><img class="pnav-wolf" src="../ralf-logo-wolf-white.png" alt="" /><img class="pnav-text" src="../ralf-logo-text-white.png" alt="The Ralf" /></span>
+        <button class="pnav-close" id="navClose" aria-label="Fermer le menu">Fermer <span aria-hidden="true">&#215;</span></button>
+      </div>
+      <a href="about.html">À propos</a>
+      <a href="story.html">La Maison</a>
+      <a href="rooms.html">Chambres &amp; Suites</a>
+      <a href="presents.html">Demandez à Ralf</a>
+      <a href="contact.html">Nous joindre</a>
+      <a href="https://app.mews.com/distributor/6bb1de57-7e2d-4c1b-a060-b45000c2c7ea" target="_blank" rel="noopener" class="btn-book">Votre séjour</a>
+      <div class="pnav-lang"><a href="../story.html" hreflang="en-CA" lang="en-CA">EN</a><span aria-hidden="true">|</span><a href="story.html" hreflang="fr-CA" lang="fr-CA" class="is-current" aria-current="page">FR</a></div>
+    </nav>
+  </header>
+
+  <!-- ============ HERO BANNER ============ -->
+  <section class="hero" id="top">
+    <img class="hero-bg" src="../ralf-bar-lobby.png" alt="" aria-hidden="true" />
+    <div class="hero-overlay"></div>
+    <div class="hero-banner">
+      <h1 class="hero-lines">
+        <span class="ln"><span class="hero-title script">La Maison &middot; Rencontrez Ralf</span></span>
+        <span class="ln"><span class="hero-sub strong">Personne ne sait au juste quand Ralf est arrivé au 164 Notre-Dame Est.</span></span>
+        <span class="ln"><span class="hero-sub em">Certains disent qu&rsquo;il est là depuis toujours&hellip;</span></span>
+      </h1>
+    </div>
+    <p class="hero-tag">La Maison</p>
+    <a href="#story" class="hero-scroll">Découvrir<span class="hero-scroll-arrow">&darr;</span></a>
+  </section>
+
+  <!-- ============ EDITORIAL STORY ============ -->
+  <!-- One beat per scroll: short storytelling moments, each image revealing a
+       different part of the story. Sequence follows the design deck (slide 4). -->
+  <section class="story" id="story">
+
+    <!-- 01 · Every old house has a story -->
+    <div class="story-trio">
+      <p class="story-caption reveal">Chaque vieille maison<br />a une histoire.</p>
+      <figure class="story-media reveal" style="aspect-ratio:965/879">
+        <img src="../ralf-house-watercolor.jpg" alt="Illustration à l&rsquo;aquarelle de la maison au crépuscule, ses fenêtres éclairées de l&rsquo;intérieur" />
+      </figure>
+      <p class="story-caption reveal">Celle-ci se souvient<br />de chacune.</p>
+    </div>
+
+    <!-- 02 · The doorman who is none of those things -->
+    <!-- full-bleed like the hero; the photograph is a 4:5 portrait, so the wide
+         band crops it — the scrim, not the frame, holds the copy -->
+    <div class="story-full doorman align-left flush-below reveal">
+      <img src="../ralf-doorman.jpg" alt="" aria-hidden="true" />
+      <div class="story-full-text">
+        <p>Ralf n&rsquo;est pas le propriétaire.<br />Il n&rsquo;est pas le concierge.<br />Il n&rsquo;est pas le portier.</p>
+        <p>Il est là depuis toujours, tout simplement.</p>
+      </div>
+    </div>
+
+    <!-- 03 · Not quite a hotel — photo owns its half of the band, flush to the page edge -->
+    <div class="story-split flush">
+      <figure class="story-media reveal"><img src="../ralf-living.jpg" alt="L&rsquo;espace salon et salle à manger d&rsquo;une suite The Ralf, le Vieux-Montréal au-delà des fenêtres" /></figure>
+      <div class="story-caption reveal">
+        <p>Pas tout à fait un hôtel.<br />Pas tout à fait chez soi.<br />Quelque part entre les deux.</p>
+        <img class="wolf-mark" src="../ralf-logo-wolf-black.png" alt="" />
+      </div>
+    </div>
+
+    <!-- 04 · Every guest known — full-bleed like the hero, the room carrying the
+         whole band and the line centred on it -->
+    <div class="story-full align-center known reveal">
+      <img src="../ralf-bedroom-day.jpg" alt="" aria-hidden="true" />
+      <div class="story-full-text">
+        <p>Nous croyons que chaque client devrait se sentir attendu.<br />Reconnu.<br />Ne serait-ce que pour quelques jours.</p>
+      </div>
+    </div>
+
+    <!-- 05 · Ralf knows this city differently -->
+    <div class="story-pair wide media-right">
+      <div class="story-caption reveal">
+        <p>Ralf connaît cette ville autrement.<br />Pas par les monuments.<br />Par ses tables préférées.<br />Les promenades du matin.<br />Les coins tranquilles.</p>
+      </div>
+      <figure class="story-media land reveal"><img src="../ralf-about-mission.jpg" alt="Photographie d&rsquo;époque d&rsquo;une succursale de la Banque de Montréal, deux vieilles voitures garées devant" /></figure>
+    </div>
+
+    <!-- 06 · During your stay -->
+    <div class="story-pair wide media-left">
+      <figure class="story-media land reveal"><img src="../ralf-bedroom-evening.jpg" alt="Une chambre The Ralf au crépuscule, l&rsquo;hôtel de ville illuminé au-delà de la fenêtre" /></figure>
+      <div class="story-caption reveal">
+        <p>Pendant votre séjour&hellip;</p>
+        <p>&hellip;trouvez votre chambre préférée,<br />&hellip;découvrez votre rue préférée,<br />&hellip;gardez un secret ou deux.</p>
+      </div>
+    </div>
+
+    <!-- 07 · Finale — the invitation -->
+    <div class="story-full finale align-center reveal" id="book">
+      <img src="../ralf-etching-dark.jpg" alt="" aria-hidden="true" />
+      <div class="story-full-text">
+        <p>Certaines histoires se racontent.<br />Les meilleures se vivent.</p>
+        <p>Séjourner chez The Ralf.</p>
+        <a href="https://app.mews.com/distributor/6bb1de57-7e2d-4c1b-a060-b45000c2c7ea" target="_blank" rel="noopener" class="btn-line light">Votre séjour</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img class="ralf-dog big" src="../ralf-logo-wolf-black.png" alt="The Ralf" />
+        <p class="footer-address">164 Notre-Dame Est<br />Vieux-Montréal, QC H2Y 1C2</p>
+        <a href="tel:15147000164" class="footer-phone">514&middot;700&middot;0164</a>
+      </div>
+      <nav class="footer-col"><h4>La Maison</h4><a href="story.html">Notre histoire</a><a href="rooms.html">Chambres</a><a href="events.html">Réceptions</a></nav>
+      <nav class="footer-col"><h4>Nous joindre</h4><a href="contact.html">Nous joindre</a><a href="mailto:reservations@theralf.ca">Réservations</a><a href="mailto:ask@theralf.ca">Demandez à Ralf</a><a href="mailto:events@theralf.ca">Réceptions</a><a href="mailto:press@theralf.ca">Blogue</a></nav>
+      <nav class="footer-col"><h4>Suivez-nous</h4><a href="presents.html">Liste de la maison</a><a href="#shop">Instagram</a></nav>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 The Ralf. Tous droits réservés.</p><div class="footer-legal"><a href="#privacy">Politique de confidentialité</a><a href="#accessibility">Accessibilité</a></div></div>
+  </footer>
+
+  <!-- ============ OPENING ANNOUNCEMENT ============ -->
+  <div class="announce" id="announce" role="dialog" aria-label="Annonce d&rsquo;ouverture">
+    <div class="announce-card">
+      <button class="announce-close" id="announceClose" aria-label="Fermer">&times;</button>
+      <img class="announce-logo" src="../ralf-logo-text-black.png" alt="The Ralf" />
+      <p class="announce-eyebrow">Vieux-Montréal</p>
+      <h3 class="announce-title">Nos portes s&rsquo;ouvrent en octobre</h3>
+      <p class="announce-text">Une nouvelle maison d&rsquo;hôtes au cœur du Vieux-Port. Soyez parmi les premiers à entrer.</p>
+      <a href="#book" class="announce-btn">S&rsquo;inscrire à la liste</a>
+    </div>
+  </div>
+
+  <script src="../script.js?v=17"></script>
+</body>
+</html>
