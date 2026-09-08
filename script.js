@@ -349,11 +349,24 @@ if (toggle && nav) {
 
   // --- open / close
   let leaving = null;
+  // The overlay paints over the page but leaves it in the tree, so without this
+  // a tab or a screen-reader swipe walks out of the "menu" into the hero behind
+  // it. inert takes the whole page out at once; the header is excluded so the
+  // MENU button that opened the panel can still close it.
+  const pageInert = (on) => {
+    [...document.body.children].forEach((el) => {
+      if (el === header || el.contains(nav) || el.id === 'announce') return;
+      el.toggleAttribute('inert', on);
+    });
+  };
+
   const openNav = () => {
     warm();
     nav.classList.add('open');
     document.body.classList.add('nav-open');
     toggle.setAttribute('aria-expanded', 'true');
+    pageInert(true);
+    nav.querySelector('.pnav-close')?.focus();
   };
   const closeNav = () => {
     if (leaving) { clearTimeout(leaving); leaving = null; store.del('ralf:curtain'); }
@@ -362,6 +375,7 @@ if (toggle && nav) {
     words.forEach((w) => w.classList.remove('is-hot'));
     document.body.classList.remove('nav-open');
     toggle.setAttribute('aria-expanded', 'false');
+    pageInert(false);
     show('default');
   };
   toggle.setAttribute('aria-expanded', 'false');
@@ -416,6 +430,21 @@ if (toggle && nav) {
   });
 }
 
+// ===== Language switch: keep the reader's place =====
+// Each switch href is a per-page mirror (rooms.html -> fr/rooms.html), but it is
+// written without a fragment. The id sets are identical across every EN/FR pair,
+// so carrying the hash lands the reader on the same room or section rather than
+// at the top of the translated page.
+document.querySelectorAll('a.btn-lang, .pnav-lang a, a.footer-lang').forEach((a) => {
+  const base = a.getAttribute('href');          // keep the mirror href intact
+  if (base.includes('#')) return;
+  a.addEventListener('click', () => {
+    // recomputed on every click, so a reader who moves down the page and clicks
+    // again is not sent back to the anchor they were on the first time
+    a.setAttribute('href', base + location.hash);
+  });
+});
+
 // ===== Forms (newsletter sign-up, contact) =====
 // PRE-LAUNCH: neither of these posts anywhere. They clear and confirm so the
 // pages can be demoed; both need a real endpoint before the site goes live.
@@ -436,11 +465,23 @@ if (toggle && nav) {
 // ===== Opening announcement pop-up (once per session) =====
 const announce = document.getElementById('announce');
 if (announce && store.get('ralf-announce') !== '1') {
-  setTimeout(() => announce.classList.add('show'), 4800);
+  // role="dialog" over a live page: take the rest of the document out of the
+  // tree while it is up, or focus and screen-reader swipe run straight past it.
+  const rest = () => [...document.body.children].filter((el) => el !== announce);
+  setTimeout(() => {
+    announce.classList.add('show');
+    rest().forEach((el) => el.setAttribute('inert', ''));
+    announce.querySelector('.announce-close')?.focus();
+  }, 4800);
   const dismiss = () => {
     announce.classList.remove('show');
+    rest().forEach((el) => el.removeAttribute('inert'));
     store.set('ralf-announce', '1');
+    document.getElementById('navToggle')?.focus();
   };
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && announce.classList.contains('show')) dismiss();
+  });
   announce.querySelector('.announce-close')?.addEventListener('click', dismiss);
   announce.querySelector('.announce-btn')?.addEventListener('click', dismiss);
   announce.addEventListener('click', (e) => { if (e.target === announce) dismiss(); });
