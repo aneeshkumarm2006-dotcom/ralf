@@ -487,6 +487,30 @@ if (announce && store.get('ralf-announce') !== '1') {
   announce.addEventListener('click', (e) => { if (e.target === announce) dismiss(); });
 }
 
+// ===== Just Ask Ralf: the chapter rail follows the list you're reading =====
+// Same idea as the rooms rail, one axis over: a chapter becomes current once it
+// crosses a band through the middle of the viewport. Between chapters nothing is
+// in the band and no entry fires, so the last one stays lit rather than flicking
+// off in the gap.
+(function () {
+  const rail = document.querySelector('.jar-rail');
+  if (!rail) return;
+  const links = Array.prototype.slice.call(rail.querySelectorAll('.jar-chip'));
+  const chapters = links.map((a) => document.querySelector(a.getAttribute('href')));
+  if (!chapters.length || chapters.some((c) => !c)) return;
+
+  const setCurrent = (chapter) => {
+    links.forEach((a, i) => a.classList.toggle('is-current', chapters[i] === chapter));
+  };
+
+  const jarIO = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) setCurrent(e.target); });
+  }, { rootMargin: '-40% 0px -50% 0px' });
+  chapters.forEach((c) => jarIO.observe(c));
+
+  setCurrent(chapters[0]);   // the rail is never unlit, even before the first crossing
+})();
+
 // ===== Rooms rail: the nav follows the room you're looking at =====
 // A room becomes the current one once it crosses a band through the middle of
 // the viewport. Between rooms nothing is in the band and no entry fires, so the

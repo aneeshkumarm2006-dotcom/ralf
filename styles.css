@@ -1445,3 +1445,121 @@ body.is-loaded .hero-lines .ln:nth-child(3)>span{transition-delay:1.25s}
   .contact-form-foot{flex-direction:column;align-items:flex-start}
   .other-grid{grid-template-columns:1fr}
 }
+
+/* ============ JUST ASK RALF — Ralf's list (deck p.25–28) ============ */
+/* The deck cuts the page into modes: food, after hour, tourist mode, and a few
+   hours to kill. Each is a chapter here. The rail names all four and lights the
+   one you're reading — it is sticky inside .jar-wrap ALONE, so it is carried
+   away by the end of the list instead of riding over the newsletter block.
+   Its top offset is the masthead's own height (.header-brand-row padding plus
+   the tallest brand image), so the two bars stack without a seam. */
+.jar-wrap{position:relative}
+.jar-rail{
+  position:sticky;top:4.8rem;z-index:20;
+  display:flex;justify-content:center;gap:clamp(1.1rem,3.2vw,3rem);
+  padding:.85rem clamp(1.2rem,6vw,8rem);
+  background:var(--cream);border-bottom:1px solid var(--line);
+  overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+}
+.jar-rail::-webkit-scrollbar{display:none}
+/* Policy Gothic is unicase, so these draw as small caps with no text-transform;
+   the uppercase below is only for the fallback face. */
+.jar-chip{
+  font-family:var(--display);font-weight:400;
+  font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;
+  white-space:nowrap;color:var(--ink);opacity:.42;
+  padding-bottom:.15rem;border-bottom:1px solid transparent;
+  transition:opacity .45s var(--ease),border-color .45s var(--ease);
+}
+.jar-chip:hover{opacity:.75}
+.jar-chip.is-current{opacity:1;border-bottom-color:var(--ink)}
+
+/* anchored chapters land below the masthead AND the rail, never under them */
+.jar{scroll-margin-top:8.6rem}
+.jar-head{max-width:50rem;margin:0 auto clamp(2.4rem,5vw,4rem);text-align:center}
+.jar-heading{
+  font-family:var(--title);font-weight:300;letter-spacing:.01em;
+  font-size:clamp(2rem,4.2vw,3.4rem);line-height:1.2;
+}
+
+/* Slide 25 is two panels side by side — dinner left, morning right. */
+.jar-pair{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(1.2rem,3vw,2.6rem);align-items:start;
+  max-width:74rem;margin:0 auto;
+}
+.jar-card{background:var(--cream-2);padding:clamp(1.6rem,3.2vw,2.8rem)}
+/* the culture chapter is one card across the whole track, not half of a pair */
+.jar-card-wide{max-width:74rem;margin:0 auto}
+.jar-title{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(1.2rem,2vw,1.55rem);letter-spacing:.05em;line-height:1.25;
+  padding-bottom:1.2rem;margin-bottom:.2rem;border-bottom:1px solid var(--line);
+}
+.jar-list{list-style:none;margin:0;padding:0}
+.jar-list li{padding:1.15rem 0;border-bottom:1px solid var(--line)}
+.jar-list li:last-child{border-bottom:0;padding-bottom:0}
+.jar-name{
+  display:block;font-family:var(--display);font-weight:400;
+  font-size:1.02rem;letter-spacing:.09em;text-transform:uppercase;
+  line-height:1.3;margin-bottom:.3rem;
+}
+.jar-note{display:block;color:var(--ink-soft);font-size:.96rem;line-height:1.6;max-width:42ch}
+
+/* After dark (slide 26) — the one chapter that takes the dark panel. The
+   etching sits beside the pair rather than behind them: two bars on a full
+   photograph would lose the hairline rules that carry the rest of the list. */
+.jar-dark{background:var(--espresso);color:var(--cream)}
+.jar-dark .section-eyebrow{color:var(--sand)}
+.jar-dark .jar-heading{color:var(--cream)}
+.jar-night{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);
+  gap:clamp(1.6rem,4vw,4rem);align-items:center;
+  max-width:74rem;margin:0 auto;
+}
+.jar-night-media{aspect-ratio:1/1;overflow:hidden}
+.jar-night-media img{transition:transform 1.6s var(--ease)}
+.jar-night:hover .jar-night-media img{transform:scale(1.04)}
+.jar-dark .jar-list li{border-bottom-color:rgba(216,195,154,.28)}
+.jar-dark .jar-note{color:var(--sand)}
+
+/* A little culture (slide 27) — eight entries, so two columns of four rather
+   than one long ladder. */
+.jar-culture{max-width:74rem;margin:0 auto;grid-template-columns:1fr 1fr;display:grid;gap:0 clamp(2rem,5vw,4.5rem)}
+.jar-culture li{break-inside:avoid}
+/* two columns means the left column's last row is not the list's last child,
+   so every culture row keeps its rule and the block closes level on both sides */
+.jar-list.jar-culture li:last-child{border-bottom:1px solid var(--line);padding-bottom:1.15rem}
+
+/* A few hours to kill (slide 28) — three conditions, three answers. */
+.jar-hours-sec{background:var(--cream-2)}
+.jar-hours{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));
+  gap:clamp(1.2rem,3vw,2.6rem);max-width:74rem;margin:0 auto;
+}
+.jar-hour{background:var(--cream);padding:clamp(1.5rem,3vw,2.4rem);display:grid;gap:.8rem;align-content:start}
+/* min-height reserves the two lines the longest condition needs, so the three
+   answers sit on one baseline however their labels wrap */
+.jar-hour dt{
+  font-family:var(--display);font-weight:400;
+  font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--moss);
+  line-height:1.5;min-height:3em;
+}
+.jar-hour dd{margin:0;font-size:1.12rem;line-height:1.55;max-width:24ch}
+
+/* Closing pair: the two things Ralf does that are not a list. Kept to the
+   same 74rem track as the chapters so the page holds one measure. */
+.jar-ask .tiles{max-width:74rem;margin:0 auto;grid-template-columns:1fr 1fr}
+
+@media(max-width:860px){
+  .jar-pair{grid-template-columns:1fr}
+  .jar-night{grid-template-columns:1fr}
+  .jar-night-media{aspect-ratio:16/10;order:-1}
+  .jar-culture{grid-template-columns:1fr}
+  .jar-ask .tiles{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .jar-rail{top:3.5rem;justify-content:flex-start}
+  .jar{scroll-margin-top:6.9rem}
+  .jar-chip{font-size:.72rem;letter-spacing:.16em}
+}

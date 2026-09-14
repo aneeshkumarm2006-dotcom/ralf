@@ -12,7 +12,7 @@
   <link rel="alternate" hreflang="x-default" href="presents.html" />
   <link rel="icon" type="image/png" href="ralf-logo-wolf-black.png" />
   <link rel="apple-touch-icon" href="ralf-logo-wolf-black.png" />
-  <link rel="stylesheet" href="styles.css?v=35" />
+  <link rel="stylesheet" href="styles.css?v=36" />
   <!-- Arrived by clicking a word in the menu? Then the loader is a scrim over this page's own hero, not a cream slab. Must run before first paint. -->
   <script>try{if(sessionStorage.getItem('ralf:curtain')){sessionStorage.removeItem('ralf:curtain');document.documentElement.className+=' is-curtain'}}catch(e){}</script>
 </head>
@@ -67,22 +67,111 @@
     </div>
   </section>
 
-  <section class="section" style="background:var(--cream-2);padding-top:0">
+  <!-- ============ RALF&rsquo;S LIST (deck p.25-28) ============ -->
+  <!-- The deck splits Just Ask Ralf into modes - food, after hour, tourist mode,
+       and a few hours to kill. Each is a chapter below; the rail names all four. -->
+  <div class="jar-wrap">
+    <nav class="jar-rail" aria-label="Ralf&rsquo;s list">
+      <a class="jar-chip" href="#food">Food</a>
+      <a class="jar-chip" href="#after-dark">After dark</a>
+      <a class="jar-chip" href="#culture">Culture</a>
+      <a class="jar-chip" href="#hours">Hours to kill</a>
+    </nav>
+
+    <!-- ---- FOOD (deck p.25) ---- -->
+    <section class="section jar" id="food">
+      <div class="jar-head reveal">
+        <p class="section-eyebrow">Food</p>
+        <h2 class="jar-heading">Ralf says: eat here</h2>
+      </div>
+      <div class="jar-pair">
+        <article class="jar-card reveal">
+          <h3 class="jar-title">For a proper dinner</h3>
+          <ul class="jar-list">
+            <li><span class="jar-name">Barroco</span><span class="jar-note">Intime, sombre, cocktails + dinner. Très date-night.</span></li>
+            <li><span class="jar-name">Club Chasse et Pêche</span><span class="jar-note">Intimate, refined, discreet.</span></li>
+            <li><span class="jar-name">Romies</span><span class="jar-note">Neighbourhood cool, casual-chic.</span></li>
+            <li><span class="jar-name">Motto</span><span class="jar-note">Handroll bar. A quick bite, done right.</span></li>
+            <li><span class="jar-name">Garde-Manger</span><span class="jar-note">Lively.</span></li>
+            <li><span class="jar-name">Monarque</span><span class="jar-note">Très Montréal, beau, sophistiqué sans être guindé. Also recommended by the MICHELIN Guide 2026.</span></li>
+          </ul>
+        </article>
+        <article class="jar-card reveal">
+          <h3 class="jar-title">Morning, Darling</h3>
+          <ul class="jar-list">
+            <li><span class="jar-name">Dandy</span><span class="jar-note">Elevated brunch &middot; beautiful interiors &middot; cool crowd</span></li>
+            <li><span class="jar-name">Olive et Gourmando</span><span class="jar-note">Montréal institution &middot; bakery &middot; breakfast &amp; lunch</span></li>
+            <li><span class="jar-name">Café Olimpico</span><span class="jar-note">Italian coffee &middot; local classic &middot; quick morning stop</span></li>
+            <li><span class="jar-name">Crew Collective &amp; Café</span><span class="jar-note">Grand architecture &middot; coffee &middot; iconic setting</span></li>
+            <li><span class="jar-name">Le Petit Dep</span><span class="jar-note">Charming &middot; coffee &amp; pastries &middot; very Montréal</span></li>
+            <li><span class="jar-name">Paquebot Vieux-Montréal</span><span class="jar-note">Specialty coffee &middot; laid-back &middot; local feel</span></li>
+            <li><span class="jar-name">Micro Espresso Café</span><span class="jar-note">Tiny espresso bar &middot; minimal &middot; hidden gem</span></li>
+            <li><span class="jar-name">Tommy Café</span><span class="jar-note">Coffee &amp; brunch &middot; lively &middot; beautiful space</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ---- AFTER DARK (deck p.26) ---- -->
+    <section class="section jar jar-dark" id="after-dark">
+      <div class="jar-head reveal">
+        <p class="section-eyebrow">After hours</p>
+        <h2 class="jar-heading">After dark</h2>
+      </div>
+      <div class="jar-night reveal">
+        <div class="jar-night-media"><img src="ralf-etching-dark.jpg" alt="A dark etching hanging in the house" /></div>
+        <ul class="jar-list">
+          <li><span class="jar-name">Bowie</span><span class="jar-note">Cocktails &middot; moody &middot; cool crowd</span></li>
+          <li><span class="jar-name">The Coldroom</span><span class="jar-note">Hidden &middot; cocktails &middot; Montréal staple</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ---- TOURIST MODE (deck p.27) ---- -->
+    <section class="section jar" id="culture">
+      <div class="jar-head reveal">
+        <p class="section-eyebrow">Tourist mode</p>
+        <h2 class="jar-heading">A little culture</h2>
+      </div>
+      <article class="jar-card jar-card-wide reveal">
+        <ul class="jar-list jar-culture">
+          <li><span class="jar-name">PHI Foundation</span><span class="jar-note">Contemporary art &middot; bold exhibitions &middot; free admission</span></li>
+          <li><span class="jar-name">PHI Centre</span><span class="jar-note">Art &middot; film &middot; immersive experiences</span></li>
+          <li><span class="jar-name">Pointe-à-Callière</span><span class="jar-note">Montréal history &middot; archaeology &middot; iconic architecture</span></li>
+          <li><span class="jar-name">Notre-Dame Basilica</span><span class="jar-note">Gothic architecture &middot; Montréal landmark &middot; breathtaking interiors</span></li>
+          <li><span class="jar-name">AURA at Notre-Dame</span><span class="jar-note">Light &amp; sound &middot; immersive &middot; after-dark experience</span></li>
+          <li><span class="jar-name">Château Ramezay</span><span class="jar-note">Historic Montréal &middot; intimate museum &middot; beautiful gardens</span></li>
+          <li><span class="jar-name">Marguerite-Bourgeoys Historic Site</span><span class="jar-note">History &middot; heritage &middot; panoramic views</span></li>
+          <li><span class="jar-name">Fonderie Darling</span><span class="jar-note">Contemporary art &middot; industrial setting &middot; local artists</span></li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- ---- A FEW HOURS TO KILL (deck p.28) ---- -->
+    <section class="section jar jar-hours-sec" id="hours">
+      <div class="jar-head reveal">
+        <p class="section-eyebrow">Hours to kill</p>
+        <h2 class="jar-heading">Ralf has a few hours to kill</h2>
+      </div>
+      <dl class="jar-hours reveal">
+        <div class="jar-hour"><dt>If you have an hour</dt><dd>Coffee + a walk along the water.</dd></div>
+        <div class="jar-hour"><dt>If you have an afternoon</dt><dd>Bota Bota Spa.</dd></div>
+        <div class="jar-hour"><dt>If it&rsquo;s raining</dt><dd>Pointe-à-Callière, and coffee at Crew Collective &amp; Café.</dd></div>
+      </dl>
+    </section>
+  </div>
+
+  <!-- ============ AND WHEN YOU&rsquo;D RATHER JUST ASK ============ -->
+  <section class="section jar-ask">
     <div class="tiles">
       <article class="tile reveal">
-        <div class="tile-media"><img src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?auto=format&fit=crop&w=1000&q=80" alt="Hidden Montréal" /></div>
-        <p class="tile-meta">The little black book</p>
-        <h3>Hidden Montréal</h3>
-        <p>The café around the corner, the gallery worth the walk, the table to ask for, Ralf knows where to go, and where not to.</p>
-      </article>
-      <article class="tile reveal">
-        <div class="tile-media"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=80" alt="On the house, surprise and delight" /></div>
+        <div class="tile-media"><img src="ralf-slippers.jpg" alt="Slippers set out in a room at The Ralf" /></div>
         <p class="tile-meta">Surprise &amp; delight</p>
         <h3>On the House</h3>
-        <p>The morning paper at your door, a few "stealable" amenities, a nightcap at the bar, small, considered touches that make you feel known.</p>
+        <p>The morning paper at your door, a few &ldquo;stealable&rdquo; amenities, a nightcap at the bar, small, considered touches that make you feel known.</p>
       </article>
       <article class="tile reveal">
-        <div class="tile-media"><img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1000&q=80" alt="Just ask Ralf concierge" /></div>
+        <div class="tile-media"><img src="ralf-doorman.jpg" alt="The doorman at the entrance to The Ralf" /></div>
         <p class="tile-meta">Concierge</p>
         <h3>Just Ask</h3>
         <p>Dinner reservations, a car to the airport, F1 weekend, a quiet table for two, whatever you need, just ask Ralf.</p>
@@ -130,6 +219,6 @@
     </div>
   </div>
 
-  <script src="script.js?v=19"></script>
+  <script src="script.js?v=20"></script>
 </body>
 </html>
