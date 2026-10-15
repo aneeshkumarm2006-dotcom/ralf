@@ -12,7 +12,7 @@
   <link rel="alternate" hreflang="x-default" href="index.html" />
   <link rel="icon" type="image/png" href="ralf-logo-wolf-black.png" />
   <link rel="apple-touch-icon" href="ralf-logo-wolf-black.png" />
-  <link rel="stylesheet" href="styles.css?v=36" />
+  <link rel="stylesheet" href="styles.css?v=40" />
   <!-- Arrived by clicking a word in the menu? Then the loader is a scrim over this page's own hero, not a cream slab. Must run before first paint. -->
   <script>try{if(sessionStorage.getItem('ralf:curtain')){sessionStorage.removeItem('ralf:curtain');document.documentElement.className+=' is-curtain'}}catch(e){}</script>
 </head>
@@ -49,7 +49,9 @@
 
   <!-- ============ HERO BANNER ============ -->
   <section class="hero" id="top">
-    <video class="hero-bg" src="ralf-video.mp4" poster="hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+    <!-- Client, Oct 2026: show this still "for now" instead of the video. To restore, swap back to:
+         <video class="hero-bg" src="ralf-video.mp4" poster="hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video> -->
+    <img class="hero-bg" src="ralf-penthouse-bedroom.jpg" alt="" aria-hidden="true" fetchpriority="high" />
     <div class="hero-overlay"></div>
     <div class="hero-banner">
       <h1 class="hero-lines">
@@ -110,23 +112,23 @@
     <div class="dining-cards">
       <article class="dining-card reveal">
         <div class="dining-media">
-          <img src="ralf-bar.jpg" alt="The Café at The Ralf" />
+          <img src="ralf-cafe-brewing.jpg" alt="A Little Something Is Brewing. The Café, opening at a later date." />
         </div>
         <div class="dining-info">
           <h3>The Café</h3>
           <p>A neighborhood café by day. A quiet start to the day, just downstairs.</p>
-          <a href="#dining" class="btn-line">Take a seat &#8599;</a>
+          <!-- "Take a seat &#8599;" returns once the Café opens and has somewhere to link to -->
         </div>
       </article>
 
       <article class="dining-card reveal">
         <div class="dining-media">
-          <img src="ralf-table.jpg" alt="The Bar at The Ralf" />
+          <img src="ralf-bar-good-things.jpg" alt="Good Things Take Time. The Bar, opening at a later date." />
         </div>
         <div class="dining-info">
           <h3>The Bar</h3>
           <p>A negroni without consulting the menu, a martini before dinner, the kind of room where you settle in and stay a little longer.</p>
-          <a href="#dining" class="btn-line">Pull up a stool &#8599;</a>
+          <!-- "Pull up a stool &#8599;" returns once the Bar opens and has somewhere to link to -->
         </div>
       </article>
     </div>
@@ -207,6 +209,6 @@
     </div>
   </div>
 
-  <script src="script.js?v=20"></script>
+  <script src="script.js?v=21"></script>
 </body>
 </html>

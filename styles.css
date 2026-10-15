@@ -303,6 +303,29 @@ a{color:inherit;text-decoration:none}
 .brand-lockup{flex-direction:row;align-items:center;gap:.8rem}
 .brand-lockup .ralf-dog{height:1.9rem;transform:translateY(-.22rem)}
 .brand-lockup .brand-name{height:2.8rem;transform:translateY(.22rem)}
+/* Deck slide 1: the logo shows up a lot, so the wolf earns its place instead of
+   just sitting there. Once the intro lifts it lopes in from the left in a few
+   short bounds and settles beside the wordmark — on the first page of a visit
+   only (script.js sets html.wolf-run), or it becomes one more repeat. Every
+   keyframe keeps the -.22rem baseline lift above, and the last one is exactly
+   the resting transform. --wolf-run is the length of the run; phones shorten it
+   so the wolf never starts on top of the MENU chip (at 320px a full run would). */
+@keyframes wolfRunIn{
+  0%{opacity:0;transform:translate(calc(var(--wolf-run) * -1),-.22rem)}
+  14%{opacity:1}
+  26%{transform:translate(calc(var(--wolf-run) * -.75),-.6rem)}
+  40%{transform:translate(calc(var(--wolf-run) * -.5),-.22rem)}
+  54%{transform:translate(calc(var(--wolf-run) * -.27),-.5rem)}
+  68%{transform:translate(calc(var(--wolf-run) * -.08),-.22rem)}
+  84%{opacity:1;transform:translate(calc(var(--wolf-run) * .04),-.32rem)}
+  100%{opacity:1;transform:translate(0,-.22rem)}
+}
+.brand-lockup .ralf-dog{--wolf-run:2.6rem}
+@media(max-width:560px){.brand-lockup .ralf-dog{--wolf-run:1.5rem}}
+html.wolf-run body.is-loaded .brand-lockup .ralf-dog{animation:wolfRunIn 1.15s cubic-bezier(.3,.6,.4,1) .45s both}
+@media (prefers-reduced-motion:reduce){
+  html.wolf-run body.is-loaded .brand-lockup .ralf-dog{animation:none}
+}
 
 /* overlay nav (opened via MENU on any viewport) */
 /* always rendered so it can be transitioned — same shape as .announce further
@@ -483,14 +506,29 @@ body.is-loaded .hero-tag{opacity:.92;transform:none;transition-delay:1.45s}
 .dining-intro{text-align:center;max-width:46rem;margin:0 auto 4.5rem}
 .dining-intro .display-line{margin:0 auto}
 .dining-lede{margin-top:1.6rem;color:var(--ink-soft);font-size:1.05rem}
-.dining-cards{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,3.5rem)}
+/* The two images are 4:5 posters with their words printed in, so they show whole
+   (no 3:2 crop) — and the pair is capped, or each poster outgrows the screen. */
+.dining-cards{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,3.5rem);max-width:64rem;margin:0 auto}
 /* The two cards carry copy of different lengths, so the column is a flex stack
    with the paragraph absorbing the slack — that drops both links onto the same
    line rather than letting the shorter card's call ride up. align-items stays
    flex-start so the underlined link keeps its text width, not the full column. */
 .dining-card{display:flex;flex-direction:column}
-.dining-media{aspect-ratio:3/2;overflow:hidden;margin-bottom:1.8rem;flex:none}
+.dining-media{aspect-ratio:4/5;overflow:hidden;margin-bottom:1.8rem;flex:none}
 .dining-media img{transition:transform 1.4s var(--ease)}
+/* The French page can't use the posters (their words are printed in English), so
+   it lays its own words over the same photographs, set in the posters' faces:
+   the serif headline centred on the card / glasses, the tracked tag at the foot.
+   cqw sizes keep the type locked to the poster at every card width. */
+.dining-poster{position:relative;container-type:inline-size}
+.dining-poster-title,
+.dining-poster-tag{position:absolute;left:0;right:0;text-align:center;pointer-events:none;color:#f4ecdc}
+.dining-poster-title{top:50%;transform:translateY(-50%);padding:0 19%;font-family:var(--serif);font-size:5.8cqw;line-height:1.12}
+.dining-poster-tag{bottom:3.2%;font-family:var(--display);font-size:max(1.65cqw,.5rem);letter-spacing:.2em;text-transform:uppercase}
+.dining-poster-dark .dining-poster-title,
+.dining-poster-dark .dining-poster-tag{color:#1d1610}
+/* the bar line runs across both glasses on ONE line, as on the English poster */
+.dining-poster-dark .dining-poster-title{padding:0 5%;font-size:5.2cqw;white-space:nowrap}
 .dining-card:hover .dining-media img{transform:scale(1.05)}
 .dining-info{display:flex;flex-direction:column;align-items:flex-start;flex:1}
 .dining-info h3{font-family:var(--display);font-weight:400;font-size:1.6rem;letter-spacing:.05em;margin-bottom:.7rem}
@@ -938,7 +976,6 @@ html[lang="fr-CA"] .well-script{font-size:clamp(1.8rem,5.2vw,4rem)}
 @media(max-width:980px){
   .feature-grid{grid-template-columns:1fr}
   .feature-media{aspect-ratio:4/3}
-  .dining-cards{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr 1fr}
   /* the room stacks and the overlaid rail has no margin left to live in */
   .rooms-rail{display:none}
@@ -968,6 +1005,7 @@ html[lang="fr-CA"] .well-script{font-size:clamp(1.8rem,5.2vw,4rem)}
   .ed-wide{aspect-ratio:4/3}
 }
 @media(max-width:560px){
+  .dining-cards{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr;gap:2rem}
   .house-stage{grid-template-columns:1fr 1fr}
   .well-stage{grid-template-columns:1fr 1fr}

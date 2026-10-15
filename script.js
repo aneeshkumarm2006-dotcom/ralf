@@ -1,3 +1,14 @@
+// ===== Wolf run-in =====
+// The header wolf lopes into place beside the wordmark on the first page of a
+// visit only — on every page it would become one more repeated logo moment.
+// No storage (some privacy modes) → skip the flourish rather than replay it.
+try {
+  if (!sessionStorage.getItem('ralf:wolf')) {
+    sessionStorage.setItem('ralf:wolf', '1');
+    document.documentElement.classList.add('wolf-run');
+  }
+} catch (_) { /* nothing to do */ }
+
 // ===== Loader intro =====
 const fireLoaded = () => {
   document.body.classList.add('is-loaded');
