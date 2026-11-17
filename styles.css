@@ -1584,6 +1584,7 @@ body.is-loaded .hero-lines .ln:nth-child(3)>span{transition-delay:1.25s}
   line-height:1.5;min-height:3em;
 }
 .jar-hour dd{margin:0;font-size:1.12rem;line-height:1.55;max-width:24ch}
+.jar-hour dd a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
 
 /* Closing pair: the two things Ralf does that are not a list. Kept to the
    same 74rem track as the chapters so the page holds one measure. */

@@ -27,7 +27,7 @@
       <button class="nav-toggle menu-btn" id="navToggle" aria-label="Ouvrir le menu"><span class="menu-btn-circle" aria-hidden="true"><span></span><span></span><span></span></span><span class="menu-btn-label">Menu</span></button>
       <a href="index.html" class="brand brand-lockup" aria-label="Accueil The Ralf"><img class="ralf-dog" src="../ralf-logo-wolf-black.png" alt="" /><img class="brand-name" src="../ralf-logo-text-black.png" alt="The Ralf" /></a>
       <div class="nav-utility">
-        <a class="btn-lang" href="../rooms.html" hreflang="en-CA" lang="en-CA" aria-label="EN — view this page in English">EN</a>
+        <a class="btn-lang" href="../rooms.html" hreflang="en-CA" lang="en-CA" aria-label="EN: view this page in English">EN</a>
         <a href="https://app.mews.com/distributor/6bb1de57-7e2d-4c1b-a060-b45000c2c7ea" target="_blank" rel="noopener" class="btn-book"><span class="bk-long">Votre séjour</span><span class="bk-short">Séjour</span></a>
       </div>
     </div>
@@ -86,6 +86,12 @@
           </a>
         </li>
         <li>
+          <a class="rail-link" href="#cozy-suite">
+            <svg class="rail-arrow" viewBox="0 0 46 10" aria-hidden="true"><path d="M0 5h42M37.5 1.5 42 5l-4.5 3.5" /></svg>
+            <span>Suite Douillette</span>
+          </a>
+        </li>
+        <li>
           <a class="rail-link" href="#cozy-accessible-room">
             <svg class="rail-arrow" viewBox="0 0 46 10" aria-hidden="true"><path d="M0 5h42M37.5 1.5 42 5l-4.5 3.5" /></svg>
             <span>Chambre Douillette adaptée</span>
@@ -101,8 +107,8 @@
     </nav>
 
     <div class="rooms-panels">
-      <!-- Room copy & specs below are placeholder content; final names, copy & rates to be supplied by the client.
-           Art Suite and Cozy Room link to their detail pages; the other three await theirs. -->
+      <!-- Room copy & specs per the client's third-round deck (Nov 2026). Cozy Suite image is a placeholder.
+           Only Cozy Room links to a detail page; the Art Suite button is removed for now. -->
       <article class="room-panel reveal" id="art-room">
         <h2 class="sr-only">Chambre Art</h2>
         <div class="room-plate">
@@ -115,13 +121,13 @@
           </div>
         </div>
         <div class="room-info">
-          <p class="room-desc">Une toile plus intime pour le même esprit &mdash; une chambre touchée par l&rsquo;artiste en résidence, où la couleur et le confort se partagent les murs.</p>
+          <p class="room-desc">Une chambre qui a du caractère. Des touches artistiques, des détails pensés avec intention et une fenêtre sur la ville.</p>
           <span class="room-rule" aria-hidden="true"></span>
           <dl class="room-specs">
-            <div class="room-spec"><dt>Capacité</dt><dd>2 max</dd></div>
-            <div class="room-spec"><dt>Superficie</dt><dd>26&nbsp;m&sup2;</dd></div>
-            <div class="room-spec"><dt>Vue</dt><dd>Cour intérieure</dd></div>
-            <div class="room-spec"><dt>Lit</dt><dd>Queen</dd></div>
+            <div class="room-spec"><dt>Capacité</dt><dd>2 personnes</dd></div>
+            <div class="room-spec"><dt>Superficie</dt><dd>300&nbsp;pi&sup2;</dd></div>
+            <div class="room-spec"><dt>Vue</dt><dd>Vue sur la ville</dd></div>
+            <div class="room-spec"><dt>Lit</dt><dd>Lit king</dd></div>
           </dl>
         </div>
       </article>
@@ -138,15 +144,16 @@
           </div>
         </div>
         <div class="room-info">
-          <p class="room-desc">D&rsquo;avril à octobre, une chambre exclusive réinventée par l&rsquo;artiste en résidence Michael McGregor devient une œuvre vivante, où l&rsquo;art contemporain rencontre l&rsquo;hospitalité romaine.</p>
+          <p class="room-desc">Un peu plus d&rsquo;espace pour l&rsquo;inspiration. Un caractère artistique, un confort invitant et une vue sur la ville. Avec cuisine complète et laveuse-sécheuse dans la suite, pour un séjour entièrement à vous.</p>
           <span class="room-rule" aria-hidden="true"></span>
           <dl class="room-specs">
-            <div class="room-spec"><dt>Capacité</dt><dd>4 max &middot; 3 adultes</dd></div>
-            <div class="room-spec"><dt>Superficie</dt><dd>41&nbsp;m&sup2;</dd></div>
-            <div class="room-spec"><dt>Vue</dt><dd>Panisperna &middot; Patio &middot; Cimarra</dd></div>
-            <div class="room-spec"><dt>Lit</dt><dd>King / lits jumeaux</dd></div>
+            <div class="room-spec"><dt>Capacité</dt><dd>4 personnes</dd></div>
+            <div class="room-spec"><dt>Superficie</dt><dd>550&nbsp;pi&sup2;</dd></div>
+            <div class="room-spec"><dt>Vue</dt><dd>Vue sur la ville</dd></div>
+            <div class="room-spec"><dt>Lit</dt><dd>Lit king + canapé-lit queen</dd></div>
+            <div class="room-spec"><dt>Cuisine</dt><dd>Oui</dd></div>
+            <div class="room-spec"><dt>Laveuse &amp; sécheuse</dt><dd>Oui</dd></div>
           </dl>
-          <a href="art-suite.html" class="btn-frame">En savoir plus</a>
         </div>
       </article>
 
@@ -162,15 +169,40 @@
           </div>
         </div>
         <div class="room-info">
-          <p class="room-desc">Plongez dans le charme envoûtant de notre Chambre Douillette, inspirée de l&rsquo;atmosphère artistique de Monti, avec vue sur la Via Panisperna ou sur le patio.</p>
+          <p class="room-desc">Votre petit coin à vous dans le Vieux-Montréal. Des textures douces, une ambiance chaleureuse et un espace qui vous ressemble.</p>
           <span class="room-rule" aria-hidden="true"></span>
           <dl class="room-specs">
-            <div class="room-spec"><dt>Capacité</dt><dd>1 max</dd></div>
-            <div class="room-spec"><dt>Superficie</dt><dd>19&ndash;21&nbsp;m&sup2;</dd></div>
-            <div class="room-spec"><dt>Vue</dt><dd>Panisperna &middot; Patio</dd></div>
-            <div class="room-spec"><dt>Lit</dt><dd>Queen</dd></div>
+            <div class="room-spec"><dt>Capacité</dt><dd>2 personnes</dd></div>
+            <div class="room-spec"><dt>Superficie</dt><dd>275&nbsp;pi&sup2;</dd></div>
+            <div class="room-spec"><dt>Vue</dt><dd>Vue sur la cour</dd></div>
+            <div class="room-spec"><dt>Lit</dt><dd>Lit king</dd></div>
           </dl>
           <a href="cosy-room.html" class="btn-frame">En savoir plus</a>
+        </div>
+      </article>
+
+      <article class="room-panel reveal" id="cozy-suite">
+        <h2 class="sr-only">Suite Douillette</h2>
+        <div class="room-plate">
+          <div class="room-plate-inner">
+            <svg class="room-arc" viewBox="0 0 400 500" aria-hidden="true">
+              <path id="arc-cozy-suite" d="M-26 210A226 236 0 0 1 426 210" />
+              <text><textPath href="#arc-cozy-suite" startOffset="50%" text-anchor="middle">Suite Douillette</textPath></text>
+            </svg>
+            <div class="room-media"><img src="../ralf-living.jpg" alt="La Suite Douillette" /></div>
+          </div>
+        </div>
+        <div class="room-info">
+          <p class="room-desc">Un peu plus d&rsquo;espace pour se détendre. Des tons chaleureux, des textures douces et une atmosphère intime, avec cuisine complète et laveuse-sécheuse dans la suite pour s&rsquo;installer et prendre son temps.</p>
+          <span class="room-rule" aria-hidden="true"></span>
+          <dl class="room-specs">
+            <div class="room-spec"><dt>Capacité</dt><dd>2 personnes</dd></div>
+            <div class="room-spec"><dt>Superficie</dt><dd>500&nbsp;pi&sup2;</dd></div>
+            <div class="room-spec"><dt>Vue</dt><dd>Blocs de verre architecturaux (sans vue extérieure)</dd></div>
+            <div class="room-spec"><dt>Lit</dt><dd>Lit queen</dd></div>
+            <div class="room-spec"><dt>Cuisine</dt><dd>Oui</dd></div>
+            <div class="room-spec"><dt>Laveuse &amp; sécheuse</dt><dd>Oui</dd></div>
+          </dl>
         </div>
       </article>
 
@@ -186,13 +218,13 @@
           </div>
         </div>
         <div class="room-info">
-          <p class="room-desc">Toute la chaleur de la Chambre Douillette, repensée avec soin pour un accès de plain-pied &mdash; un dégagement plus large, des installations abaissées et une vaste salle de bain à douche adaptée.</p>
+          <p class="room-desc">Toute la chaleur de notre Chambre Douillette, avec plus d&rsquo;espace pour circuler. Un lieu accueillant, doté d&rsquo;aménagements accessibles pour un séjour confortable et sans effort.</p>
           <span class="room-rule" aria-hidden="true"></span>
           <dl class="room-specs">
-            <div class="room-spec"><dt>Capacité</dt><dd>2 max</dd></div>
-            <div class="room-spec"><dt>Superficie</dt><dd>22&nbsp;m&sup2;</dd></div>
-            <div class="room-spec"><dt>Accès</dt><dd>De plain-pied &middot; Douche adaptée</dd></div>
-            <div class="room-spec"><dt>Lit</dt><dd>Queen</dd></div>
+            <div class="room-spec"><dt>Capacité</dt><dd>2 personnes</dd></div>
+            <div class="room-spec"><dt>Superficie</dt><dd>350&nbsp;pi&sup2;</dd></div>
+            <div class="room-spec"><dt>Accessibilité</dt><dd>De plain-pied, douche adaptée</dd></div>
+            <div class="room-spec"><dt>Lit</dt><dd>Lit queen</dd></div>
           </dl>
         </div>
       </article>
@@ -209,13 +241,15 @@
           </div>
         </div>
         <div class="room-info">
-          <p class="room-desc">La maison dans toute sa générosité &mdash; un refuge au dernier étage, une lumière qui l&rsquo;enveloppe et la plus belle vue, celle que Ralf garde pour la fin.</p>
+          <p class="room-desc">La maison dans toute sa générosité. Un vaste refuge au dernier étage, avec de chaleureux espaces de vie, une cuisine complète, une laveuse-sécheuse et une vue imprenable sur le Vieux-Montréal. Un lieu où s&rsquo;installer et se sentir chez soi.</p>
           <span class="room-rule" aria-hidden="true"></span>
           <dl class="room-specs">
-            <div class="room-spec"><dt>Capacité</dt><dd>4 max</dd></div>
-            <div class="room-spec"><dt>Superficie</dt><dd>68&nbsp;m&sup2;</dd></div>
+            <div class="room-spec"><dt>Capacité</dt><dd>6 personnes</dd></div>
+            <div class="room-spec"><dt>Superficie</dt><dd>2&nbsp;000&nbsp;pi&sup2;</dd></div>
             <div class="room-spec"><dt>Vue</dt><dd>Toits du Vieux-Port</dd></div>
-            <div class="room-spec"><dt>Lit</dt><dd>King</dd></div>
+            <div class="room-spec"><dt>Lit</dt><dd>1 lit king + 2 lits queen</dd></div>
+            <div class="room-spec"><dt>Cuisine</dt><dd>Oui</dd></div>
+            <div class="room-spec"><dt>Laveuse &amp; sécheuse</dt><dd>Oui</dd></div>
           </dl>
         </div>
       </article>
@@ -237,14 +271,15 @@
         <li>Choix d&rsquo;oreillers sur demande</li>
         <li>Climatisation</li>
         <li>Téléviseur &amp; haut-parleur Bluetooth</li>
-        <li>Chargeurs de téléphone sans fil</li>
         <li>Minibar garni de produits d&rsquo;ici</li>
         <li>Wi-Fi gratuit</li>
         <li>Somptueuses salles de bain en marbre</li>
-        <li>Animaux bienvenus</li>
-        <li>Produits véganes Holidermie</li>
-        <li>Chromecast</li>
         <li>Lit de bébé disponible</li>
+        <li>Savon, shampoing &amp; revitalisant Le Labo</li>
+        <li>Peignoirs et pantoufles sur mesure</li>
+        <li>Sèche-cheveux</li>
+        <li>Dans toutes les suites&#8239;: cuisine complète (four, cuisinière &amp; lave-vaisselle)</li>
+        <li>Dans toutes les suites&#8239;: laveuse &amp; sécheuse</li>
       </ul>
     </div>
   </section>
@@ -257,7 +292,7 @@
         <a href="tel:15147000164" class="footer-phone">514&middot;700&middot;0164</a>
       </div>
       <nav class="footer-col"><h4>La Maison</h4><a href="story.html">Notre histoire</a><a href="rooms.html">Chambres</a></nav>
-      <nav class="footer-col"><h4>Nous joindre</h4><a href="contact.html">Nous joindre</a><a href="mailto:reservations@theralf.ca">Réservations</a><a href="mailto:ask@theralf.ca">Demandez à Ralf</a><a href="mailto:press@theralf.ca">Blogue</a></nav>
+      <nav class="footer-col"><h4>Nous joindre</h4><a href="mailto:info@theralfhotel.com">Nous joindre</a><a href="mailto:info@theralfhotel.com">info@theralfhotel.com</a></nav>
       <nav class="footer-col"><h4>Suivez-nous</h4><a href="presents.html">Liste de la maison</a><a href="#shop">Instagram</a></nav>
     </div>
     <div class="footer-bottom"><p>&copy; 2026 The Ralf. Tous droits réservés.</p><div class="footer-legal"><a class="footer-lang" href="../rooms.html" hreflang="en-CA" lang="en-CA">English</a><a href="#privacy">Politique de confidentialité</a><a href="#accessibility">Accessibilité</a></div></div>
